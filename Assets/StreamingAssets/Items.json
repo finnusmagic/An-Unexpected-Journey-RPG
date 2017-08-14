@@ -1,0 +1,44 @@
+[
+	{
+		"id": 0,
+		"title": "Leather Gloves",
+		"value": 2,
+		"stats": {
+			"power": 2,
+			"defence": 1,
+			"vitality": 2
+		},
+		"description": "Simpe Gloves made from Leather to keep your Hands warm.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "leather_gloves"
+	},
+	{
+		"id": 1,
+		"title": "Iron Gloves",
+		"value": 4,
+		"stats": {
+			"power": 4,
+			"defence": 2,
+			"vitality": 4
+		},
+		"description": "Simpe Gloves made from Leather to keep your Hands warm.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "iron_gloves"
+	},
+	{
+		"id": 2,
+		"title": "Steel Gloves",
+		"value": 6,
+		"stats": {
+			"power": 6,
+			"defence": 3,
+			"vitality": 6
+		},
+		"description": "Simpe Gloves made from Leather to keep your Hands warm.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "steel_gloves"
+	}
+]
