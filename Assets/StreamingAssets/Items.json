@@ -8,10 +8,10 @@
 			"defence": 1,
 			"vitality": 2
 		},
-		"description": "Simpe Gloves made from Leather to keep your Hands warm.",
-		"stackable": false, 
+		"description": "Simpe gloves made from leather to keep your hands warm.",
+		"stackable": true, 
 		"rarity": 1,
-		"slug": "leather_gloves"
+		"slug": "gloves_01_leather"
 	},
 	{
 		"id": 1,
@@ -22,10 +22,10 @@
 			"defence": 2,
 			"vitality": 4
 		},
-		"description": "Simpe Gloves made from Leather to keep your Hands warm.",
+		"description": "Robust Gloves made out of Iron. They look pretty heavy.",
 		"stackable": false, 
 		"rarity": 1,
-		"slug": "iron_gloves"
+		"slug": "gloves_02_iron"
 	},
 	{
 		"id": 2,
@@ -36,9 +36,93 @@
 			"defence": 3,
 			"vitality": 6
 		},
-		"description": "Simpe Gloves made from Leather to keep your Hands warm.",
+		"description": "Robust Gloves made out of Steel. They look pretty heavy.",
 		"stackable": false, 
 		"rarity": 1,
-		"slug": "steel_gloves"
+		"slug": "gloves_03_steel"
+	},
+	{
+		"id": 3,
+		"title": "Heavy Bronze Gloves",
+		"value": 6,
+		"stats": {
+			"power": 6,
+			"defence": 3,
+			"vitality": 6
+		},
+		"description": "Simpe Gloves made from Bronze to keep your Hands warm.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "gloves_heavy_01_bronze"
+	},
+	{
+		"id": 4,
+		"title": "Heavy Iron Gloves",
+		"value": 6,
+		"stats": {
+			"power": 6,
+			"defence": 3,
+			"vitality": 6
+		},
+		"description": "Simpe Gloves made from Iron to keep your Hands warm.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "gloves_heavy_02_iron"
+	},
+	{
+		"id": 5,
+		"title": "Heavy Steel Gloves",
+		"value": 6,
+		"stats": {
+			"power": 6,
+			"defence": 3,
+			"vitality": 6
+		},
+		"description": "Simpe Gloves made from Steel to keep your Hands warm.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "gloves_heavy_03_steel"
+	},
+	{
+		"id": 6,
+		"title": "Wooden Sword",
+		"value": 6,
+		"stats": {
+			"power": 6,
+			"defence": 3,
+			"vitality": 6
+		},
+		"description": "A Sword made from Wood. It looks sharp.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "sword_01_wood"
+	},
+	{
+		"id": 7,
+		"title": "Silver Sword",
+		"value": 6,
+		"stats": {
+			"power": 6,
+			"defence": 3,
+			"vitality": 6
+		},
+		"description": "A Sword made from Silver. It looks sharp.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "sword_02_silver"
+	},
+	{
+		"id": 8,
+		"title": "Golden Sword",
+		"value": 6,
+		"stats": {
+			"power": 6,
+			"defence": 3,
+			"vitality": 6
+		},
+		"description": "A Sword made from Gold. It looks sharp.",
+		"stackable": false, 
+		"rarity": 1,
+		"slug": "sword_03_gold"
 	}
 ]
