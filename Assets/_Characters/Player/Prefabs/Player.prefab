@@ -1697,8 +1697,11 @@ MonoBehaviour:
   criticalHitChance: 0.25
   criticalHitMultiplier: 2
   criticalHitParticle: {fileID: 198804056152581082}
-  attackSound: {fileID: 8300000, guid: 0c9d4f00b5404bc4bb61e56ba2649280, type: 3}
-  critSound: {fileID: 8300000, guid: 824e42b579d7be74e84296e4fa8037e1, type: 3}
+  attackSounds:
+  - {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
+  - {fileID: 8300000, guid: b76357a42d03a4722afcba74c3073136, type: 3}
+  criticalSounds:
+  - {fileID: 8300000, guid: 5208ca9b1ae744345b73b125684d7105, type: 3}
 --- !u!114 &114449498703188598
 MonoBehaviour:
   m_ObjectHideFlags: 1

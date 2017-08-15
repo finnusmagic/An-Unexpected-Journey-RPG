@@ -11,14 +11,14 @@ namespace RPG.Characters
         [Range(.1f, 1.0f)] [SerializeField] float criticalHitChance = 0.1f;
         [SerializeField] float criticalHitMultiplier = 1.25f;
         [SerializeField] ParticleSystem criticalHitParticle = null;
-        [SerializeField] AudioClip attackSound, critSound;
-        AudioSource audioSource;
+        [SerializeField] AudioClip[] attackSounds = null;
+        [SerializeField] AudioClip[] criticalSounds = null;
+       AudioSource audioSource;
 
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
 
         Animator animator = null;
-        SpecialAbilities abilities;
 
         float lastHitTime = 0;
         GameObject weaponObject;
@@ -27,7 +27,6 @@ namespace RPG.Characters
         void Start()
         {
             playerCombat = GetComponent<PlayerCombat>();
-            abilities = GetComponent<SpecialAbilities>();
 
             PutWeaponInHand(currentWeaponConfig); 
             SetAttackAnimation();
@@ -87,14 +86,14 @@ namespace RPG.Characters
             if (isCriticalHit)
             {
                 criticalHitParticle.Play();
-                audioSource.clip = critSound;
-                audioSource.Play();
+                var critClip = criticalSounds[Random.Range(0, criticalSounds.Length)];
+                audioSource.PlayOneShot(critClip);
                 return damageBeforeCritical * criticalHitMultiplier;
             }
             else
             {
-                audioSource.clip = attackSound;
-                audioSource.Play();
+                var attackClip = attackSounds[Random.Range(0, attackSounds.Length)];
+                audioSource.PlayOneShot(attackClip);
                 return damageBeforeCritical;
             }
         }

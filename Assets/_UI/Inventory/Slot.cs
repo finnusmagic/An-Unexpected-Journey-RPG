@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 namespace RPG.Inventory
@@ -19,13 +20,15 @@ namespace RPG.Inventory
         public void OnDrop(PointerEventData eventData)
         {
             ItemData droppedItem = eventData.pointerDrag.GetComponent<ItemData>();
+
             if ( inv.items[slotID].ID == -1)
             {
                 inv.items[droppedItem.slotNumber] = new Item();
                 inv.items[slotID] = droppedItem.item;
                 droppedItem.slotNumber = slotID;
             }
-            else
+
+            else if (droppedItem.slotNumber != slotID)
             {
                 Transform itemInSlot = this.transform.GetChild(0);
                 itemInSlot.GetComponent<ItemData>().slotNumber = droppedItem.slotNumber;

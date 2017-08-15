@@ -102,7 +102,8 @@ namespace RPG.Characters
             characterMovement.Kill();
             animator.SetTrigger(DEATH_TRIGGER);
 
-            var enemy = GetComponent<Enemy>().isAlive = false;
+            var enemy = GetComponent<Enemy>();
+            enemy.isAlive = false;
             var enemyComponent = GetComponent<Character>();
             if (enemyComponent && enemyComponent.isActiveAndEnabled)
             {

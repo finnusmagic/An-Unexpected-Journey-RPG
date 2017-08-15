@@ -52,7 +52,6 @@ namespace RPG.Characters
         public void AttemptSpecialAbility(int abilityIndex, GameObject target = null)
         {
             var energyCost = abilities[abilityIndex].GetEnergyCost();
-            var cooldown = abilities[abilityIndex].GetCoolDown();
 
             if (energyCost <= currentEnergyPoints)
             {
