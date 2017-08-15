@@ -4,36 +4,56 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using RPG.Characters;
 
 namespace RPG.Inventory
 {
-    public class Inventory : MonoBehaviour, IPointerExitHandler
+    public class Inventory : MonoBehaviour
     {
         GameObject inventoryPanel;
         GameObject slotPanel;
         ItemDatabase database;
+
         [Header("Setup")]
         public GameObject inventorySlot = null;
         public GameObject inventoryItem = null;
+
+        [Header("Add Item Panel")]
+        [SerializeField] Text itemIDText;
+        [SerializeField] Button addItemButton;
+
+        [Header("Equip Item Panel")]
+        [SerializeField] GameObject equipItemPanel = null;
+        [SerializeField] Button equipItemButton;
+
+        [Header("Drop Item Panel")]
+        [SerializeField] GameObject dropItemPanel = null;
+        [SerializeField] Button dropItemButton;
+
+        [Header("Delete Item Panel")]
+        [SerializeField] GameObject deleteItemPanel = null;
+        [SerializeField] Button deleteItemButton;
 
         [Header("Design Settings")]
         [Range(0, 100)]
         public int slotAmount = 30;
         public List<Item> items = new List<Item>();
-        public List<ItemData> itemHolder = new List<ItemData>();
         public List<GameObject> slots = new List<GameObject>();
 
-        [Header("Add / Remove Functions")]
-        [SerializeField] Text itemIDText;
-        [SerializeField] Button addItemButton;
         int IDNumber = 0;
-        public int currentItem = -1;
+        public int currentItem;
+        private Vector3 weaponDrop;
+        private WeaponConfig weaponConfig;
+        private Weapon weaponToUse;
+        int firstTimeCounter = 2;
 
         private void Start()
         {
             inventoryPanel = GameObject.Find("Inventory Panel");
+            weaponConfig = FindObjectOfType<WeaponConfig>();
             slotPanel = inventoryPanel.transform.Find("Slot Panel").gameObject;
             database = GetComponent<ItemDatabase>();
+            weaponDrop.z += 1;
 
             itemIDText.text = "0";
             addItemButton.onClick.AddListener(AddItemButton);
@@ -45,6 +65,10 @@ namespace RPG.Inventory
                 slots[i].GetComponent<Slot>().slotID = i;
                 slots[i].transform.SetParent(slotPanel.transform);
             }
+
+            AddItem(0);
+            AddItem(1);
+            AddItem(2);
         }
 
         public void AddItemButton()
@@ -52,6 +76,45 @@ namespace RPG.Inventory
            IDNumber = Convert.ToInt32(itemIDText.text);
            IDNumber = int.Parse(itemIDText.text);
            AddItem(IDNumber);
+        }
+
+        public void ActivateItemPanels()
+        {
+            equipItemPanel.SetActive(true);
+            dropItemPanel.SetActive(true);
+            deleteItemPanel.SetActive(true);
+
+            equipItemButton.onClick.AddListener(EquipItem);
+            dropItemButton.onClick.AddListener(DropItem);
+            deleteItemButton.onClick.AddListener(DeleteItem);
+        }
+
+        public void EquipItem()
+        {
+            weaponConfig.PutWeaponInHand(database.FetchItemByID(currentItem).Weapon);
+            RemoveItem(currentItem);
+            equipItemButton.onClick.RemoveListener(EquipItem);
+            firstTimeCounter--;
+
+            if (firstTimeCounter <= 0)
+            {
+                AddItem(weaponConfig.currentWeaponID);
+            }
+        }
+
+        public void DropItem()
+        {
+            Instantiate(database.FetchItemByID(currentItem).Weapon, weaponDrop, transform.rotation);
+            RemoveItem(currentItem);
+            dropItemButton.onClick.RemoveListener(DropItem);
+        }
+
+        public void DeleteItem()
+        {
+            RemoveItem(currentItem);
+            deleteItemButton.onClick.RemoveAllListeners();
+            deleteItemPanel.SetActive(false);
+            deleteItemButton.onClick.RemoveListener(DeleteItem);
         }
 
         public void AddItem(int id)
@@ -85,6 +148,7 @@ namespace RPG.Inventory
                         itemObj.transform.position = slots[i].transform.position;
                         itemObj.GetComponent<Image>().sprite = itemToAdd.Sprite;
                         itemObj.name = "Item: " + itemToAdd.Title;
+                        itemObj.AddComponent<Button>().onClick.AddListener(ActivateItemPanels);
                         break;
                     }
                 }
@@ -135,11 +199,6 @@ namespace RPG.Inventory
                 if (items[i].ID == item.ID)
                     return true;
             return false;
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            Debug.Log("Cursor left Panel");
         }
     }
 }

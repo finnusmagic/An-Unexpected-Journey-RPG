@@ -24,7 +24,6 @@ namespace RPG.Inventory
             tooltip = inv.GetComponent<Tooltip>();
         }
 
-
         public void OnBeginDrag(PointerEventData eventData)
         {
             if (item != null)
@@ -54,6 +53,7 @@ namespace RPG.Inventory
         public void OnPointerEnter(PointerEventData eventData)
         {
             tooltip.Activate(item);
+            inv.currentItem = item.ID;
         }
 
         public void OnPointerExit(PointerEventData eventData)

@@ -1,6 +1,7 @@
 ﻿using UnityEngine.Assertions;
 using UnityEngine;
 using RPG.CameraUI;
+using RPG.Inventory;
 
 namespace RPG.Characters
 {
@@ -13,7 +14,7 @@ namespace RPG.Characters
         [SerializeField] ParticleSystem criticalHitParticle = null;
         [SerializeField] AudioClip[] attackSounds = null;
         [SerializeField] AudioClip[] criticalSounds = null;
-       AudioSource audioSource;
+        AudioSource audioSource;
 
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
@@ -23,12 +24,15 @@ namespace RPG.Characters
         float lastHitTime = 0;
         GameObject weaponObject;
         PlayerCombat playerCombat;
+        private ItemDatabase itemData;
+        public int currentWeaponID;
 
         void Start()
         {
+            currentWeaponID = -1;
             playerCombat = GetComponent<PlayerCombat>();
-
-            PutWeaponInHand(currentWeaponConfig); 
+            itemData = FindObjectOfType<ItemDatabase>();
+           // PutWeaponInHand(currentWeaponConfig); 
             SetAttackAnimation();
 
             audioSource = GetComponent<AudioSource>();
@@ -36,6 +40,7 @@ namespace RPG.Characters
 
         public void PutWeaponInHand(Weapon weaponToUse)
         {
+            currentWeaponID = currentWeaponConfig.ID;
             currentWeaponConfig = weaponToUse;
             var weaponPrefab = weaponToUse.GetWeaponPrefab();
             GameObject dominantHand = RequestDominantHand();
@@ -81,7 +86,9 @@ namespace RPG.Characters
         {
             bool isCriticalHit = UnityEngine.Random.Range(0f, 1f) <= criticalHitChance;
 
-            float damageBeforeCritical = playerCombat.baseDamage + currentWeaponConfig.GetAdditionalDamage();
+            float weaponDamage = itemData.FetchItemByID(currentWeaponConfig.ID).Power;
+            float damageBeforeCritical = playerCombat.baseDamage + weaponDamage;
+            Debug.Log(damageBeforeCritical);
 
             if (isCriticalHit)
             {

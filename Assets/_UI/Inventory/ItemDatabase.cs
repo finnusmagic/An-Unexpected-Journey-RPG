@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LitJson;
 using System.IO;
+using RPG.Characters;
 
 namespace RPG.Inventory
 {
@@ -10,6 +11,7 @@ namespace RPG.Inventory
     {
         private List<Item> database = new List<Item>();
         private JsonData itemData;
+        private Weapon weapon;
 
         private void Start()
         {
@@ -51,6 +53,7 @@ namespace RPG.Inventory
         public int Rarity { get; set; }
         public string Slug { get; set; }
         public Sprite Sprite { get; set; }
+        public Weapon Weapon { get; set; }
 
 
         public Item(int id, string title, int value, int power, int defence, int vitality, string description, bool stackable, int rarity, string slug)
@@ -66,6 +69,7 @@ namespace RPG.Inventory
             this.Rarity = rarity;
             this.Slug = slug;
             this.Sprite = Resources.Load<Sprite>("Sprites/Items/" + slug);
+            this.Weapon = Resources.Load<Weapon>("Weapons/" + slug);
         }
 
         public Item()
