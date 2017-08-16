@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64dad50b5db4b574b9f0f9b8fe8871c8, type: 3}
+  m_Name: ItemDatabase
+  m_EditorClassIdentifier: 
+  itemList:
+  - itemName: Simple Sword
+    itemID: 0
+    itemDesc: Just a simple Sword.
+    itemIcon: {fileID: 21300000, guid: 7023c5a1cf520244f8c1345bc34b70b6, type: 3}
+    itemModel: {fileID: 1768788195628394, guid: fd46c11064849844bae9ca4c060a44df,
+      type: 2}
+    itemValue: 1
+    itemType: 1
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 1
+    itemAttributes:
+    - attributeName: Strength
+      attributeValue: 10
+    - attributeName: Health
+      attributeValue: 5
+    - attributeName: Defence
+      attributeValue: 2
+    - attributeName: Mana
+      attributeValue: 2
+  - itemName: Rod of Death
+    itemID: 1
+    itemDesc: Just a Rod.
+    itemIcon: {fileID: 21300000, guid: 4500a82b53777e845a4949f143013321, type: 3}
+    itemModel: {fileID: 100110, guid: 208779813a52bf74b89a7bc10fc2908f, type: 2}
+    itemValue: 1
+    itemType: 1
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 1
+    itemAttributes:
+    - attributeName: Strength
+      attributeValue: 5
+    - attributeName: Health
+      attributeValue: 2
+    - attributeName: Defence
+      attributeValue: 1
+    - attributeName: Mana
+      attributeValue: 0
+  - itemName: Simple Sword
+    itemID: 2
+    itemDesc: Just a simple sword.
+    itemIcon: {fileID: 21300000, guid: 7023c5a1cf520244f8c1345bc34b70b6, type: 3}
+    itemModel: {fileID: 1768788195628394, guid: fd46c11064849844bae9ca4c060a44df,
+      type: 2}
+    itemValue: 1
+    itemType: 1
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 1
+    itemAttributes:
+    - attributeName: Strength
+      attributeValue: 10
+    - attributeName: Health
+      attributeValue: 5
+    - attributeName: Defence
+      attributeValue: 2
+    - attributeName: Mana
+      attributeValue: 2

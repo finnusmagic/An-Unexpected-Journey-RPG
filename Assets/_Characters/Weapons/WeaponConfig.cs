@@ -1,114 +1,50 @@
-﻿using UnityEngine.Assertions;
-using UnityEngine;
-using RPG.CameraUI;
-using RPG.Inventory;
+﻿using UnityEngine;
 
 namespace RPG.Characters
 {
-    public class WeaponConfig : MonoBehaviour
+    [CreateAssetMenu(menuName = ("RPG/Weapon"))]
+    public class WeaponConfig : ScriptableObject
     {
-        [SerializeField] Weapon currentWeaponConfig = null;
-        [SerializeField] AnimatorOverrideController animatorOverrideController = null;
-        [Range(.1f, 1.0f)] [SerializeField] float criticalHitChance = 0.1f;
-        [SerializeField] float criticalHitMultiplier = 1.25f;
-        [SerializeField] ParticleSystem criticalHitParticle = null;
-        [SerializeField] AudioClip[] attackSounds = null;
-        [SerializeField] AudioClip[] criticalSounds = null;
-        AudioSource audioSource;
 
-        const string ATTACK_TRIGGER = "Attack";
-        const string DEFAULT_ATTACK = "DEFAULT ATTACK";
+        public Transform gripTransform;
 
-        Animator animator = null;
+        public int ID;
+        [SerializeField] GameObject weaponPrefab;
+        [SerializeField] AnimationClip attackAnimation;
 
-        float lastHitTime = 0;
-        GameObject weaponObject;
-        PlayerCombat playerCombat;
-        private ItemDatabase itemData;
-        public int currentWeaponID;
+        [SerializeField] float minTimeBetweenHits = .5f;
+        [SerializeField] float maxAttackRange = 2f;
+        [SerializeField] float additionalDamage = 10f;
 
-        void Start()
+        public float GetMinTimeBetweenHits()
         {
-            currentWeaponID = -1;
-            playerCombat = GetComponent<PlayerCombat>();
-            itemData = FindObjectOfType<ItemDatabase>();
-           // PutWeaponInHand(currentWeaponConfig); 
-            SetAttackAnimation();
-
-            audioSource = GetComponent<AudioSource>();
+            return minTimeBetweenHits;
         }
 
-        public void PutWeaponInHand(Weapon weaponToUse)
+        public float GetMaxAttackRange()
         {
-            currentWeaponID = currentWeaponConfig.ID;
-            currentWeaponConfig = weaponToUse;
-            var weaponPrefab = weaponToUse.GetWeaponPrefab();
-            GameObject dominantHand = RequestDominantHand();
-            Destroy(weaponObject);
-            weaponObject = Instantiate(weaponPrefab, dominantHand.transform);
-            weaponObject.transform.localPosition = currentWeaponConfig.gripTransform.localPosition;
-            weaponObject.transform.localRotation = currentWeaponConfig.gripTransform.localRotation;
+            return maxAttackRange;
         }
 
-        private void SetAttackAnimation()
+        public GameObject GetWeaponPrefab()
         {
-            animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
+            return weaponPrefab;
         }
 
-        private GameObject RequestDominantHand()
+        public AnimationClip GetAttackAnimClip()
         {
-            var dominantHands = GetComponentsInChildren<DominantHand>();
-            int numberOfDominantHands = dominantHands.Length;
-            Assert.IsFalse(numberOfDominantHands <= 0, "No DominantHand found on Player, please add one");
-            Assert.IsFalse(numberOfDominantHands > 1, "Multiple DominantHand scripts on Player, please remove one");
-            return dominantHands[0].gameObject;
+            RemoveAnimationEvents();
+            return attackAnimation;
         }
 
-        public void AttackTarget(HealthSystem target)
+        public float GetAdditionalDamage()
         {
-            if (Time.time - lastHitTime > currentWeaponConfig.GetMinTimeBetweenHits())
-            {
-                SetAttackAnimation();
-                DamageTarget(target);
-                animator.SetTrigger(ATTACK_TRIGGER);
-                lastHitTime = Time.time;
-            }
+            return additionalDamage;
         }
 
-        public void DamageTarget(HealthSystem targetHealth)
+        private void RemoveAnimationEvents()
         {
-            targetHealth.TakeDamage(CalculateDamage());
-        }
-
-        private float CalculateDamage()
-        {
-            bool isCriticalHit = UnityEngine.Random.Range(0f, 1f) <= criticalHitChance;
-
-            float weaponDamage = itemData.FetchItemByID(currentWeaponConfig.ID).Power;
-            float damageBeforeCritical = playerCombat.baseDamage + weaponDamage;
-            Debug.Log(damageBeforeCritical);
-
-            if (isCriticalHit)
-            {
-                criticalHitParticle.Play();
-                var critClip = criticalSounds[Random.Range(0, criticalSounds.Length)];
-                audioSource.PlayOneShot(critClip);
-                return damageBeforeCritical * criticalHitMultiplier;
-            }
-            else
-            {
-                var attackClip = attackSounds[Random.Range(0, attackSounds.Length)];
-                audioSource.PlayOneShot(attackClip);
-                return damageBeforeCritical;
-            }
-        }
-
-        public bool IsTargetInRange(GameObject target)
-        {
-            float distanceToTarget = (target.transform.position - transform.position).magnitude;
-            return distanceToTarget <= currentWeaponConfig.GetMaxAttackRange();
+            attackAnimation.events = new AnimationEvent[0];
         }
     }
 }

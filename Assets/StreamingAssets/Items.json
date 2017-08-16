@@ -15,20 +15,6 @@
 	},
 	{
 		"id": 1,
-		"title": "Hoe",
-		"value": 2,
-		"stats": {
-			"power": 10,
-			"defence": 2,
-			"vitality": 4
-		},
-		"description": "A farmes hoe. It looks dirty.",
-		"stackable": false, 
-		"rarity": 1,
-		"slug": "dirty_old_hoe"
-	},
-	{
-		"id": 2,
 		"title": "Simple Sword",
 		"value": 2,
 		"stats": {

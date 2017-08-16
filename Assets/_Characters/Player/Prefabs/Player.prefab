@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 114380599797862062}
   - component: {fileID: 114360667541591632}
   - component: {fileID: 114516872289219390}
+  - component: {fileID: 114252138040290606}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -1649,6 +1650,22 @@ Transform:
   m_Father: {fileID: 4321103547743660}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114252138040290606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327385881675218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d1816eabec94a48a9db8d04e49be50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
+  characterSystem: {fileID: 0}
+  craftSystem: {fileID: 0}
+  HPMANACanvas: {fileID: 0}
+  currentHealth: 60
 --- !u!114 &114351146362244830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1690,18 +1707,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f280a43b95148498ecb6ffa9d03e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeaponConfig: {fileID: 11400000, guid: e28e8c87dd4e4d345824c73049811946,
+  baseDamage: 10
+  currentWeaponConfig: {fileID: 11400000, guid: 3fe88ccb5d723f34c857f737d2550eff,
     type: 2}
-  animatorOverrideController: {fileID: 22100000, guid: 53008094921768c4281a2528979ef499,
-    type: 2}
-  criticalHitChance: 0.25
-  criticalHitMultiplier: 2
-  criticalHitParticle: {fileID: 198804056152581082}
-  attackSounds:
-  - {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
-  - {fileID: 8300000, guid: b76357a42d03a4722afcba74c3073136, type: 3}
-  criticalSounds:
-  - {fileID: 8300000, guid: 5208ca9b1ae744345b73b125684d7105, type: 3}
+  currentWeaponID: 0
 --- !u!114 &114449498703188598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1768,7 +1777,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc42eca8427da1a4cb7e49c706c92f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 5
   rotationSpeed: 25
 --- !u!137 &137152979736848872
 SkinnedMeshRenderer:

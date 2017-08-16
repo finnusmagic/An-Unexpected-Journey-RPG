@@ -20,14 +20,14 @@ namespace RPG.Characters
         bool isAttacking = false;
 
         public bool isAlive = true;
-        PlayerCombat player = null;
+        PlayerMovement player = null;
 
         NavMeshAgent agent;
         Vector3 startPoint;
 
         void Start()
         {
-            player = FindObjectOfType<PlayerCombat>();
+            player = FindObjectOfType<PlayerMovement>();
             agent = GetComponent<NavMeshAgent>();
             startPoint = transform.position;
         }
@@ -66,7 +66,7 @@ namespace RPG.Characters
             agent.SetDestination(startPoint);
         }
 
-        private void RotateTowards(PlayerCombat player)
+        private void RotateTowards(PlayerMovement player)
         {
             if (isAlive)
             {

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33251346324142550}
   - component: {fileID: 23767038275631462}
   m_Layer: 0
-  m_Name: Simple_Bow
+  m_Name: simple_bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

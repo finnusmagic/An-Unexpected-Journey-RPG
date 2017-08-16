@@ -5,6 +5,20 @@ TagManager:
   serializedVersion: 2
   tags:
   - Collide
+  - EventSystem
+  - Canvas
+  - DraggingItem
+  - Item
+  - CraftSystem
+  - Slots
+  - ResultSlot
+  - EquipmentSystem
+  - Slot
+  - Hotbar
+  - Panel
+  - Tooltip
+  - ItemIcon
+  - MainInventory
   layers:
   - Default
   - TransparentFX
