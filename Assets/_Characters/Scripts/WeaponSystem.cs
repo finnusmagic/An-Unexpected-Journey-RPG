@@ -8,7 +8,7 @@ namespace RPG.Characters
         [SerializeField] float baseDamage = 10f;
         [SerializeField] WeaponConfig currentWeaponConfig = null;
 
-        GameObject target;
+       // GameObject target;
         GameObject weaponObject;
         Animator animator;
         Character character;
@@ -66,7 +66,7 @@ namespace RPG.Characters
 
         public void AttackTarget(GameObject targetToAttack)
         {
-            target = targetToAttack;
+           // target = targetToAttack;
             // use a repeat attack co-routine
         }
 

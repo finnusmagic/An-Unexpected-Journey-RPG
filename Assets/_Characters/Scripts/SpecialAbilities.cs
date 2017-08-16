@@ -6,7 +6,7 @@ namespace RPG.Characters
     public class SpecialAbilities : MonoBehaviour
     {
         [SerializeField] AbilityConfig[] abilities;
-        [SerializeField] Image energyBar;
+      //  [SerializeField] Image energyBar;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 1f;
         [SerializeField] AudioClip outOfEnergy;
@@ -79,12 +79,12 @@ namespace RPG.Characters
         {
             float newEnergyPoints = currentEnergyPoints - amount;
             currentEnergyPoints = Mathf.Clamp(newEnergyPoints, 0, maxEnergyPoints);
-            UpdateEnergyBar();
+           // UpdateEnergyBar();
         }
 
         private void UpdateEnergyBar()
         {
-            energyBar.fillAmount = energyAsPercent;
+           // energyBar.fillAmount = energyAsPercent;
         }
     }
 }
