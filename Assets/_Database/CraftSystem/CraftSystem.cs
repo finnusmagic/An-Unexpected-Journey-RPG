@@ -49,7 +49,7 @@ namespace RPG.Database
         }
 
 #if UNITY_EDITOR
-        [MenuItem("RPG/Database/Craft System")]
+        [MenuItem("RPG/Create/Craft System")]
         public static void menuItemCreateInventory()
         {
             GameObject Canvas = null;

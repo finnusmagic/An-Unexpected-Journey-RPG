@@ -29,7 +29,7 @@ namespace RPG.Database
             slotsInTotal = inv.width * inv.height;
         }
 #if UNITY_EDITOR
-        [MenuItem("RPG/UI/Equipment")]        //creating the menu item
+        [MenuItem("RPG/Create/Equipment")]        //creating the menu item
         public static void menuItemCreateInventory()       //create the inventory at start
         {
             GameObject Canvas = null;
@@ -46,7 +46,7 @@ namespace RPG.Database
                 draggingItem.transform.SetParent(Canvas.transform, true);
                 Instantiate(Resources.Load("Prefabs/EventSystem") as GameObject);
                 Inventory inv = panel.AddComponent<Inventory>();
-                panel.AddComponent<InventoryDesign>();
+               // panel.AddComponent<InventoryDesign>();
                 panel.AddComponent<EquipmentSystem>();
                 inv.getPrefabs();
             }
@@ -59,7 +59,7 @@ namespace RPG.Database
                 panel.AddComponent<EquipmentSystem>();
                 DestroyImmediate(GameObject.FindGameObjectWithTag("DraggingItem"));
                 GameObject draggingItem = (GameObject)Instantiate(Resources.Load("Prefabs/DraggingItem") as GameObject);
-                panel.AddComponent<InventoryDesign>();
+              //  panel.AddComponent<InventoryDesign>();
                 draggingItem.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, true);
                 inv.getPrefabs();
             }

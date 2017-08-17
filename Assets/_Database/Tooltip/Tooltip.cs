@@ -19,6 +19,8 @@ namespace RPG.Database
         public Text tooltipNameText;
         [SerializeField]
         public Text tooltipDescText;
+        [SerializeField]
+        public Text tooltipAttributeText;
 
         //Tooltip Settings
         [SerializeField]
@@ -53,6 +55,16 @@ namespace RPG.Database
         private int tooltipDescSizeX;
         [SerializeField]
         private int tooltipDescSizeY;
+        [SerializeField]
+        private bool showTooltipAttributes;
+        [SerializeField]
+        private int showTooltipAttributesPosX;
+        [SerializeField]
+        private int showTooltipAttributesPosY;
+        [SerializeField]
+        private int showTooltipAttributesSizeX;
+        [SerializeField]
+        private int showTooltipAttributesSizeY;
 
         //Tooltip Objects
         [SerializeField]
@@ -65,6 +77,9 @@ namespace RPG.Database
         private GameObject tooltipTextDesc;
         [SerializeField]
         private GameObject tooltipImageIcon;
+        [SerializeField]
+        private GameObject tooltipTextAttributes;
+        private string itemAttributes;
 
         void Start()
         {
@@ -72,7 +87,7 @@ namespace RPG.Database
         }
 
 #if UNITY_EDITOR
-        [MenuItem("RPG/UI/Tooltip")]        //creating the menu item
+        [MenuItem("RPG/Create/Tooltip")]        //creating the menu item
         public static void menuItemCreateInventory()       //create the inventory at start
         {
             if (GameObject.FindGameObjectWithTag("Tooltip") == null)
@@ -94,12 +109,16 @@ namespace RPG.Database
             tooltipImageIcon.SetActive(false);
             tooltipTextDesc = this.transform.GetChild(3).gameObject;
             tooltipTextDesc.SetActive(false);
+            tooltipTextAttributes = this.transform.GetChild(4).gameObject;
+            tooltipTextAttributes.SetActive(false);
 
             tooltipIconSize = 50;
             tooltipWidth = 150;
             tooltipHeight = 250;
             tooltipDescSizeX = 100;
             tooltipDescSizeY = 100;
+            showTooltipAttributesSizeX = 100;
+            showTooltipAttributesSizeY = 100;
         }
 
         public void setVariables()
@@ -107,25 +126,40 @@ namespace RPG.Database
             tooltipBackground = transform.GetChild(0).GetComponent<Image>();
             tooltipNameText = transform.GetChild(2).GetComponent<Text>();
             tooltipDescText = transform.GetChild(3).GetComponent<Text>();
+            tooltipAttributeText = transform.GetChild(4).GetComponent<Text>();
         }
 
-        public void activateTooltip()               //if you activate the tooltip through hovering over an item
+        public void activateTooltip()              
         {
             tooltipTextName.SetActive(true);
             tooltipImageIcon.SetActive(true);
             tooltipTextDesc.SetActive(true);
-            transform.GetChild(0).gameObject.SetActive(true);          //Tooltip getting activated
-            transform.GetChild(1).GetComponent<Image>().sprite = item.itemIcon;         //and the itemIcon...
-            transform.GetChild(2).GetComponent<Text>().text = item.itemName;            //,itemName...
-            transform.GetChild(3).GetComponent<Text>().text = item.itemDesc;            //and itemDesc is getting set        
+            tooltipTextAttributes.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(true);         
+            transform.GetChild(1).GetComponent<Image>().sprite = item.itemIcon;         
+            transform.GetChild(2).GetComponent<Text>().text = item.itemName;            
+            transform.GetChild(3).GetComponent<Text>().text = item.itemDesc;
+
+            for (int i = 0; i < item.itemAttributes.Count; i++)
+            {
+                if (item.itemAttributes[i] != null)
+                {
+                    itemAttributes += "+ " + item.itemAttributes[i].attributeValue + " " + item.itemAttributes[i].attributeName + "\n";
+                }
+            }
+
+            transform.GetChild(4).GetComponent<Text>().text = itemAttributes;
         }
 
-        public void deactivateTooltip()             //deactivating the tooltip after you went out of a slot
+        public void deactivateTooltip()             
         {
             tooltipTextName.SetActive(false);
             tooltipImageIcon.SetActive(false);
             tooltipTextDesc.SetActive(false);
+            tooltipTextAttributes.SetActive(false);
             transform.GetChild(0).gameObject.SetActive(false);
+
+            itemAttributes = null;
         }
 
         public void updateTooltip()
@@ -164,6 +198,16 @@ namespace RPG.Database
                 else
                 {
                     this.transform.GetChild(3).gameObject.SetActive(false);
+                }
+                if(showTooltipAttributes)
+                {
+                    this.transform.GetChild(4).gameObject.SetActive(true);
+                    this.transform.GetChild(4).GetComponent<RectTransform>().localPosition = new Vector3(showTooltipAttributesPosX, showTooltipAttributesPosY, 0);
+                    this.transform.GetChild(4).GetComponent<RectTransform>().sizeDelta = new Vector2(showTooltipAttributesSizeX, showTooltipAttributesSizeY);
+                }
+                else
+                {
+                    this.transform.GetChild(4).gameObject.SetActive(false);
                 }
             }
         }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ItemDatabase
   m_EditorClassIdentifier: 
   itemList:
-  - itemName: Simple Sword
+  - itemName: Nothing
     itemID: 0
     itemDesc: Just a simple Sword.
     itemIcon: {fileID: 21300000, guid: 7023c5a1cf520244f8c1345bc34b70b6, type: 3}
@@ -33,44 +33,74 @@ MonoBehaviour:
       attributeValue: 2
     - attributeName: Mana
       attributeValue: 2
-  - itemName: Rod of Death
-    itemID: 1
-    itemDesc: Just a Rod.
-    itemIcon: {fileID: 21300000, guid: 4500a82b53777e845a4949f143013321, type: 3}
-    itemModel: {fileID: 100110, guid: 208779813a52bf74b89a7bc10fc2908f, type: 2}
-    itemValue: 1
-    itemType: 1
-    itemWeight: 0
-    maxStack: 1
-    indexItemInList: 999
-    rarity: 1
-    itemAttributes:
-    - attributeName: Strength
-      attributeValue: 5
-    - attributeName: Health
-      attributeValue: 2
-    - attributeName: Defence
-      attributeValue: 1
-    - attributeName: Mana
-      attributeValue: 0
   - itemName: Simple Sword
-    itemID: 2
-    itemDesc: Just a simple sword.
-    itemIcon: {fileID: 21300000, guid: 7023c5a1cf520244f8c1345bc34b70b6, type: 3}
+    itemID: 1
+    itemDesc: It's just a simple sword. Seems like there is nothing special about
+      it.
+    itemIcon: {fileID: 21300000, guid: 60639bba7a2b7734cba5b3c006fb3441, type: 3}
     itemModel: {fileID: 1768788195628394, guid: fd46c11064849844bae9ca4c060a44df,
       type: 2}
     itemValue: 1
-    itemType: 1
+    itemType: 12
     itemWeight: 0
     maxStack: 1
     indexItemInList: 999
-    rarity: 1
+    rarity: 0
     itemAttributes:
     - attributeName: Strength
       attributeValue: 10
-    - attributeName: Health
-      attributeValue: 5
     - attributeName: Defence
       attributeValue: 2
+    - attributeName: Health
+      attributeValue: 25
+    - attributeName: Mana
+      attributeValue: 2
+  - itemName: Small Potion of Health
+    itemID: 2
+    itemDesc: A small potion of health that will regenerate some of your life when
+      consumed.
+    itemIcon: {fileID: 21300000, guid: 26a1d6e02bf678b48b6ff65f68c7bf49, type: 3}
+    itemModel: {fileID: 100000, guid: 2a7aeccaf51cb44258e96e4127ac8d7e, type: 3}
+    itemValue: 1
+    itemType: 2
+    itemWeight: 0
+    maxStack: 10
+    indexItemInList: 999
+    rarity: 5
+    itemAttributes:
+    - attributeName: Health
+      attributeValue: 25
+  - itemName: Small Mana Potion
+    itemID: 3
+    itemDesc: A small potion of mana.
+    itemIcon: {fileID: 21300000, guid: 81192211eadb9f342b12ff375a7bf7ad, type: 3}
+    itemModel: {fileID: 100000, guid: a7b94700af64d4331af2f449bf00b987, type: 3}
+    itemValue: 1
+    itemType: 2
+    itemWeight: 0
+    maxStack: 10
+    indexItemInList: 999
+    rarity: 5
+    itemAttributes:
+    - attributeName: Mana
+      attributeValue: 25
+  - itemName: Rod of Death
+    itemID: 4
+    itemDesc: A simple Rod that can be deadly in the right hands.
+    itemIcon: {fileID: 21300000, guid: c7bf940d020f4334a9cc56e3490e90b3, type: 3}
+    itemModel: {fileID: 100110, guid: 208779813a52bf74b89a7bc10fc2908f, type: 2}
+    itemValue: 1
+    itemType: 12
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 5
+    itemAttributes:
+    - attributeName: Strength
+      attributeValue: 10
+    - attributeName: Defence
+      attributeValue: 2
+    - attributeName: Health
+      attributeValue: 5
     - attributeName: Mana
       attributeValue: 2

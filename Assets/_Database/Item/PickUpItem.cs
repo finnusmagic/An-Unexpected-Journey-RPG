@@ -8,7 +8,6 @@ namespace RPG.Database
         public Item item;
         private Inventory _inventory;
         private GameObject _player;
-        // Use this for initialization
 
         void Start()
         {
@@ -17,7 +16,6 @@ namespace RPG.Database
                 _inventory = _player.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
         }
 
-        // Update is called once per frame
         void Update()
         {
             if (_inventory != null && Input.GetKeyDown(KeyCode.E))

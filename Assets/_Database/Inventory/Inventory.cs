@@ -208,7 +208,7 @@ namespace RPG.Database
         }
 
 #if UNITY_EDITOR
-        [MenuItem("RPG/UI/Inventory and Storage")]        //creating the menu item
+        [MenuItem("RPG/Create/Inventory and Storage")]        //creating the menu item
         public static void menuItemCreateInventory()       //create the inventory at start
         {
             GameObject Canvas = null;
@@ -225,7 +225,7 @@ namespace RPG.Database
                 draggingItem.transform.SetParent(Canvas.transform, true);
                 Inventory temp = panel.AddComponent<Inventory>();
                 Instantiate(Resources.Load("Prefabs/EventSystem") as GameObject);
-                panel.AddComponent<InventoryDesign>();
+               // panel.AddComponent<InventoryDesign>();
                 temp.getPrefabs();
             }
             else
@@ -234,7 +234,7 @@ namespace RPG.Database
                 panel.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, true);
                 panel.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                 Inventory temp = panel.AddComponent<Inventory>();
-                panel.AddComponent<InventoryDesign>();
+               // panel.AddComponent<InventoryDesign>();
                 DestroyImmediate(GameObject.FindGameObjectWithTag("DraggingItem"));
                 GameObject draggingItem = (GameObject)Instantiate(Resources.Load("Prefabs/DraggingItem") as GameObject);
                 draggingItem.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, true);

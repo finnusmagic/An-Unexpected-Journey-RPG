@@ -18,20 +18,20 @@ namespace RPG.Database
 
         private InputManager inputManagerDatabase;
 
-        public GameObject HPMANACanvas;
+        public GameObject playerStatus;
 
         Text hpText;
         Text manaText;
         Image hpImage;
         Image manaImage;
 
-        float maxHealth = 100;
-        float maxMana = 100;
+        float maxHealth = 150;
+        float maxMana = 150;
         float maxDamage = 0;
         float maxArmor = 0;
 
         public float currentHealth = 60;
-        float currentMana = 100;
+        public float currentMana = 100;
         float currentDamage = 0;
         float currentArmor = 0;
 
@@ -157,20 +157,46 @@ namespace RPG.Database
             }
         }
 
+        public void UpdatePlayerHealth()
+        {
+            hpText.text = currentHealth + " / " + maxHealth;
+            float fillAmount = currentHealth / maxHealth;
+            hpImage.fillAmount = fillAmount;
+
+            if (currentHealth >= maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+        }
+
+        public void UpdatePlayerMana()
+        {
+            manaText.text = currentMana + " / " + maxMana;
+            float fillAmount = currentMana / maxMana;
+            manaImage.fillAmount = fillAmount;
+
+            if (currentMana >= maxMana)
+            {
+                currentMana = maxMana;
+            }
+        }
+
         void Start()
         {
-            //if (HPMANACanvas != null)
-            //{
-            //    hpText = HPMANACanvas.transform.GetChild(1).GetChild(0).GetComponent<Text>();
+            if (playerStatus != null)
+            {
+                hpText = playerStatus.transform.GetChild(0).GetChild(3).GetComponent<Text>();
+                hpImage = playerStatus.transform.GetChild(0).GetChild(1).GetComponent<Image>();
 
-            //    manaText = HPMANACanvas.transform.GetChild(2).GetChild(0).GetComponent<Text>();
+                manaText = playerStatus.transform.GetChild(1).GetChild(3).GetComponent<Text>();
+                manaImage = playerStatus.transform.GetChild(1).GetChild(1).GetComponent<Image>();
 
-            //    hpImage = HPMANACanvas.transform.GetChild(1).GetComponent<Image>();
-            //    manaImage = HPMANACanvas.transform.GetChild(1).GetComponent<Image>();
+                currentHealth = maxHealth;
+                currentMana = maxMana;
 
-            //    UpdateHPBar();
-            //    UpdateManaBar();
-            //}
+                UpdatePlayerHealth();
+                UpdatePlayerMana();
+            }
 
             if (inputManagerDatabase == null)
                 inputManagerDatabase = (InputManager)Resources.Load("InputManager");
@@ -258,6 +284,9 @@ namespace RPG.Database
         // Update is called once per frame
         void Update()
         {
+            UpdatePlayerHealth();
+            UpdatePlayerMana();
+
             if (Input.GetKeyDown(inputManagerDatabase.CharacterSystemKeyCode))
             {
                 if (!characterSystem.activeSelf)

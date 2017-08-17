@@ -17,7 +17,7 @@ namespace RPG.Database
         public int slotsInTotal;
 
 #if UNITY_EDITOR
-        [MenuItem("RPG/UI/Hotbar")]        //creating the menu item
+        [MenuItem("RPG/Create/Hotbar")]        //creating the menu item
         public static void menuItemCreateInventory()       //create the inventory at start
         {
             GameObject Canvas = null;
@@ -34,7 +34,7 @@ namespace RPG.Database
                 Instantiate(Resources.Load("Prefabs/EventSystem") as GameObject);
                 draggingItem.transform.SetParent(Canvas.transform, true);
                 Inventory inv = panel.AddComponent<Inventory>();
-                panel.AddComponent<InventoryDesign>();
+                // panel.AddComponent<InventoryDesign>();
                 panel.AddComponent<Hotbar>();
                 inv.getPrefabs();
             }
@@ -48,7 +48,7 @@ namespace RPG.Database
                 DestroyImmediate(GameObject.FindGameObjectWithTag("DraggingItem"));
                 GameObject draggingItem = (GameObject)Instantiate(Resources.Load("Prefabs/DraggingItem") as GameObject);
                 draggingItem.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, true);
-                panel.AddComponent<InventoryDesign>();
+                // panel.AddComponent<InventoryDesign>();
                 inv.getPrefabs();
             }
         }
