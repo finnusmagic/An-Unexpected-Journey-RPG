@@ -64,9 +64,9 @@ MonoBehaviour:
     itemValue: 1
     itemType: 2
     itemWeight: 0
-    maxStack: 10
+    maxStack: 100
     indexItemInList: 999
-    rarity: 5
+    rarity: 80
     itemAttributes:
     - attributeName: Health
       attributeValue: 25
@@ -78,9 +78,9 @@ MonoBehaviour:
     itemValue: 1
     itemType: 2
     itemWeight: 0
-    maxStack: 10
+    maxStack: 100
     indexItemInList: 999
-    rarity: 5
+    rarity: 84
     itemAttributes:
     - attributeName: Mana
       attributeValue: 25

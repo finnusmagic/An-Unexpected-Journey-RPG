@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using RPG.Characters;
+using UnityEngine.UI;
 
 namespace RPG.Database
 {
@@ -17,6 +18,72 @@ namespace RPG.Database
         private InputManager inputManagerDatabase;
         private PlayerStatusManager playerStatus;
         int normalSize = 3;
+
+        void Start()
+        {
+            playerStatus = FindObjectOfType<PlayerStatusManager>();
+
+            if (inputManagerDatabase == null)
+                inputManagerDatabase = (InputManager)Resources.Load("InputManager");
+
+            if (craftSystem != null)
+                cS = craftSystem.GetComponent<CraftSystem>();
+
+            if (GameObject.FindGameObjectWithTag("Tooltip") != null)
+                toolTip = GameObject.FindGameObjectWithTag("Tooltip").GetComponent<Tooltip>();
+            if (inventory != null)
+                mainInventory = inventory.GetComponent<Inventory>();
+            if (characterSystem != null)
+                characterSystemInventory = characterSystem.GetComponent<Inventory>();
+            if (craftSystem != null)
+                craftSystemInventory = craftSystem.GetComponent<Inventory>();
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(inputManagerDatabase.CharacterSystemKeyCode))
+            {
+                if (!characterSystem.activeSelf)
+                {
+                    characterSystemInventory.openInventory();
+                }
+                else
+                {
+                    if (toolTip != null)
+                        toolTip.deactivateTooltip();
+                    characterSystemInventory.closeInventory();
+                }
+            }
+
+            if (Input.GetKeyDown(inputManagerDatabase.InventoryKeyCode))
+            {
+                if (!inventory.activeSelf)
+                {
+                    mainInventory.openInventory();
+                }
+                else
+                {
+                    if (toolTip != null)
+                        toolTip.deactivateTooltip();
+                    mainInventory.closeInventory();
+                }
+            }
+
+            if (Input.GetKeyDown(inputManagerDatabase.CraftSystemKeyCode))
+            {
+                if (!craftSystem.activeSelf)
+                    craftSystemInventory.openInventory();
+                else
+                {
+                    if (cS != null)
+                        cS.backToInventory();
+                    if (toolTip != null)
+                        toolTip.deactivateTooltip();
+                    craftSystemInventory.closeInventory();
+                }
+            }
+
+        }
 
         public void OnEnable()
         {
@@ -138,26 +205,6 @@ namespace RPG.Database
             }
         }
 
-        void Start()
-        {
-            playerStatus = FindObjectOfType<PlayerStatusManager>();
-
-            if (inputManagerDatabase == null)
-                inputManagerDatabase = (InputManager)Resources.Load("InputManager");
-
-            if (craftSystem != null)
-                cS = craftSystem.GetComponent<CraftSystem>();
-
-            if (GameObject.FindGameObjectWithTag("Tooltip") != null)
-                toolTip = GameObject.FindGameObjectWithTag("Tooltip").GetComponent<Tooltip>();
-            if (inventory != null)
-                mainInventory = inventory.GetComponent<Inventory>();
-            if (characterSystem != null)
-                characterSystemInventory = characterSystem.GetComponent<Inventory>();
-            if (craftSystem != null)
-                craftSystemInventory = craftSystem.GetComponent<Inventory>();
-        }
-
         public void OnConsumeItem(Item item)
         {
             for (int i = 0; i < item.itemAttributes.Count; i++)
@@ -206,6 +253,7 @@ namespace RPG.Database
                 if (item.itemAttributes[i].attributeName == "Damage")
                     playerStatus.maxDamage += item.itemAttributes[i].attributeValue;
             }
+            playerStatus.UpdatePlayerStats();
         }
 
         public void OnUnEquipItem(Item item)
@@ -221,56 +269,9 @@ namespace RPG.Database
                 if (item.itemAttributes[i].attributeName == "Damage")
                     playerStatus.maxDamage -= item.itemAttributes[i].attributeValue;
             }
+            playerStatus.UpdatePlayerStats();
         }
 
-
-
-        // Update is called once per frame
-        void Update()
-        {
-            if (Input.GetKeyDown(inputManagerDatabase.CharacterSystemKeyCode))
-            {
-                if (!characterSystem.activeSelf)
-                {
-                    characterSystemInventory.openInventory();
-                }
-                else
-                {
-                    if (toolTip != null)
-                        toolTip.deactivateTooltip();
-                    characterSystemInventory.closeInventory();
-                }
-            }
-
-            if (Input.GetKeyDown(inputManagerDatabase.InventoryKeyCode))
-            {
-                if (!inventory.activeSelf)
-                {
-                    mainInventory.openInventory();
-                }
-                else
-                {
-                    if (toolTip != null)
-                        toolTip.deactivateTooltip();
-                    mainInventory.closeInventory();
-                }
-            }
-
-            if (Input.GetKeyDown(inputManagerDatabase.CraftSystemKeyCode))
-            {
-                if (!craftSystem.activeSelf)
-                    craftSystemInventory.openInventory();
-                else
-                {
-                    if (cS != null)
-                        cS.backToInventory();
-                    if (toolTip != null)
-                        toolTip.deactivateTooltip();
-                    craftSystemInventory.closeInventory();
-                }
-            }
-
-        }
     }
 }
 

@@ -47,7 +47,9 @@ namespace RPG.Database
                 if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, slotCorners[3], data.pressEventCamera, out localPointerPosition))   // and set the localposition of the tooltip...
                 {
                     if (transform.parent.parent.parent.GetComponent<Hotbar>() == null)
+                    {
                         tooltipRectTransform.localPosition = localPointerPosition;          //at the right bottom side of the slot
+                    }
                     else
                         tooltipRectTransform.localPosition = new Vector3(localPointerPosition.x, localPointerPosition.y + tooltip.tooltipHeight);
                 }

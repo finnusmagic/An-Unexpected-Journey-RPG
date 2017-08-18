@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114344506911011430}
   - component: {fileID: 114575263218139092}
   - component: {fileID: 114613034994385344}
-  - component: {fileID: 114059048837878102}
+  - component: {fileID: 114185620874455954}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -97,13 +97,13 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021387032470026}
   m_Enabled: 1
---- !u!114 &114059048837878102
+--- !u!114 &114185620874455954
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021387032470026}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -115,18 +115,18 @@ MonoBehaviour:
   stopNaNPropagation: 1
   antialiasingMode: 3
   temporalAntialiasing:
-    jitterSpread: 0.74
-    sharpen: 0.1
-    stationaryBlending: 0.75
-    motionBlending: 0.85
+    jitterSpread: 0.524
+    sharpen: 0.51
+    stationaryBlending: 0.99
+    motionBlending: 0.314
   fastApproximateAntialiasing:
     mobileOptimized: 0
     keepAlpha: 0
   ambientOcclusion:
-    enabled: 0
-    intensity: 0.1
+    enabled: 1
+    intensity: 0.28
     radius: 0.25
-    quality: 2
+    quality: 3
     ambientOnly: 0
   fog:
     enabled: 1
@@ -148,8 +148,8 @@ MonoBehaviour:
       exposure: 0.12
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
   m_ShowRenderingFeatures: 1
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
+  m_ShowToolkit: 1
+  m_ShowCustomSorter: 1
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c9a272f6969f445889ef8cc0392a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerCameraDistance: 8
+  PlayerCameraDistance: 7
 --- !u!114 &114575263218139092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9ef18ec26b35647a8351b43db6aeee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkCursor: {fileID: 2800000, guid: f42c4bb11f584df40951cf4832f8cc82, type: 3}
+  walkCursor: {fileID: 2800000, guid: cc8e2339ec0761d4ba1aa3a3460c250f, type: 3}
   enemyCursor: {fileID: 2800000, guid: 8a31b5c268031a84a872f286e2382061, type: 3}
-  cursorHotspot: {x: 0, y: 0}
+  cursorOffset: {x: 23, y: 8}
 --- !u!114 &114613034994385344
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UFPS: 0
   reloadWeapon: 114
-  SplitItem: 325
+  SplitItem: 97
   InventoryKeyCode: 105
   StorageKeyCode: 98
   CharacterSystemKeyCode: 105
-  CraftSystemKeyCode: 49
+  CraftSystemKeyCode: 99
