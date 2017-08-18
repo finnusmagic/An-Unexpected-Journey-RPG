@@ -144,7 +144,6 @@ GameObject:
   - component: {fileID: 224873691453466568}
   - component: {fileID: 222775294911373410}
   - component: {fileID: 114778921279806540}
-  - component: {fileID: 114450951912473586}
   m_Layer: 0
   m_Name: Points Text
   m_TagString: Untagged
@@ -786,7 +785,6 @@ GameObject:
   - component: {fileID: 224000772472044516}
   - component: {fileID: 222733329465187990}
   - component: {fileID: 114420919415751960}
-  - component: {fileID: 114120839067488720}
   m_Layer: 0
   m_Name: Points Title
   m_TagString: Untagged
@@ -1225,17 +1223,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114120839067488720
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1950622548879096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd69e70a124e6614fb0d0be78af2136c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114121816142456218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1831,17 +1818,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114450951912473586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1234111826755960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd69e70a124e6614fb0d0be78af2136c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114465958561148414
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RPG.Characters
 {
     public class SelfHealBehaviour : AbilityBehaviour
     {
-        Character player = null;
+        PlayerStatusManager player = null;
 
         void Start()
         {
-            player = GetComponent<Character>();
+            player = GetComponent<PlayerStatusManager>();
         }
 
         public override void Use(GameObject target)
         {
             PlayAbilitySound();
-            var playerHealth = player.GetComponent<HealthSystem>();
+            var playerHealth = player;
             playerHealth.Heal((config as SelfHealConfig).GetExtraHealth());
             PlayParticleEffect();
         }

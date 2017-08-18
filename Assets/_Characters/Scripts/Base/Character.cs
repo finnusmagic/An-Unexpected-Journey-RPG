@@ -59,6 +59,7 @@ namespace RPG.Characters
 
             var audioSource = gameObject.AddComponent<AudioSource>();
             audioSource.spatialBlend = audioSourceSpatialBlend;
+            audioSource.dopplerLevel = 0;
 
             animator = gameObject.AddComponent<Animator>();
             animator.runtimeAnimatorController = animatorController;

@@ -295,7 +295,6 @@ GameObject:
   - component: {fileID: 114837981393403242}
   - component: {fileID: 114380599797862062}
   - component: {fileID: 114360667541591632}
-  - component: {fileID: 114516872289219390}
   - component: {fileID: 114252138040290606}
   m_Layer: 11
   m_Name: Player Default
@@ -1695,8 +1694,14 @@ MonoBehaviour:
   inventory: {fileID: 0}
   characterSystem: {fileID: 0}
   craftSystem: {fileID: 0}
-  HPMANACanvas: {fileID: 0}
-  currentHealth: 60
+  playerStatus: {fileID: 0}
+  hpText: {fileID: 0}
+  manaText: {fileID: 0}
+  manaImage: {fileID: 0}
+  maxHealth: 0
+  maxMana: 0
+  currentHealth: 0
+  currentMana: 0
 --- !u!114 &114351146362244830
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1723,9 +1728,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b6b4ad46ab809447b0ec2d1f1b95301, type: 2}
   - {fileID: 11400000, guid: 58a711623a785014899b67e7b3bb3215, type: 2}
   - {fileID: 11400000, guid: dd53b6c78a1c6b040806ac43be6d9501, type: 2}
-  maxEnergyPoints: 100
+  maxManaPoints: 100
   regenPointsPerSecond: 1
-  outOfEnergy: {fileID: 8300000, guid: 1ad07e4fc8279ff45bda3f93adb7a395, type: 3}
+  outOfMana: {fileID: 0}
 --- !u!114 &114380599797862062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1769,32 +1774,6 @@ MonoBehaviour:
   navMeshAgentStoppingDistance: 1
   navMeshAgentRadius: 0.3
   navMeshAgentHeight: 1.8
---- !u!114 &114516872289219390
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1327385881675218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e361943d259d7ca458c4aaea1b1e472f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isEnemy: 0
-  enemyCanvas: {fileID: 0}
-  maxHealthPoints: 100
-  damageSounds:
-  - {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
-  - {fileID: 8300000, guid: 35a9e30fa232a844098ae0254b98dc9d, type: 3}
-  - {fileID: 8300000, guid: 5d50e61fcedf44e42b796d2e017af755, type: 3}
-  - {fileID: 8300000, guid: 4891244ec0e6bde4b8253a5c9481bb8f, type: 3}
-  - {fileID: 8300000, guid: 4784a29557ed91045b61d00cec2a7360, type: 3}
-  - {fileID: 8300000, guid: 362578f4c62b2e443a4d6847659c372f, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
-  - {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
-  - {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
-  deathVanishSeconds: 2
 --- !u!114 &114837981393403242
 MonoBehaviour:
   m_ObjectHideFlags: 1

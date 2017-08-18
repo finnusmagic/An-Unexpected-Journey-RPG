@@ -177,8 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9ef18ec26b35647a8351b43db6aeee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkCursor: {fileID: 2800000, guid: c87a9ec5b3dd99a459d825f8625b44bd, type: 3}
-  enemyCursor: {fileID: 2800000, guid: fda947c973635334aae173d4ce637ab0, type: 3}
+  walkCursor: {fileID: 2800000, guid: f42c4bb11f584df40951cf4832f8cc82, type: 3}
+  enemyCursor: {fileID: 2800000, guid: 8a31b5c268031a84a872f286e2382061, type: 3}
   cursorHotspot: {x: 0, y: 0}
 --- !u!114 &114613034994385344
 MonoBehaviour:

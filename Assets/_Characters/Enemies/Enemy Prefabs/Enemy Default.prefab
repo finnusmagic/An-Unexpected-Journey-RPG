@@ -97,6 +97,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4123907852654184}
   - component: {fileID: 114842419081193470}
+  - component: {fileID: 114243753432175980}
+  - component: {fileID: 114879455088274268}
   m_Layer: 0
   m_Name: Enemy Default
   m_TagString: Untagged
@@ -964,7 +966,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1112032646070892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2716217, y: 0, z: 7.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4224032591176562}
@@ -1708,6 +1710,28 @@ MonoBehaviour:
   triggerRadius: 10
   isOneTimeOnly: 1
   hasPlayed: 0
+--- !u!114 &114243753432175980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1112032646070892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84c4e2c0105368244a79510536347b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseRadius: 4
+  attackRadius: 10
+  damagePerShot: 10
+  firingPeriodInS: 2
+  firingPeriodVariation: 0.5
+  projectileToUse: {fileID: 1874979086049940, guid: 62f3111ab9274e346bbd73a7eac13658,
+    type: 2}
+  projectileSocket: {fileID: 1722435453854820}
+  aimOffset: {x: 0, y: 1, z: 0}
+  rotationSpeed: 10
+  isAlive: 1
 --- !u!114 &114593323177195790
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1738,8 +1762,8 @@ MonoBehaviour:
   colliderCenter: {x: 0, y: 1.03, z: 0}
   colliderRadius: 0.2
   colliderHeight: 2.03
-  moveSpeedMultiplier: 0.7
-  animationSpeedMultiplier: 1.5
+  moveSpeedMultiplier: 0.2
+  animationSpeedMultiplier: 1
   movingTurnSpeed: 360
   stationaryTurnSpeed: 180
   moveThreshold: 1
@@ -1747,6 +1771,23 @@ MonoBehaviour:
   navMeshAgentStoppingDistance: 1.3
   navMeshAgentRadius: 0.3
   navMeshAgentHeight: 1.8
+--- !u!114 &114879455088274268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1112032646070892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e361943d259d7ca458c4aaea1b1e472f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCanvas: {fileID: 1751071195537254, guid: 094e17e8b47220e43b901fdd7a8d9f2a,
+    type: 2}
+  maxHealthPoints: 100
+  damageSounds: []
+  deathSounds: []
+  deathVanishSeconds: 2
 --- !u!137 &137896516618454702
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

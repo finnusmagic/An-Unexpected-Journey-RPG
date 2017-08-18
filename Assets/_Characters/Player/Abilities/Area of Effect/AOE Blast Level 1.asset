@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a07130e89789ba468d258c434a0d9da, type: 3}
   m_Name: AOE Blast Level 1
   m_EditorClassIdentifier: 
-  energyCost: 10
+  manaCost: 25
+  coolDown: 2
   particlePrefab: {fileID: 1005475209298914, guid: 5c7566465b26a9840b7948f249d750df,
     type: 2}
   audioClips:

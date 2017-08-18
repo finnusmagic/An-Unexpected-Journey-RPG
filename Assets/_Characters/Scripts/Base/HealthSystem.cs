@@ -9,14 +9,11 @@ namespace RPG.Characters
 {
     public class HealthSystem : MonoBehaviour
     {
-        [SerializeField] bool isEnemy;
         [SerializeField] GameObject enemyCanvas = null;
-        Camera targetCamera;
         [Space(10)]
         [SerializeField] float maxHealthPoints = 100f;
-       // [SerializeField] Image healthBar;
-        [SerializeField] AudioClip[] damageSounds;
-        [SerializeField] AudioClip[] deathSounds;
+        [SerializeField] AudioClip[] damageSounds = null;
+        [SerializeField] AudioClip[] deathSounds = null;
         [SerializeField] float deathVanishSeconds = 2.0f;
 
         const string DEATH_TRIGGER = "Death";
@@ -26,34 +23,33 @@ namespace RPG.Characters
         AudioSource audioSource;
         Character characterMovement;
 
+        GameObject enemyHealth;
+
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
         void Start()
         {
-            targetCamera = Camera.main;
             animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
             characterMovement = GetComponent<Character>();
 
             currentHealthPoints = maxHealthPoints;
+
+            Vector3 enemyCanvasPosition = new Vector3(0, 2.5f, 0) + transform.position;
+            enemyHealth = Instantiate(enemyCanvas, enemyCanvasPosition, transform.rotation);
+            enemyHealth.transform.SetParent(transform);
+
+            enemyCanvas.transform.GetChild(1).GetComponent<Image>().fillAmount = healthAsPercentage;
         }
 
         void Update()
         {
             UpdateHealthBar();
-
-            if (isEnemy)
-            {
-                enemyCanvas.transform.rotation = targetCamera.transform.rotation;
-            }
         }
 
         void UpdateHealthBar()
         {
-           // if (healthBar) // Enemies may not have health bars to update
-           // {
-               // healthBar.fillAmount = healthAsPercentage;
-           // }
+            enemyCanvas.transform.GetChild(1).GetComponent<Image>().fillAmount = healthAsPercentage;
         }
 
         public void TakeDamage(float damage)
@@ -63,11 +59,7 @@ namespace RPG.Characters
             var clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
             audioSource.PlayOneShot(clip);
 
-            if (characterDies && !isEnemy)
-            {
-                StartCoroutine(KillPlayer());
-            }
-            if (characterDies && isEnemy)
+            if (characterDies)
             {
                 StartCoroutine(KillEnemy());
             }

@@ -23,7 +23,7 @@ namespace RPG.Characters
         {
             if (collider.gameObject.tag == "Player")
             {
-                collider.gameObject.GetComponent<HealthSystem>().TakeDamage(damageCaused);
+                collider.gameObject.GetComponent<PlayerStatusManager>().DamagePlayer(damageCaused);
                 Destroy(gameObject, DESTROY_DELAY_AFTER_HIT);
             }
             else

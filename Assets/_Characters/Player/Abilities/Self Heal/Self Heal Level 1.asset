@@ -11,7 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697ec6227e1450340a01fb7d876901bf, type: 3}
   m_Name: Self Heal Level 1
   m_EditorClassIdentifier: 
-  energyCost: 10
+  manaCost: 25
+  coolDown: 2
   particlePrefab: {fileID: 1814514907074992, guid: d27c5388d0a1dbb42b3139489896685e,
     type: 2}
   audioClips:

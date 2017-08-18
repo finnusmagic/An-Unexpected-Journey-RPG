@@ -5,7 +5,7 @@ namespace RPG.Characters
     public abstract class AbilityConfig : ScriptableObject
     {
         [Header("Spcial Ability General")]
-        [SerializeField] float energyCost = 10f;
+        [SerializeField] float manaCost;
         [SerializeField] float coolDown = 2f;
         [SerializeField] GameObject particlePrefab;
         [SerializeField] AudioClip[] audioClips;
@@ -26,9 +26,9 @@ namespace RPG.Characters
             behaviour.Use(target);
         }
 
-        public float GetEnergyCost()
+        public float GetManaCost()
         {
-            return energyCost;
+            return manaCost;
         }
 
         public float GetCoolDown()

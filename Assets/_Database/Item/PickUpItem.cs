@@ -13,7 +13,7 @@ namespace RPG.Database
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             if (_player != null)
-                _inventory = _player.GetComponent<PlayerInventory>().inventory.GetComponent<Inventory>();
+                _inventory = _player.GetComponent<PlayerInventoryManager>().inventory.GetComponent<Inventory>();
         }
 
         void Update()
