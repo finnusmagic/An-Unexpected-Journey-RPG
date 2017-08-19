@@ -12,17 +12,21 @@ MonoBehaviour:
   m_Name: AttributeDatabase
   m_EditorClassIdentifier: 
   itemAttributeList:
+  - attributeName: Damage
+    attributeValue: 0
+  - attributeName: Armor
+    attributeValue: 0
   - attributeName: Health
-    attributeValue: 0
-  - attributeName: Defence
-    attributeValue: 0
-  - attributeName: Strength
     attributeValue: 0
   - attributeName: Mana
     attributeValue: 0
-  - attributeName: Health
+  - attributeName: Health Reg
     attributeValue: 0
-  - attributeName: Health
+  - attributeName: Mana Reg
     attributeValue: 0
-  - attributeName: Defense
+  - attributeName: Crit Damage
+    attributeValue: 0
+  - attributeName: Crit Chance
+    attributeValue: 0
+  - attributeName: Damage
     attributeValue: 0

@@ -35,72 +35,130 @@ MonoBehaviour:
       attributeValue: 2
   - itemName: Simple Sword
     itemID: 1
-    itemDesc: It's just a simple sword. Seems like there is nothing special about
-      it.
+    itemDesc: Just a simple sword. It's blade does not look very sharp and it's grip
+      is rusty.
     itemIcon: {fileID: 21300000, guid: 60639bba7a2b7734cba5b3c006fb3441, type: 3}
-    itemModel: {fileID: 1768788195628394, guid: fd46c11064849844bae9ca4c060a44df,
+    itemModel: {fileID: 1358036631176394, guid: 71dd502105dd4e54d92f599bc8c82dff,
       type: 2}
     itemValue: 1
     itemType: 12
     itemWeight: 0
     maxStack: 1
     indexItemInList: 999
-    rarity: 0
+    rarity: 1
     itemAttributes:
-    - attributeName: Strength
-      attributeValue: 10
+    - attributeName: Damage
+      attributeValue: 5
+    - attributeName: Armor
+      attributeValue: 4
     - attributeName: Health
-      attributeValue: 25
-    - attributeName: Mana
+      attributeValue: 5
+    - attributeName: Health Reg
+      attributeValue: 0.05
+    - attributeName: Crit Damage
       attributeValue: 2
-    - attributeName: Defense
-      attributeValue: 2
-  - itemName: Small Potion of Health
+    - attributeName: Crit Chance
+      attributeValue: 1.5
+  - itemName: Simple Bow
     itemID: 2
-    itemDesc: A small potion of health that will regenerate some of your life when
-      consumed.
-    itemIcon: {fileID: 21300000, guid: 26a1d6e02bf678b48b6ff65f68c7bf49, type: 3}
-    itemModel: {fileID: 100000, guid: 2a7aeccaf51cb44258e96e4127ac8d7e, type: 3}
-    itemValue: 1
-    itemType: 2
-    itemWeight: 0
-    maxStack: 100
-    indexItemInList: 999
-    rarity: 80
-    itemAttributes:
-    - attributeName: Health
-      attributeValue: 25
-  - itemName: Small Mana Potion
-    itemID: 3
-    itemDesc: A small potion of mana.
-    itemIcon: {fileID: 21300000, guid: 81192211eadb9f342b12ff375a7bf7ad, type: 3}
-    itemModel: {fileID: 100000, guid: a7b94700af64d4331af2f449bf00b987, type: 3}
-    itemValue: 1
-    itemType: 2
-    itemWeight: 0
-    maxStack: 100
-    indexItemInList: 999
-    rarity: 84
-    itemAttributes:
-    - attributeName: Mana
-      attributeValue: 25
-  - itemName: Rod of Death
-    itemID: 4
-    itemDesc: A simple Rod that can be deadly in the right hands.
-    itemIcon: {fileID: 21300000, guid: c7bf940d020f4334a9cc56e3490e90b3, type: 3}
-    itemModel: {fileID: 100110, guid: 208779813a52bf74b89a7bc10fc2908f, type: 2}
+    itemDesc: Just a simple Bow. It looks as if it has already been used in many fights.
+    itemIcon: {fileID: 21300000, guid: 9f79de080511c19449ca0d3ebc913c7b, type: 3}
+    itemModel: {fileID: 1830904260501586, guid: ecbbb7b06d2369f4dbb5911995363e1f,
+      type: 2}
     itemValue: 1
     itemType: 12
     itemWeight: 0
     maxStack: 1
     indexItemInList: 999
-    rarity: 5
+    rarity: 1
     itemAttributes:
-    - attributeName: Strength
-      attributeValue: 10
-    - attributeName: Defence
+    - attributeName: Damage
+      attributeValue: 6
+    - attributeName: Armor
       attributeValue: 2
     - attributeName: Health
-      attributeValue: 5
-    - attributeName: Mana
       attributeValue: 2
+    - attributeName: Health Reg
+      attributeValue: 0.01
+    - attributeName: Crit Damage
+      attributeValue: 2
+    - attributeName: Crit Chance
+      attributeValue: 1.5
+  - itemName: Simple Staff
+    itemID: 3
+    itemDesc: 'Just a simple Staff. It looks as if it could break at any moment. '
+    itemIcon: {fileID: 21300000, guid: c7bf940d020f4334a9cc56e3490e90b3, type: 3}
+    itemModel: {fileID: 141714, guid: 90914c334262f7140a0cf37f0b182e5c, type: 2}
+    itemValue: 1
+    itemType: 12
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 1
+    itemAttributes:
+    - attributeName: Damage
+      attributeValue: 2
+    - attributeName: Health
+      attributeValue: 1
+    - attributeName: Mana
+      attributeValue: 5
+    - attributeName: Health Reg
+      attributeValue: 0.01
+    - attributeName: Crit Damage
+      attributeValue: 1
+    - attributeName: Crit Chance
+      attributeValue: 0.5
+  - itemName: Small Health Potion
+    itemID: 4
+    itemDesc: A small healing pot. When it becomes dangerous, this potion can possibly
+      save lives.
+    itemIcon: {fileID: 21300000, guid: 26a1d6e02bf678b48b6ff65f68c7bf49, type: 3}
+    itemModel: {fileID: 100000, guid: 2a7aeccaf51cb44258e96e4127ac8d7e, type: 3}
+    itemValue: 1
+    itemType: 2
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 1
+    itemAttributes:
+    - attributeName: Health
+      attributeValue: 10
+  - itemName: Small Mana Potion
+    itemID: 5
+    itemDesc: A small mana potion. If the energy to perform abilities leaks, this
+      could help.
+    itemIcon: {fileID: 21300000, guid: 81192211eadb9f342b12ff375a7bf7ad, type: 3}
+    itemModel: {fileID: 100000, guid: a7b94700af64d4331af2f449bf00b987, type: 3}
+    itemValue: 1
+    itemType: 2
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 1
+    itemAttributes:
+    - attributeName: Mana
+      attributeValue: 10
+  - itemName: TZest
+    itemID: 6
+    itemDesc: test
+    itemIcon: {fileID: 21300000, guid: 5245b23bf5b259f40a030a004284ec1c, type: 3}
+    itemModel: {fileID: 166914, guid: 35def8c4f8304524785a18281440c268, type: 2}
+    itemValue: 1
+    itemType: 12
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 1
+    itemAttributes:
+    - attributeName: Armor
+      attributeValue: 0
+    - attributeName: Health
+      attributeValue: 0
+    - attributeName: Mana
+      attributeValue: 0
+    - attributeName: Health Reg
+      attributeValue: 0
+    - attributeName: Mana Reg
+      attributeValue: 0
+    - attributeName: Crit Chance
+      attributeValue: 0

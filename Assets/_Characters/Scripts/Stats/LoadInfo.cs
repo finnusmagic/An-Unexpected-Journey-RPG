@@ -10,12 +10,17 @@ public class LoadInfo {
         GameInfo.PlayerLevel = PlayerPrefs.GetInt("PLAYERLEVEL");
         GameInfo.PlayerModel = PlayerPrefs.GetInt("PLAYERMODEL");
 
-        GameInfo.Strength = PlayerPrefs.GetInt("STRENGTH");
-        GameInfo.Defense = PlayerPrefs.GetInt("DEFENSE");
+        GameInfo.Damage = PlayerPrefs.GetInt("DAMAGE");
+        GameInfo.Armor = PlayerPrefs.GetInt("ARMOR");
         GameInfo.Health = PlayerPrefs.GetInt("HEALTH");
         GameInfo.Mana = PlayerPrefs.GetInt("MANA");
 
-        Debug.Log(GameInfo.Strength);
+        GameInfo.HealthRegen = PlayerPrefs.GetFloat("HEALTHREGEN");
+        GameInfo.ManaRegen = PlayerPrefs.GetFloat("MANAREGEN");
+
+        GameInfo.CritChance = PlayerPrefs.GetFloat("CRITCHANCE");
+        GameInfo.CritDamage = PlayerPrefs.GetFloat("CRTIDAMAGE");
+
         Debug.Log("Info Loaded.");
     }
 }

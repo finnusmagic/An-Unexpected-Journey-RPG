@@ -9,10 +9,16 @@ public class CreatePlayer : MonoBehaviour {
     private BasePlayerClass newPlayer;
     private string playerName = "Test Player";
 
-    public Text strengthText = null;
-    public Text defenseText = null;
+    public Text damageText = null;
+    public Text armorText = null;
     public Text healthText = null;
     public Text manaText = null;
+
+    public Text healthRegText = null;
+    public Text manaRegText = null;
+
+    public Text critChanceText = null;
+    public Text critDamageText = null;
 
     public Text classNameText = null;
     public Text classDescriptionText = null;
@@ -43,10 +49,16 @@ public class CreatePlayer : MonoBehaviour {
         GameInfo.PlayerName = newPlayer.PlayerName;
         GameInfo.PlayerClass = newPlayer.PlayerClass;
 
-        GameInfo.Strength = newPlayer.Strength;
-        GameInfo.Defense = newPlayer.Defense;
+        GameInfo.Damage = newPlayer.Damage;
+        GameInfo.Armor = newPlayer.Armor;
         GameInfo.Health = newPlayer.Health;
         GameInfo.Mana = newPlayer.Mana;
+
+        GameInfo.HealthRegen = newPlayer.HealthReg;
+        GameInfo.ManaRegen = newPlayer.ManaReg;
+
+        GameInfo.CritChance = newPlayer.CritChance;
+        GameInfo.CritDamage = newPlayer.CritDamage;
 
         SaveInfo.SaveAllInfo();
 
@@ -57,10 +69,16 @@ public class CreatePlayer : MonoBehaviour {
     {
         pointsToSpend = 20;
         newPlayer.PlayerClass = new BaseArcherClass();
-        newPlayer.Strength = newPlayer.PlayerClass.Strength;
-        newPlayer.Defense = newPlayer.PlayerClass.Defense;
+        newPlayer.Damage = newPlayer.PlayerClass.Damage;
+        newPlayer.Armor = newPlayer.PlayerClass.Armor;
         newPlayer.Health = newPlayer.PlayerClass.Health;
         newPlayer.Mana = newPlayer.PlayerClass.Mana;
+
+        newPlayer.HealthReg = newPlayer.PlayerClass.HealthReg;
+        newPlayer.ManaReg = newPlayer.PlayerClass.ManaReg;
+
+        newPlayer.CritChance = newPlayer.PlayerClass.CritChance;
+        newPlayer.CritDamage = newPlayer.PlayerClass.CritDamage;
 
         className = "The Archer";
         classDescription = "The Archer is a ranged Class that focuses on mastering the bow. His shooting skills are the best out there and his agility is the greatest.";
@@ -71,10 +89,16 @@ public class CreatePlayer : MonoBehaviour {
     public void SetWarriorClass()
     {
         newPlayer.PlayerClass = new BaseWarriorClass();
-        newPlayer.Strength = newPlayer.PlayerClass.Strength;
-        newPlayer.Defense = newPlayer.PlayerClass.Defense;
+        newPlayer.Damage = newPlayer.PlayerClass.Damage;
+        newPlayer.Armor = newPlayer.PlayerClass.Armor;
         newPlayer.Health = newPlayer.PlayerClass.Health;
         newPlayer.Mana = newPlayer.PlayerClass.Mana;
+
+        newPlayer.HealthReg = newPlayer.PlayerClass.HealthReg;
+        newPlayer.ManaReg = newPlayer.PlayerClass.ManaReg;
+
+        newPlayer.CritChance = newPlayer.PlayerClass.CritChance;
+        newPlayer.CritDamage = newPlayer.PlayerClass.CritDamage;
 
         className = "The Warrior";
         classDescription = "The Warrior is a meele Class that focuses on mastering the Sword. His sword skills are the strongest out there and his defence is the greatest";
@@ -85,10 +109,16 @@ public class CreatePlayer : MonoBehaviour {
     public void SetMageClass()
     {
         newPlayer.PlayerClass = new BaseMageClass();
-        newPlayer.Strength = newPlayer.PlayerClass.Strength;
-        newPlayer.Defense = newPlayer.PlayerClass.Defense;
+        newPlayer.Damage = newPlayer.PlayerClass.Damage;
+        newPlayer.Armor = newPlayer.PlayerClass.Armor;
         newPlayer.Health = newPlayer.PlayerClass.Health;
         newPlayer.Mana = newPlayer.PlayerClass.Mana;
+
+        newPlayer.HealthReg = newPlayer.PlayerClass.HealthReg;
+        newPlayer.ManaReg = newPlayer.PlayerClass.ManaReg;
+
+        newPlayer.CritChance = newPlayer.PlayerClass.CritChance;
+        newPlayer.CritDamage = newPlayer.PlayerClass.CritDamage;
 
         className = "The Mage";
         classDescription = "The Mage is a Class that focuses on casting strong abilities to destruct their enemies. His abilities are his greatest Power, but his defense is his greates weakness. ";
@@ -99,10 +129,16 @@ public class CreatePlayer : MonoBehaviour {
 
     void UpdateUI()
     {
-        strengthText.text = newPlayer.Strength.ToString();
-        defenseText.text = newPlayer.Defense.ToString();
+        damageText.text = newPlayer.Damage.ToString();
+        armorText.text = newPlayer.Armor.ToString();
         healthText.text = newPlayer.Health.ToString();
         manaText.text = newPlayer.Mana.ToString();
+
+        healthRegText.text = newPlayer.HealthReg.ToString();
+        manaRegText.text = newPlayer.ManaReg.ToString();
+
+        critChanceText.text = newPlayer.CritChance.ToString();
+        critDamageText.text = newPlayer.CritDamage.ToString();
 
         pointsText.text = pointsToSpend.ToString();
 
@@ -111,19 +147,19 @@ public class CreatePlayer : MonoBehaviour {
         classIconSprite.sprite = classIcon;
     }
 
-    public void SetStrength(int amount)
+    public void SetDamage(int amount)
     {
         if (newPlayer.PlayerClass != null)
         {
             if (amount > 0 && pointsToSpend > 0)
             {
-                newPlayer.Strength += amount;
+                newPlayer.Damage += amount;
                 pointsToSpend -= 1;
                 UpdateUI();
             } 
-            else if (amount < 0 && newPlayer.Strength > newPlayer.PlayerClass.Strength)
+            else if (amount < 0 && newPlayer.Damage > newPlayer.PlayerClass.Damage)
             {
-                newPlayer.Strength += amount;
+                newPlayer.Damage += amount;
                 pointsToSpend += 1;
                 UpdateUI();
             }
@@ -133,19 +169,19 @@ public class CreatePlayer : MonoBehaviour {
             Debug.Log("No Class Choosen!");
         }
     }
-    public void SetDefense(int amount)
+    public void SetArmor(int amount)
     {
         if (newPlayer.PlayerClass != null)
         {
             if (amount > 0 && pointsToSpend > 0)
             {
-                newPlayer.Defense += amount;
+                newPlayer.Armor += amount;
                 pointsToSpend -= 1;
                 UpdateUI();
             }
-            else if (amount < 0 && newPlayer.Defense > newPlayer.PlayerClass.Defense)
+            else if (amount < 0 && newPlayer.Armor > newPlayer.PlayerClass.Armor)
             {
-                newPlayer.Defense += amount;
+                newPlayer.Armor += amount;
                 pointsToSpend += 1;
                 UpdateUI();
             }

@@ -37,14 +37,33 @@ namespace RPG.Characters
         public float maxArmor = 0;
 
         [HideInInspector]
-        public float manaRegenPointsPerSecond = 1f;
+        public float currentHealthReg = 0;
         [HideInInspector]
-        public float healthRegenPointsPerSecond = 1f;
+        public float maxHealthReg = 0;
+        [HideInInspector]
+        public float currentManaReg = 0;
+        [HideInInspector]
+        public float maxManaReg = 0;
 
-        Text Strength;
-        Text Defense;
+        [HideInInspector]
+        public float currentCritChance = 0;
+        [HideInInspector]
+        public float maxCritChance = 0;
+        [HideInInspector]
+        public float currentCritDamage = 0;
+        [HideInInspector]
+        public float maxCritDamage = 0;
+
+        Text Damage;
+        Text Armor;
         Text Health;
         Text Mana;
+
+        Text HealthReg;
+        Text ManaReg;
+
+        Text CritChance;
+        Text CritDamage;
 
         private LevelUpSystem playerLevel;
         private PlayerInventoryManager playerInventory;
@@ -83,38 +102,74 @@ namespace RPG.Characters
 
         public void InitiatePlayerStats()
         {
-            maxDamage = GameInfo.Strength;
-            maxArmor = GameInfo.Defense;
+            maxDamage = GameInfo.Damage;
+            maxArmor = GameInfo.Armor;
             maxHealth = GameInfo.Health;
             maxMana = GameInfo.Mana;
 
-            Strength = playerStatsPanel.transform.GetChild(2).GetChild(0).GetComponent<Text>();
-            Defense = playerStatsPanel.transform.GetChild(2).GetChild(1).GetComponent<Text>();
+            maxHealthReg = GameInfo.HealthRegen;
+            maxManaReg = GameInfo.ManaRegen;
+
+            maxCritChance = GameInfo.CritChance;
+            maxCritDamage = GameInfo.CritDamage;
+
+            Damage = playerStatsPanel.transform.GetChild(2).GetChild(0).GetComponent<Text>();
+            Armor = playerStatsPanel.transform.GetChild(2).GetChild(1).GetComponent<Text>();
             Health = playerStatsPanel.transform.GetChild(2).GetChild(2).GetComponent<Text>();
             Mana = playerStatsPanel.transform.GetChild(2).GetChild(3).GetComponent<Text>();
 
-            Strength.text = maxDamage.ToString();
-            Defense.text = maxArmor.ToString();
+            HealthReg = playerStatsPanel.transform.GetChild(4).GetChild(2).GetComponent<Text>();
+            ManaReg = playerStatsPanel.transform.GetChild(4).GetChild(3).GetComponent<Text>();
+
+            CritChance = playerStatsPanel.transform.GetChild(4).GetChild(0).GetComponent<Text>();
+            CritDamage = playerStatsPanel.transform.GetChild(4).GetChild(1).GetComponent<Text>();
+
+            Damage.text = maxDamage.ToString();
+            Armor.text = maxArmor.ToString();
             Health.text = maxHealth.ToString();
             Mana.text = maxMana.ToString();
+
+            HealthReg.text = maxHealthReg.ToString();
+            ManaReg.text = maxManaReg.ToString();
+
+            CritChance.text = maxCritChance.ToString();
+            CritDamage.text = maxCritDamage.ToString();
 
             currentDamage = maxDamage;
             currentArmor = maxArmor;
             currentHealth = maxHealth;
             currentMana = maxMana;
+
+            currentHealthReg = maxHealthReg;
+            currentManaReg = maxManaReg;
+
+            currentCritChance = maxCritChance;
+            currentCritDamage = maxCritDamage;
         }
 
         public void UpdatePlayerStats()
         {
-            maxDamage = GameInfo.Strength + playerInventory.itemStrength + playerLevel.levelStrength;
-            maxArmor = GameInfo.Defense + playerInventory.itemDefense + playerLevel.levelDefense;
+            maxDamage = GameInfo.Damage + playerInventory.itemDamage + playerLevel.levelDamage;
+            maxArmor = GameInfo.Armor + playerInventory.itemArmor + playerLevel.levelArmor;
             maxHealth = GameInfo.Health + playerInventory.itemHealth + playerLevel.levelHealth;
             maxMana = GameInfo.Mana + playerInventory.itemMana + playerLevel.levelMana;
 
-            Strength.text = maxDamage.ToString();
-            Defense.text = maxArmor.ToString();
+            maxHealthReg = GameInfo.HealthRegen + playerInventory.itemHealthReg + playerLevel.levelHealthReg;
+            maxManaReg = GameInfo.ManaRegen + playerInventory.itemManaReg + playerLevel.levelManaReg;
+
+            maxCritChance = GameInfo.CritChance + playerInventory.itemCritChance + playerLevel.levelCritChance;
+            maxCritDamage = GameInfo.CritDamage + playerInventory.itemCritDamage + playerLevel.levelCritDamage;
+
+            Damage.text = maxDamage.ToString();
+            Armor.text = maxArmor.ToString();
             Health.text = maxHealth.ToString();
             Mana.text = maxMana.ToString();
+
+            HealthReg.text = maxHealthReg.ToString();
+            ManaReg.text = maxManaReg.ToString();
+
+            CritChance.text = maxCritChance.ToString();
+            CritDamage.text = maxCritDamage.ToString();
 
             UpdatePlayerMana();
             UpdatePlayerHealth();
@@ -156,13 +211,13 @@ namespace RPG.Characters
 
         public void AddManaPoints()
         {
-            var pointsToAdd = manaRegenPointsPerSecond * Time.deltaTime;
+            var pointsToAdd = maxManaReg * Time.deltaTime;
             currentMana = Mathf.Clamp(currentMana + pointsToAdd, 0, maxMana);
         }
 
         public void AddHealthPoints()
         {
-            var pointsToAdd = healthRegenPointsPerSecond * Time.deltaTime;
+            var pointsToAdd = maxHealthReg * Time.deltaTime;
             currentHealth = Mathf.Clamp(currentHealth + pointsToAdd, 0, maxHealth);
         }
 

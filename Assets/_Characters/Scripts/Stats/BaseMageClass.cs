@@ -6,10 +6,16 @@ public class BaseMageClass : BaseClass {
 
     public BaseMageClass()
     {
-        Strength = 15;
-        Defense = 5;
+        Damage = 15;
+        Armor = 5;
         Health = 25;
         Mana = 50;
+
+        HealthReg = 0.01f;
+        ManaReg = 0.01f;
+
+        CritChance = 0.5f;
+        CritDamage = 0.5f;
     }
 
 }

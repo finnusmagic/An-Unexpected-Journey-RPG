@@ -11,10 +11,16 @@ public class SaveInfo
         PlayerPrefs.SetInt("PLAYERLEVEL", GameInfo.PlayerLevel);
         PlayerPrefs.SetInt("PLAYERMODEL", GameInfo.PlayerModel);
 
-        PlayerPrefs.SetInt("STRENGTH", GameInfo.Strength);
-        PlayerPrefs.SetInt("DEFENSE", GameInfo.Defense);
+        PlayerPrefs.SetInt("DAMAGE", GameInfo.Damage);
+        PlayerPrefs.SetInt("ARMOR", GameInfo.Armor);
         PlayerPrefs.SetInt("HEALTH", GameInfo.Health);
         PlayerPrefs.SetInt("MANA", GameInfo.Mana);
+
+        PlayerPrefs.SetFloat("HEALTHREGEN", GameInfo.HealthRegen);
+        PlayerPrefs.SetFloat("MANAREGEN", GameInfo.ManaRegen);
+
+        PlayerPrefs.SetFloat("CRITCHANCE", GameInfo.CritChance);
+        PlayerPrefs.SetFloat("CRITDAMAGE", GameInfo.CritDamage);
 
         Debug.Log("Info Saved.");
     }

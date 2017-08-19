@@ -23,10 +23,16 @@ namespace RPG.Database
         private PlayerStatusManager playerStatus;
         int normalSize = 3;
 
-        public float itemStrength;
-        public float itemDefense;
+        public float itemDamage;
+        public float itemArmor;
         public float itemHealth;
         public float itemMana;
+
+        public float itemHealthReg;
+        public float itemManaReg;
+
+        public float itemCritChance;
+        public float itemCritDamage;
 
         void Start()
         {
@@ -148,7 +154,7 @@ namespace RPG.Database
                         mainInventory = inventory.GetComponent<Inventory>();
                     mainInventory.sortItems();
                     if (item.itemAttributes[i].attributeName == "Slots")
-                        ChangeInventorySize(item.itemAttributes[i].attributeValue);
+                        ChangeInventorySize((int)item.itemAttributes[i].attributeValue);
                 }
             }
         }
@@ -234,14 +240,14 @@ namespace RPG.Database
                     else
                         playerStatus.currentMana += item.itemAttributes[i].attributeValue;
                 }
-                if (item.itemAttributes[i].attributeName == "Defense")
+                if (item.itemAttributes[i].attributeName == "Armor")
                 {
                     if ((playerStatus.currentArmor + item.itemAttributes[i].attributeValue) > playerStatus.maxArmor)
                         playerStatus.currentArmor = playerStatus.maxArmor;
                     else
                         playerStatus.currentArmor += item.itemAttributes[i].attributeValue;
                 }
-                if (item.itemAttributes[i].attributeName == "Strength")
+                if (item.itemAttributes[i].attributeName == "Damage")
                 {
                     if ((playerStatus.currentDamage + item.itemAttributes[i].attributeValue) > playerStatus.maxDamage)
                         playerStatus.currentDamage = playerStatus.maxDamage;
@@ -261,10 +267,18 @@ namespace RPG.Database
                     itemHealth += item.itemAttributes[i].attributeValue;
                 if (item.itemAttributes[i].attributeName == "Mana")
                     itemMana += item.itemAttributes[i].attributeValue;
-                if (item.itemAttributes[i].attributeName == "Defense")
-                    itemDefense += item.itemAttributes[i].attributeValue;
-                if (item.itemAttributes[i].attributeName == "Strength")
-                    itemStrength += item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Armor")
+                    itemArmor += item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Damage")
+                    itemDamage += item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Health Reg")
+                    itemHealthReg += item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Mana Reg")
+                    itemManaReg += item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Crit Chance")
+                    itemCritChance += item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Crit Damage")
+                    itemCritDamage += item.itemAttributes[i].attributeValue;
             }
         }
 
@@ -276,10 +290,18 @@ namespace RPG.Database
                     itemHealth -= item.itemAttributes[i].attributeValue;
                 if (item.itemAttributes[i].attributeName == "Mana")
                     itemMana -= item.itemAttributes[i].attributeValue;
-                if (item.itemAttributes[i].attributeName == "Defense")
-                    itemDefense -= item.itemAttributes[i].attributeValue;
-                if (item.itemAttributes[i].attributeName == "Strength")
-                    itemStrength -= item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Armor")
+                    itemArmor -= item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Damage")
+                    itemDamage -= item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Health Reg")
+                    itemHealthReg -= item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Mana Reg")
+                    itemManaReg -= item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Crit Chance")
+                    itemCritChance -= item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Crit Damage")
+                    itemCritDamage -= item.itemAttributes[i].attributeValue;
             }
         }
 

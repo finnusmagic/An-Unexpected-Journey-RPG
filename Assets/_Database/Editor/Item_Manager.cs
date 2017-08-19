@@ -53,10 +53,10 @@ namespace RPG.Database
         string addAttributeName = "";
         int attributeAmount = 1;
         int[] attributeName;
-        int[] attributeValue;
+        float[] attributeValue;
 
         int[] attributeNamesManage = new int[100];
-        int[] attributeValueManage = new int[100];
+        float[] attributeValueManage = new float[100];
         int attributeAmountManage;
 
         bool showItem;
@@ -131,12 +131,6 @@ namespace RPG.Database
             inputManagerDatabase.CraftSystemKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Craftsystem", (KeyCode)inputManagerDatabase.CraftSystemKeyCode);
             inputManagerDatabase.SplitItem = (KeyCode)EditorGUILayout.EnumPopup("Split", (KeyCode)inputManagerDatabase.SplitItem);
 
-            //if(inputManagerDatabase.UFPS)
-            //{
-            //    inputManagerDatabase.throwGrenade = (KeyCode)EditorGUILayout.EnumPopup("Grenade", (KeyCode)inputManagerDatabase.throwGrenade);
-            //    inputManagerDatabase.reloadWeapon = (KeyCode)EditorGUILayout.EnumPopup("Reload", (KeyCode)inputManagerDatabase.reloadWeapon);
-            //}
-
             EditorUtility.SetDirty(inputManagerDatabase);
 
             EditorGUILayout.EndVertical();
@@ -202,7 +196,7 @@ namespace RPG.Database
                             if (EditorGUI.EndChangeCheck())
                             {
                                 attributeName = new int[attributeAmount];
-                                attributeValue = new int[attributeAmount];
+                                attributeValue = new float[attributeAmount];
                             }
 
                             string[] attributes = new string[itemAttributeList.itemAttributeList.Count];
@@ -216,7 +210,7 @@ namespace RPG.Database
                             {
                                 EditorGUILayout.BeginHorizontal();
                                 attributeName[k] = EditorGUILayout.Popup("Attribute " + (k + 1), attributeName[k], attributes, EditorStyles.popup);
-                                attributeValue[k] = EditorGUILayout.IntField("Value", attributeValue[k]);
+                                attributeValue[k] = EditorGUILayout.FloatField("Value", attributeValue[k]);
                                 EditorGUILayout.EndHorizontal();
                             }
                             if (GUILayout.Button("Save"))
@@ -326,7 +320,7 @@ namespace RPG.Database
                                             inventoryItemList.itemList[i].itemAttributes.RemoveAt(z);
                                         GUI.color = Color.white;
                                         attributeNamesManage[z] = EditorGUILayout.Popup(attributeNamesManage[z], attributes, EditorStyles.popup);
-                                        inventoryItemList.itemList[i].itemAttributes[z].attributeValue = EditorGUILayout.IntField("Value", inventoryItemList.itemList[i].itemAttributes[z].attributeValue);
+                                        inventoryItemList.itemList[i].itemAttributes[z].attributeValue = EditorGUILayout.FloatField("Value", inventoryItemList.itemList[i].itemAttributes[z].attributeValue);
                                         EditorGUILayout.EndHorizontal();
                                     }
                                     GUI.color = Color.green;

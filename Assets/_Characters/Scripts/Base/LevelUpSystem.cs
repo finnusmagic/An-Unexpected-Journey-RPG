@@ -13,6 +13,8 @@ public class LevelUpSystem : MonoBehaviour {
 
     private float fillAmount;
     private float reverseFillAmount;
+
+    public float cheatXPSpeed = 0;
     [Space(10)]
     public int xpToGive = 5;
     public int currentLevel;
@@ -26,14 +28,22 @@ public class LevelUpSystem : MonoBehaviour {
     public float statPoints;
     public float skillPoints;
 
-    public float levelStrength;
-    public float levelDefense;
+    public float specialStatPoints;
+
+    public float levelDamage;
+    public float levelArmor;
     public float levelHealth;
     public float levelMana;
 
+    public float levelHealthReg;
+    public float levelManaReg;
+
+    public float levelCritChance;
+    public float levelCritDamage;
+
 	void Start ()
     {
-        InvokeRepeating("AddXP", .5f, .5f);
+        InvokeRepeating("AddXP", cheatXPSpeed, cheatXPSpeed);
 
         VisualiseLevel();
     }
@@ -64,16 +74,23 @@ public class LevelUpSystem : MonoBehaviour {
 
         statPoints = 5 * (currentLevel -1);
         skillPoints = 5 * (currentLevel -1);
+        specialStatPoints = 0.1f * (currentLevel - 1);
 
         PlayerLevelUp();
     }
 
     void PlayerLevelUp()
     {
-        levelStrength = statPoints;
-        levelDefense = statPoints;
+        levelDamage = statPoints;
+        levelArmor = statPoints;
         levelHealth = statPoints;
         levelMana = statPoints;
+
+        levelHealthReg = specialStatPoints;
+        levelManaReg = specialStatPoints;
+
+        levelCritChance = specialStatPoints;
+        levelCritDamage = specialStatPoints;
     }
 
     void VisualiseLevel()

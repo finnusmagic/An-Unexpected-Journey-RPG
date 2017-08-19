@@ -9,8 +9,8 @@ namespace RPG.Database
     {
 
         public string attributeName;
-        public int attributeValue;
-        public ItemAttribute(string attributeName, int attributeValue)
+        public float attributeValue;
+        public ItemAttribute(string attributeName, float attributeValue)
         {
             this.attributeName = attributeName;
             this.attributeValue = attributeValue;

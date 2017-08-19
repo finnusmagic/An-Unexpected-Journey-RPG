@@ -1018,8 +1018,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4943137366863362}
   - component: {fileID: 137360792070529704}
+  - component: {fileID: 33121227500334802}
   m_Layer: 11
-  m_Name: Character_Knight_03
+  m_Name: PlayerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1833,7 +1834,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371042566339608}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -3.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2348,6 +2349,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553099506604224}
   m_Mesh: {fileID: 4300000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+--- !u!33 &33121227500334802
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1947662928860196}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33370213981745630
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -2434,6 +2442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelBar: {fileID: 0}
+  cheatXPSpeed: 1
   xpToGive: 5
   currentLevel: 0
   baseXP: 20
@@ -2443,10 +2452,15 @@ MonoBehaviour:
   totalXPDifference: 0
   statPoints: 0
   skillPoints: 0
-  levelStrength: 0
-  levelDefense: 0
+  specialStatPoints: 0
+  levelDamage: 0
+  levelArmor: 0
   levelHealth: 0
   levelMana: 0
+  levelHealthReg: 0
+  levelManaReg: 0
+  levelCritChance: 0
+  levelCritDamage: 0
 --- !u!114 &114353672813778200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2462,10 +2476,14 @@ MonoBehaviour:
   characterSystem: {fileID: 0}
   craftSystem: {fileID: 0}
   weaponHand: {fileID: 1956513106158802}
-  itemStrength: 0
-  itemDefense: 0
+  itemDamage: 0
+  itemArmor: 0
   itemHealth: 0
   itemMana: 0
+  itemHealthReg: 0
+  itemManaReg: 0
+  itemCritChance: 0
+  itemCritDamage: 0
 --- !u!114 &114459752577362874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2549,9 +2567,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatusPanel: {fileID: 0}
   playerStatsPanel: {fileID: 0}
-  playerModelWarrior: {fileID: 0}
-  playerModelArcher: {fileID: 0}
-  playerModelMage: {fileID: 0}
   currentHealth: 0
   maxHealth: 0
   currentMana: 0
@@ -2560,8 +2575,14 @@ MonoBehaviour:
   maxDamage: 0
   currentArmor: 0
   maxArmor: 0
-  manaRegenPointsPerSecond: 1
-  healthRegenPointsPerSecond: 1
+  currentHealthReg: 0
+  maxHealthReg: 0
+  currentManaReg: 0
+  maxManaReg: 0
+  currentCritChance: 0
+  maxCritChance: 0
+  currentCritDamage: 0
+  maxCritDamage: 0
 --- !u!137 &137360792070529704
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2598,7 +2619,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300024, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+  m_Mesh: {fileID: 4300026, guid: d288a0e4a2d923b46898986e979da643, type: 3}
   m_Bones:
   - {fileID: 4869355412779832}
   - {fileID: 4588957241764402}
