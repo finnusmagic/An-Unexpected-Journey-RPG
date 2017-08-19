@@ -36,23 +36,29 @@ namespace RPG.Characters
 
         public void PutWeaponInHand(WeaponConfig weaponToUse)
         {
-            currentWeaponID = currentWeaponConfig.ID;
-            currentWeaponConfig = weaponToUse;
-            var weaponPrefab = weaponToUse.GetWeaponPrefab();
-            GameObject dominantHand = RequestDominantHand();
-            Destroy(weaponObject);
-            weaponObject = Instantiate(weaponPrefab, dominantHand.transform);
-            weaponObject.transform.localPosition = currentWeaponConfig.gripTransform.localPosition;
-            weaponObject.transform.localRotation = currentWeaponConfig.gripTransform.localRotation;
+            if (currentWeaponConfig != null)
+            {
+                currentWeaponID = currentWeaponConfig.ID;
+                currentWeaponConfig = weaponToUse;
+                var weaponPrefab = weaponToUse.GetWeaponPrefab();
+                GameObject dominantHand = RequestDominantHand();
+                Destroy(weaponObject);
+                weaponObject = Instantiate(weaponPrefab, dominantHand.transform);
+                weaponObject.transform.localPosition = currentWeaponConfig.gripTransform.localPosition;
+                weaponObject.transform.localRotation = currentWeaponConfig.gripTransform.localRotation;
+            }
         }
 
         private void SetAttackAnimation()
         {
-            animator = GetComponent<Animator>();
-            var animatorOverrideController = character.GetOverrideController();
+            if (currentWeaponConfig != null)
+            {
+                animator = GetComponent<Animator>();
+                var animatorOverrideController = character.GetOverrideController();
 
-            animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
+                animator.runtimeAnimatorController = animatorOverrideController;
+                animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
+            }
         }
 
         private GameObject RequestDominantHand()

@@ -10,6 +10,7 @@ public class GameInfo : MonoBehaviour {
     public static string PlayerName { get; set; }
     public static int PlayerLevel { get; set; }
     public static BaseClass PlayerClass { get; set; }
+    public static int PlayerModel { get; set; }
 
     public static int Strength { get; set; }
     public static int Defense { get; set; }

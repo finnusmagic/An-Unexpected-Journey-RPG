@@ -49,11 +49,11 @@ MonoBehaviour:
     itemAttributes:
     - attributeName: Strength
       attributeValue: 10
-    - attributeName: Defence
-      attributeValue: 2
     - attributeName: Health
       attributeValue: 25
     - attributeName: Mana
+      attributeValue: 2
+    - attributeName: Defense
       attributeValue: 2
   - itemName: Small Potion of Health
     itemID: 2

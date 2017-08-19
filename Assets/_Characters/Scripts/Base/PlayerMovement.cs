@@ -16,6 +16,8 @@ namespace RPG.Characters
         Enemy enemy;
         NavMeshAgent agent;
 
+        public bool canMove = true;
+
         void Start()
         {
             abilities = GetComponent<SpecialAbilities>();
@@ -50,7 +52,7 @@ namespace RPG.Characters
 
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && canMove)
             {
                 character.SetDesination(destination);
             }

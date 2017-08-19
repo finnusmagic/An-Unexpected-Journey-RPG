@@ -5,7 +5,6 @@ namespace RPG.Database
 {
     public class InputManager : ScriptableObject
     {
-        public bool UFPS;
         public KeyCode reloadWeapon = KeyCode.R;
 
         public KeyCode SplitItem;

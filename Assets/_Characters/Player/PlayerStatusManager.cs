@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using RPG.Database;
 
 namespace RPG.Characters
 {
@@ -45,8 +46,14 @@ namespace RPG.Characters
         Text Health;
         Text Mana;
 
+        private LevelUpSystem playerLevel;
+        private PlayerInventoryManager playerInventory;
+
         private void Start()
         {
+            playerLevel = FindObjectOfType<LevelUpSystem>();
+            playerInventory = FindObjectOfType<PlayerInventoryManager>();
+
             if (playerStatusPanel != null)
             {
                 hpText = playerStatusPanel.transform.GetChild(0).GetChild(3).GetComponent<Text>();
@@ -55,17 +62,23 @@ namespace RPG.Characters
                 manaText = playerStatusPanel.transform.GetChild(1).GetChild(3).GetComponent<Text>();
                 manaImage = playerStatusPanel.transform.GetChild(1).GetChild(1).GetComponent<Image>();
 
-                maxHealth = GameInfo.Health;
-                maxMana = GameInfo.Mana;
-
-                currentHealth = maxHealth;
-                currentMana = maxMana;
-
-                UpdatePlayerHealth();
-                UpdatePlayerMana();
                 InitiatePlayerStats();
-
             }
+        }
+
+        private void Update()
+        {
+            if (currentHealth < maxHealth)
+            {
+                AddHealthPoints();
+            }
+
+            if (currentMana < maxMana)
+            {
+                AddManaPoints();
+            }
+
+            UpdatePlayerStats();
         }
 
         public void InitiatePlayerStats()
@@ -84,29 +97,27 @@ namespace RPG.Characters
             Defense.text = maxArmor.ToString();
             Health.text = maxHealth.ToString();
             Mana.text = maxMana.ToString();
+
+            currentDamage = maxDamage;
+            currentArmor = maxArmor;
+            currentHealth = maxHealth;
+            currentMana = maxMana;
         }
 
         public void UpdatePlayerStats()
         {
+            maxDamage = GameInfo.Strength + playerInventory.itemStrength + playerLevel.levelStrength;
+            maxArmor = GameInfo.Defense + playerInventory.itemDefense + playerLevel.levelDefense;
+            maxHealth = GameInfo.Health + playerInventory.itemHealth + playerLevel.levelHealth;
+            maxMana = GameInfo.Mana + playerInventory.itemMana + playerLevel.levelMana;
+
             Strength.text = maxDamage.ToString();
             Defense.text = maxArmor.ToString();
             Health.text = maxHealth.ToString();
             Mana.text = maxMana.ToString();
-        }
 
-        private void Update()
-        {
-            if (currentHealth < maxHealth)
-            {
-                AddHealthPoints();
-                UpdatePlayerHealth();
-            }
-
-            if (currentMana < maxMana)
-            {
-                AddManaPoints();
-                UpdatePlayerMana();
-            }
+            UpdatePlayerMana();
+            UpdatePlayerHealth();
         }
 
         public void DamagePlayer(float damage)

@@ -8,6 +8,7 @@ public class LoadInfo {
     {
         GameInfo.PlayerName = PlayerPrefs.GetString("PLAYERNAME");
         GameInfo.PlayerLevel = PlayerPrefs.GetInt("PLAYERLEVEL");
+        GameInfo.PlayerModel = PlayerPrefs.GetInt("PLAYERMODEL");
 
         GameInfo.Strength = PlayerPrefs.GetInt("STRENGTH");
         GameInfo.Defense = PlayerPrefs.GetInt("DEFENSE");

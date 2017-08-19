@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using RPG.Characters;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 namespace RPG.Database
 {
@@ -9,6 +10,9 @@ namespace RPG.Database
         public GameObject inventory;
         public GameObject characterSystem;
         public GameObject craftSystem;
+        [Space(10)]
+        public GameObject weaponHand;
+
         private Inventory craftSystemInventory;
         private CraftSystem cS;
         private Inventory mainInventory;
@@ -18,6 +22,11 @@ namespace RPG.Database
         private InputManager inputManagerDatabase;
         private PlayerStatusManager playerStatus;
         int normalSize = 3;
+
+        public float itemStrength;
+        public float itemDefense;
+        public float itemHealth;
+        public float itemMana;
 
         void Start()
         {
@@ -60,12 +69,14 @@ namespace RPG.Database
                 if (!inventory.activeSelf)
                 {
                     mainInventory.openInventory();
+                    this.GetComponent<PlayerMovement>().canMove = false;
                 }
                 else
                 {
                     if (toolTip != null)
                         toolTip.deactivateTooltip();
                     mainInventory.closeInventory();
+                    this.GetComponent<PlayerMovement>().canMove = true;
                 }
             }
 
@@ -115,7 +126,7 @@ namespace RPG.Database
         {
             if (item.itemType == ItemType.Weapon)
             {
-                //add the weapon if you unequip the weapon
+                Instantiate(item.itemModel, weaponHand.transform);
             }
         }
 
@@ -123,7 +134,7 @@ namespace RPG.Database
         {
             if (item.itemType == ItemType.Weapon)
             {
-                //delete the weapon if you unequip the weapon
+                Destroy(weaponHand.transform.GetChild(0).gameObject);
             }
         }
 
@@ -223,20 +234,22 @@ namespace RPG.Database
                     else
                         playerStatus.currentMana += item.itemAttributes[i].attributeValue;
                 }
-                if (item.itemAttributes[i].attributeName == "Armor")
+                if (item.itemAttributes[i].attributeName == "Defense")
                 {
                     if ((playerStatus.currentArmor + item.itemAttributes[i].attributeValue) > playerStatus.maxArmor)
                         playerStatus.currentArmor = playerStatus.maxArmor;
                     else
                         playerStatus.currentArmor += item.itemAttributes[i].attributeValue;
                 }
-                if (item.itemAttributes[i].attributeName == "Damage")
+                if (item.itemAttributes[i].attributeName == "Strength")
                 {
                     if ((playerStatus.currentDamage + item.itemAttributes[i].attributeValue) > playerStatus.maxDamage)
                         playerStatus.currentDamage = playerStatus.maxDamage;
                     else
                         playerStatus.currentDamage += item.itemAttributes[i].attributeValue;
                 }
+                playerStatus.UpdatePlayerHealth();
+                playerStatus.UpdatePlayerMana();
             }
         }
 
@@ -245,15 +258,14 @@ namespace RPG.Database
             for (int i = 0; i < item.itemAttributes.Count; i++)
             {
                 if (item.itemAttributes[i].attributeName == "Health")
-                    playerStatus.maxHealth += item.itemAttributes[i].attributeValue;
+                    itemHealth += item.itemAttributes[i].attributeValue;
                 if (item.itemAttributes[i].attributeName == "Mana")
-                    playerStatus.maxMana += item.itemAttributes[i].attributeValue;
-                if (item.itemAttributes[i].attributeName == "Armor")
-                    playerStatus.maxArmor += item.itemAttributes[i].attributeValue;
-                if (item.itemAttributes[i].attributeName == "Damage")
-                    playerStatus.maxDamage += item.itemAttributes[i].attributeValue;
+                    itemMana += item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Defense")
+                    itemDefense += item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Strength")
+                    itemStrength += item.itemAttributes[i].attributeValue;
             }
-            playerStatus.UpdatePlayerStats();
         }
 
         public void OnUnEquipItem(Item item)
@@ -261,15 +273,14 @@ namespace RPG.Database
             for (int i = 0; i < item.itemAttributes.Count; i++)
             {
                 if (item.itemAttributes[i].attributeName == "Health")
-                    playerStatus.maxHealth -= item.itemAttributes[i].attributeValue;
+                    itemHealth -= item.itemAttributes[i].attributeValue;
                 if (item.itemAttributes[i].attributeName == "Mana")
-                    playerStatus.maxMana -= item.itemAttributes[i].attributeValue;
+                    itemMana -= item.itemAttributes[i].attributeValue;
                 if (item.itemAttributes[i].attributeName == "Defense")
-                    playerStatus.maxArmor -= item.itemAttributes[i].attributeValue;
-                if (item.itemAttributes[i].attributeName == "Damage")
-                    playerStatus.maxDamage -= item.itemAttributes[i].attributeValue;
+                    itemDefense -= item.itemAttributes[i].attributeValue;
+                if (item.itemAttributes[i].attributeName == "Strength")
+                    itemStrength -= item.itemAttributes[i].attributeValue;
             }
-            playerStatus.UpdatePlayerStats();
         }
 
     }

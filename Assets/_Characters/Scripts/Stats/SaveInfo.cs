@@ -9,6 +9,7 @@ public class SaveInfo
     {
         PlayerPrefs.SetString("PLAYERNAME", GameInfo.PlayerName);
         PlayerPrefs.SetInt("PLAYERLEVEL", GameInfo.PlayerLevel);
+        PlayerPrefs.SetInt("PLAYERMODEL", GameInfo.PlayerModel);
 
         PlayerPrefs.SetInt("STRENGTH", GameInfo.Strength);
         PlayerPrefs.SetInt("DEFENSE", GameInfo.Defense);

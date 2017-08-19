@@ -24,3 +24,5 @@ MonoBehaviour:
     attributeValue: 0
   - attributeName: Health
     attributeValue: 0
+  - attributeName: Defense
+    attributeValue: 0

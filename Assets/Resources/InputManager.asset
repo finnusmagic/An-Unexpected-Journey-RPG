@@ -11,7 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85ad0d4394192e647948f365a31e67fe, type: 3}
   m_Name: InputManager
   m_EditorClassIdentifier: 
-  UFPS: 0
   reloadWeapon: 114
   SplitItem: 97
   InventoryKeyCode: 105
