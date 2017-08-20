@@ -15,6 +15,10 @@ namespace RPG.Characters
         [SerializeField] float maxAttackRange = 2f;
         [SerializeField] float additionalDamage = 10f;
 
+        public bool isRanged;
+        [SerializeField] GameObject projectile = null;
+        [SerializeField] float projectileSpeed = 10f;
+
         public float GetMinTimeBetweenHits()
         {
             return minTimeBetweenHits;
@@ -39,6 +43,16 @@ namespace RPG.Characters
         public float GetAdditionalDamage()
         {
             return additionalDamage;
+        }
+
+        public GameObject GetProjectilePrefab()
+        {
+            return projectile;
+        }
+
+        public float GetProjectileSpeed()
+        {
+            return projectileSpeed;
         }
 
         private void RemoveAnimationEvents()

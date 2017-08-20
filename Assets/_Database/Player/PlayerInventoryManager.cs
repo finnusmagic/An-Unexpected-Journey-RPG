@@ -11,7 +11,8 @@ namespace RPG.Database
         public GameObject characterSystem;
         public GameObject craftSystem;
         [Space(10)]
-        public DominantHand weaponHand;
+        public DominantHand weaponHandR;
+        public DominantHand weaponHandL;
 
         private Inventory craftSystemInventory;
         private CraftSystem cS;
@@ -133,9 +134,18 @@ namespace RPG.Database
             if (item.itemType == ItemType.Weapon)
             {
                 var currentWeapon = GetComponent<WeaponSystem>().currentWeaponConfig = Resources.Load<WeaponConfig>("Weapons/" + item.itemName);
-                GameObject weaponObject = Instantiate(item.itemModel, weaponHand.transform, true);
-                weaponObject.transform.localPosition = currentWeapon.gripTransform.localPosition;
-                weaponObject.transform.localRotation = currentWeapon.gripTransform.localRotation;
+                if (!currentWeapon.isRanged)
+                {
+                    GameObject weaponObject = Instantiate(item.itemModel, weaponHandR.transform, true);
+                    weaponObject.transform.localPosition = currentWeapon.gripTransform.localPosition;
+                    weaponObject.transform.localRotation = currentWeapon.gripTransform.localRotation;
+                }
+                if (currentWeapon.isRanged)
+                {
+                    GameObject weaponObject = Instantiate(item.itemModel, weaponHandL.transform, true);
+                    weaponObject.transform.localPosition = currentWeapon.gripTransform.localPosition;
+                    weaponObject.transform.localRotation = currentWeapon.gripTransform.localRotation;
+                }
             }
         }
 
@@ -143,7 +153,15 @@ namespace RPG.Database
         {
             if (item.itemType == ItemType.Weapon)
             {
-                Destroy(weaponHand.transform.GetChild(3).gameObject);
+                var currentWeapon = GetComponent<WeaponSystem>().currentWeaponConfig = Resources.Load<WeaponConfig>("Weapons/" + item.itemName);
+                if (!currentWeapon.isRanged)
+                {
+                    Destroy(weaponHandR.transform.GetChild(3).gameObject);
+                }
+                if (currentWeapon.isRanged)
+                {
+                    Destroy(weaponHandL.transform.GetChild(3).gameObject);
+                }
             }
         }
 

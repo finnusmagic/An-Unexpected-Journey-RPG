@@ -19,3 +19,4 @@ MonoBehaviour:
   minTimeBetweenHits: 1
   maxAttackRange: 2
   additionalDamage: 0
+  isRanged: 0

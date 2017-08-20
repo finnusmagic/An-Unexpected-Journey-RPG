@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Name: AOE Blast Level 1
   m_EditorClassIdentifier: 
   manaCost: 25
-  coolDown: 2
+  coolDown: 10
+  currentCooldown: 2.893474
+  abilityIcon: {fileID: 0}
   particlePrefab: {fileID: 1005475209298914, guid: 5c7566465b26a9840b7948f249d750df,
     type: 2}
   audioClips:
   - {fileID: 8300000, guid: 42d592f366bcd3947a75fc72e78e4cbb, type: 3}
   radius: 5
-  damageToEachTarget: 5
+  damageToEachTarget: 15

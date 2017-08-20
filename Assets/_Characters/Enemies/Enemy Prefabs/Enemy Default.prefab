@@ -967,7 +967,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1112032646070892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5780182, y: 0, z: 13.934456}
+  m_LocalPosition: {x: 7.64, y: 0, z: 9.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4224032591176562}
@@ -1725,6 +1725,7 @@ MonoBehaviour:
   weaponDamage: 0
   currentWeaponConfig: {fileID: 11400000, guid: 83ecc35a55090584bb8847dcff93d049,
     type: 2}
+  target: {fileID: 0}
 --- !u!114 &114529296015932254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1736,8 +1737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e361943d259d7ca458c4aaea1b1e472f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCanvas: {fileID: 1751071195537254, guid: 094e17e8b47220e43b901fdd7a8d9f2a,
-    type: 2}
+  enemyImage: {fileID: 21300000, guid: b31f0c47a0d06f24598fbcbf6ae9609d, type: 3}
+  enemyName: Small Bandit
+  enemyLevel: 1
   maxHealthPoints: 100
   currentHealthPoints: 0
   damageSounds:
@@ -1745,6 +1747,8 @@ MonoBehaviour:
   deathSounds:
   - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
   deathVanishSeconds: 2
+  healthAsPercentage: 0
+  isAlive: 1
 --- !u!114 &114593323177195790
 MonoBehaviour:
   m_ObjectHideFlags: 1

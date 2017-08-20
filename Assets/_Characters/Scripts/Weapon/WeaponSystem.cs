@@ -8,6 +8,8 @@ namespace RPG.Characters
     public class WeaponSystem : MonoBehaviour
     {
         [SerializeField] float weaponDamage;
+        [SerializeField] GameObject projectileSocket = null;
+
         public WeaponConfig currentWeaponConfig = null;
 
         public GameObject target = null;
@@ -19,18 +21,22 @@ namespace RPG.Characters
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
 
-        private CameraRaycaster cameraRaycaster;
+        private PlayerStatusManager playerStatus;
+        private PlayerMovement player;
+        private LockTarget lockTarget;
 
         bool isAttacking = false;
+        bool rotatedTowardsEnemy = false;
 
         void Start()
         {
             animator = GetComponent<Animator>();
             character = GetComponent<Character>();
-            cameraRaycaster = FindObjectOfType<CameraRaycaster>();
+            playerStatus = FindObjectOfType<PlayerStatusManager>();
+            player = FindObjectOfType<PlayerMovement>();
+            lockTarget = GetComponent<LockTarget>();
 
             PutWeaponInHand(currentWeaponConfig); 
-            SetAttackAnimation();
 
             if (currentWeaponConfig != null)
             weaponDamage = currentWeaponConfig.GetAdditionalDamage();
@@ -78,26 +84,75 @@ namespace RPG.Characters
 
         public void AttackTarget(GameObject targetToAttack)
         {
-            if (!isAttacking)
+            SetAttackAnimation();
+
+            if (currentWeaponConfig.isRanged && target != null)
             {
-                target = targetToAttack;
-                StartCoroutine("DamageEnemy");
+                if (!isAttacking && !player.IsTargetInRange(targetToAttack) && target != null)
+                {
+                    character.SetDesination(lockTarget.target.transform.position);
+                }
+                else if (!isAttacking && player.IsTargetInRange(targetToAttack) && target != null)
+                {
+                    target = targetToAttack;
+                    player.RotateTowards(target.GetComponent<EnemyAI>());
+                    StartCoroutine("DamageEnemyRanged");
+                }
+            }
+
+            else if (!currentWeaponConfig.isRanged && target != null)
+            {
+                character.SetDesination(lockTarget.target.transform.position);
+
+                if (!isAttacking && player.IsTargetInRange(targetToAttack) && target!= null)
+                {
+                    target = targetToAttack;
+                    player.RotateTowards(target.GetComponent<EnemyAI>());
+                    StartCoroutine("DamageEnemyMeele");
+                }
             }
         }
 
-        IEnumerator DamageEnemy()
+        IEnumerator DamageEnemyMeele()
         {
+            player.RotateTowards(target.GetComponent<EnemyAI>());
             isAttacking = true;
             animator.SetTrigger(ATTACK_TRIGGER);
-            target.GetComponent<EnemyStatus>().TakeDamage(5);
+            target.GetComponent<EnemyStatus>().TakeDamage(playerStatus.CalculateDamage());
             yield return new WaitForSeconds(1f);
             isAttacking = false;
         }
 
+        IEnumerator DamageEnemyRanged()
+        {
+            StartCoroutine("ShootEnemy");
+            player.RotateTowards(target.GetComponent<EnemyAI>());
+            isAttacking = true;
+            animator.SetTrigger(ATTACK_TRIGGER);
+            target.GetComponent<EnemyStatus>().TakeDamage(playerStatus.CalculateDamage());
+            yield return new WaitForSeconds(1f);
+            isAttacking = false;
+        }
+
+        IEnumerator ShootEnemy()
+        {
+            yield return new WaitForSeconds(.3f);
+            SpawnProjectile();
+        }
 
         public float CalculateDamage()
         {
             return weaponDamage;
+        }
+
+        void SpawnProjectile()
+        {
+            if (target != null)
+            {
+                GameObject newProjectile = Instantiate(currentWeaponConfig.GetProjectilePrefab(), projectileSocket.transform.position, Quaternion.identity);
+                Vector3 unitVectorToEnemy = (target.transform.position - projectileSocket.transform.position).normalized;
+                newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToEnemy * currentWeaponConfig.GetProjectileSpeed();
+            }
         }
     }
 }

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using RPG.CameraUI;
 using UnityEngine.AI;
+using RPG.Database;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace RPG.Characters
 {
@@ -8,7 +11,6 @@ namespace RPG.Characters
     {
         [SerializeField] float rotationSpeed = 10f;
 
-        SpecialAbilities abilities;
         WeaponSystem weaponSystem;
 
         CameraRaycaster cameraRaycaster;
@@ -16,31 +18,16 @@ namespace RPG.Characters
         EnemyAI enemy;
         NavMeshAgent agent;
 
+        LockTarget lockTarget;
+
         public bool canMove = true;
 
         void Start()
         {
-            abilities = GetComponent<SpecialAbilities>();
             character = GetComponent<Character>();
             weaponSystem = GetComponent<WeaponSystem>();
-
+            lockTarget = GetComponent<LockTarget>();
             RegisterForMouseEvents();
-        }
-
-        void Update()
-        {
-            ScanForAbilityKeyDown();
-        }
-
-        void ScanForAbilityKeyDown()
-        {
-            for (int keyIndex = 1; keyIndex < abilities.GetNumberOfAbilities(); keyIndex++)
-            {
-                if (Input.GetKeyDown(keyIndex.ToString()))
-                {
-                    abilities.AttemptSpecialAbility(keyIndex);
-                }
-            }
         }
 
         private void RegisterForMouseEvents()
@@ -56,20 +43,20 @@ namespace RPG.Characters
             {
                 character.SetDesination(destination);
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                if (enemy != null)
+                weaponSystem.AttackTarget(enemy.gameObject);
+            }
         }
-
         void OnMouseOverEnemy(EnemyAI enemyToSet)
         {
             enemy = enemyToSet;
 
-            if (Input.GetMouseButton(0) && IsTargetInRange(enemy.gameObject))
+            if (Input.GetMouseButton(0))
             {
-                weaponSystem.AttackTarget(enemy.gameObject);
-                RotateTowards(enemy);
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                abilities.AttemptSpecialAbility(0);
+                lockTarget.targetPanel.SetActive(true);
+                lockTarget.target = enemy;
             }
         }
 
@@ -79,7 +66,7 @@ namespace RPG.Characters
             return distanceToTarget <= weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
         }
 
-        private void RotateTowards(EnemyAI enemy)
+        public void RotateTowards(EnemyAI enemy)
         {
             agent = character.GetComponent<NavMeshAgent>();
             agent.updateRotation = true;

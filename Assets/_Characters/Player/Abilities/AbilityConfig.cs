@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace RPG.Characters
 {
@@ -6,7 +7,9 @@ namespace RPG.Characters
     {
         [Header("Spcial Ability General")]
         [SerializeField] float manaCost;
-        [SerializeField] float coolDown = 2f;
+        public float coolDown;
+        public float currentCooldown;
+        public Image abilityIcon = null;
         [SerializeField] GameObject particlePrefab;
         [SerializeField] AudioClip[] audioClips;
 
@@ -29,11 +32,6 @@ namespace RPG.Characters
         public float GetManaCost()
         {
             return manaCost;
-        }
-
-        public float GetCoolDown()
-        {
-            return coolDown;
         }
 
         public GameObject GetParticlePrefab()

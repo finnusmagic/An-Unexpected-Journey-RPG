@@ -15,6 +15,7 @@ namespace RPG.Characters
         NavMeshAgent agent;
         Animator animator;
         WeaponSystem weaponSystem;
+        EnemyStatus enemyStatus;
 
         const string ATTACK_TRIGGER = "Attack";
 
@@ -27,6 +28,7 @@ namespace RPG.Characters
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
             weaponSystem = GetComponent<WeaponSystem>();
+            enemyStatus = GetComponent<EnemyStatus>();
         }
 
         void Update()
@@ -48,7 +50,7 @@ namespace RPG.Characters
 
         void AttackPlayer()
         {
-            if (Time.time - lastTimeHit > weaponSystem.GetCurrentWeapon().GetMinTimeBetweenHits())
+            if (Time.time - lastTimeHit > weaponSystem.GetCurrentWeapon().GetMinTimeBetweenHits() && enemyStatus.isAlive)
             {
                 animator.SetTrigger(ATTACK_TRIGGER);
                 lastTimeHit = Time.time;

@@ -12,6 +12,7 @@ namespace RPG.Characters
 
         public GameObject playerStatusPanel;
         public GameObject playerStatsPanel;
+        public GameObject playerAbilityPanel;
 
         Text hpText = null;
         Text manaText = null;
@@ -56,6 +57,8 @@ namespace RPG.Characters
         [HideInInspector]
         public float maxCritDamage = 0;
 
+        float criticalHitChance;
+
         Text Damage;
         Text Armor;
         Text Health;
@@ -74,7 +77,6 @@ namespace RPG.Characters
 
         private void Start()
         {
-
             playerLevel = FindObjectOfType<LevelUpSystem>();
             playerInventory = FindObjectOfType<PlayerInventoryManager>();
 
@@ -108,6 +110,23 @@ namespace RPG.Characters
             }
 
             UpdatePlayerStats();
+        }
+
+        public float CalculateDamage()
+        {
+            float damageBeforeCritical = GameInfo.Damage + playerInventory.itemDamage + playerLevel.levelDamage;
+            float TotalCritDamage = damageBeforeCritical * (GameInfo.CritDamage + playerInventory.itemCritDamage + playerLevel.levelCritDamage) / 100;
+            float TotalCritChance = (GameInfo.CritChance + playerInventory.itemCritChance + playerLevel.levelCritChance);
+            bool isCriticalHit = UnityEngine.Random.Range(0f, 100f) <= TotalCritChance;
+
+            if(isCriticalHit)
+            {
+                return damageBeforeCritical + TotalCritDamage;
+            }
+            else
+            {
+                return damageBeforeCritical;
+            }
         }
 
         void Die()
@@ -189,11 +208,11 @@ namespace RPG.Characters
             Health.text = maxHealth.ToString();
             Mana.text = maxMana.ToString();
 
-            HealthReg.text = maxHealthReg.ToString();
-            ManaReg.text = maxManaReg.ToString();
+            HealthReg.text = maxHealthReg.ToString() + " %";
+            ManaReg.text = maxManaReg.ToString() + " %";
 
-            CritChance.text = maxCritChance.ToString();
-            CritDamage.text = maxCritDamage.ToString();
+            CritChance.text = maxCritChance.ToString() + " %";
+            CritDamage.text = maxCritDamage.ToString() + " %";
 
             UpdatePlayerMana();
             UpdatePlayerHealth();

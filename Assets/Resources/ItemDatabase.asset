@@ -183,10 +183,10 @@ MonoBehaviour:
     - attributeName: Mana
       attributeValue: 100
     - attributeName: Mana Reg
-      attributeValue: 1
+      attributeValue: 2.5
     - attributeName: Health Reg
-      attributeValue: 1
+      attributeValue: 2.5
     - attributeName: Crit Damage
-      attributeValue: 10
+      attributeValue: 100
     - attributeName: Crit Chance
-      attributeValue: 10
+      attributeValue: 100

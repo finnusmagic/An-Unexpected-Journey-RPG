@@ -13,6 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manaCost: 15
   coolDown: 2
+  currentCooldown: 1.6379722
+  abilityIcon: {fileID: 0}
   particlePrefab: {fileID: 1807866783877080, guid: c02686b7c12742040b1609d2866d06f4,
     type: 2}
   audioClips:

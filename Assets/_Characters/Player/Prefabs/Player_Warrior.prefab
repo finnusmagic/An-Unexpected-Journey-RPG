@@ -105,6 +105,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1063599861428208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4872449739446362}
+  m_Layer: 11
+  m_Name: projectileSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1081566151884934
 GameObject:
   m_ObjectHideFlags: 1
@@ -444,6 +459,7 @@ GameObject:
   - component: {fileID: 114353672813778200}
   - component: {fileID: 114991543371149220}
   - component: {fileID: 114290178735193028}
+  - component: {fileID: 114805597329526328}
   m_Layer: 11
   m_Name: Player_Warrior
   m_TagString: Player
@@ -647,6 +663,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4113715933976298}
+  - component: {fileID: 114378762873257970}
   m_Layer: 11
   m_Name: Hand_L
   m_TagString: Untagged
@@ -1021,21 +1038,6 @@ GameObject:
   - component: {fileID: 33121227500334802}
   m_Layer: 11
   m_Name: PlayerMesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1956513106158802
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4629456137191584}
-  m_Layer: 11
-  m_Name: WeaponContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1676,19 +1678,6 @@ Transform:
   m_Father: {fileID: 4173059279899460}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4629456137191584
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1956513106158802}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4745113765923242}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4672764294933696
 Transform:
   m_ObjectHideFlags: 1
@@ -1796,7 +1785,6 @@ Transform:
   - {fileID: 4814573504816130}
   - {fileID: 4021009134201804}
   - {fileID: 4147616252298832}
-  - {fileID: 4629456137191584}
   m_Father: {fileID: 4440221820873678}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1842,6 +1830,7 @@ Transform:
   - {fileID: 4173059279899460}
   - {fileID: 4943137366863362}
   - {fileID: 4869355412779832}
+  - {fileID: 4872449739446362}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1898,6 +1887,19 @@ Transform:
   - {fileID: 4588957241764402}
   m_Father: {fileID: 4832714811141322}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4872449739446362
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063599861428208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.333, z: 0.755}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4832714811141322}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4875246722779592
 Transform:
@@ -2475,7 +2477,8 @@ MonoBehaviour:
   inventory: {fileID: 0}
   characterSystem: {fileID: 0}
   craftSystem: {fileID: 0}
-  weaponHand: {fileID: 114045705153964256}
+  weaponHandR: {fileID: 114045705153964256}
+  weaponHandL: {fileID: 114378762873257970}
   itemDamage: 0
   itemArmor: 0
   itemHealth: 0
@@ -2484,6 +2487,17 @@ MonoBehaviour:
   itemManaReg: 0
   itemCritChance: 0
   itemCritDamage: 0
+--- !u!114 &114378762873257970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1597585446183494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efee7db9b586d6b44b6d3ba0e6a56d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114459752577362874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2495,7 +2509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc42eca8427da1a4cb7e49c706c92f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 25
+  rotationSpeed: 50
   canMove: 1
 --- !u!114 &114477762546080258
 MonoBehaviour:
@@ -2509,9 +2523,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - {fileID: 11400000, guid: 3b6b4ad46ab809447b0ec2d1f1b95301, type: 2}
   - {fileID: 11400000, guid: 58a711623a785014899b67e7b3bb3215, type: 2}
   - {fileID: 11400000, guid: dd53b6c78a1c6b040806ac43be6d9501, type: 2}
+  - {fileID: 11400000, guid: 3b6b4ad46ab809447b0ec2d1f1b95301, type: 2}
+  abilityPanel: {fileID: 0}
+  enemyTarget: {fileID: 0}
 --- !u!114 &114519105505950122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2552,7 +2568,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDamage: 0
+  projectileSocket: {fileID: 1063599861428208}
   currentWeaponConfig: {fileID: 0}
+  target: {fileID: 0}
+--- !u!114 &114805597329526328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371042566339608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbf0dc9e0b885664583a2d8e6e872295, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPanel: {fileID: 0}
+  target: {fileID: 0}
 --- !u!114 &114991543371149220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2566,6 +2597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStatusPanel: {fileID: 0}
   playerStatsPanel: {fileID: 0}
+  playerAbilityPanel: {fileID: 0}
   currentHealth: 0
   maxHealth: 0
   currentMana: 0

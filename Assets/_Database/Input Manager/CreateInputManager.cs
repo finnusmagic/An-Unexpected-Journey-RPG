@@ -16,7 +16,7 @@ namespace RPG.Database
         {
             asset = ScriptableObject.CreateInstance<InputManager>();
 
-            AssetDatabase.CreateAsset(asset, "Assets/Resources/Database/InputManager.asset");
+            AssetDatabase.CreateAsset(asset, "Assets/Resources/InputManager.asset");
             AssetDatabase.SaveAssets();
             return asset;
         }

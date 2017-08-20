@@ -4,16 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 namespace RPG.Characters
 {
     public class EnemyStatus : MonoBehaviour
     {
-        [SerializeField] GameObject enemyCanvas = null;
+        [Header("Enemy Information")]
+        public Sprite enemyImage;
+        public string enemyName;
+        public int enemyLevel;
         [Space(10)]
-        [SerializeField] float maxHealthPoints = 100;
-        [SerializeField] float currentHealthPoints;
-        [Space(10)]
+        public float maxHealthPoints = 1000;
+        public float currentHealthPoints;
+        [Header("Enemy Setup")]
         [SerializeField] AudioClip[] damageSounds = null;
         [SerializeField] AudioClip[] deathSounds = null;
         [SerializeField] float deathVanishSeconds = 2.0f;
@@ -28,6 +32,8 @@ namespace RPG.Characters
 
         public float healthAsPercentage;
 
+        public bool isAlive = true;
+
         void Start()
         {
             animator = GetComponent<Animator>();
@@ -35,10 +41,6 @@ namespace RPG.Characters
             characterMovement = GetComponent<Character>();
 
             currentHealthPoints = maxHealthPoints;
-
-            Vector3 enemyCanvasPosition = new Vector3(0, 2.5f, 0) + transform.position;
-            enemyHealth = Instantiate(enemyCanvas, enemyCanvasPosition, transform.rotation);
-            enemyHealth.transform.SetParent(transform);
 
         }
 
@@ -50,8 +52,6 @@ namespace RPG.Characters
         void UpdateHealthBar()
         {
             healthAsPercentage = currentHealthPoints / maxHealthPoints;
-            Image enemyCanvas = gameObject.transform.GetChild(4).GetChild(1).GetComponent<Image>();
-            enemyCanvas.fillAmount = healthAsPercentage;
         }
 
         public void TakeDamage(float damage)
@@ -95,10 +95,11 @@ namespace RPG.Characters
 
         IEnumerator KillEnemy()
         {
+            isAlive = false;
             characterMovement.Kill();
             animator.SetTrigger(DEATH_TRIGGER);
+            GetComponent<NavMeshAgent>().isStopped = true;
 
-            var enemy = GetComponent<EnemyAI>();
             var enemyComponent = GetComponent<Character>();
             if (enemyComponent && enemyComponent.isActiveAndEnabled)
             {
