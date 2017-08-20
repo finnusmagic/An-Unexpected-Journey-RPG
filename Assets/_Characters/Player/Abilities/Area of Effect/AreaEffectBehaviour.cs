@@ -22,7 +22,7 @@ public class AreaEffectBehaviour : AbilityBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            var damageable = hit.collider.gameObject.GetComponent<HealthSystem>();
+            var damageable = hit.collider.gameObject.GetComponent<EnemyStatus>();
             bool hitPlayer = hit.collider.gameObject.GetComponent<Character>();
             if (damageable != null && !hitPlayer)
             {

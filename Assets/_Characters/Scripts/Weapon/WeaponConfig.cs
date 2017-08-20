@@ -8,7 +8,6 @@ namespace RPG.Characters
 
         public Transform gripTransform;
 
-        public int ID;
         [SerializeField] GameObject weaponPrefab;
         [SerializeField] AnimationClip attackAnimation;
 

@@ -7,25 +7,26 @@ using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
 {
-    public class HealthSystem : MonoBehaviour
+    public class EnemyStatus : MonoBehaviour
     {
         [SerializeField] GameObject enemyCanvas = null;
         [Space(10)]
-        [SerializeField] float maxHealthPoints = 100f;
+        [SerializeField] float maxHealthPoints = 100;
+        [SerializeField] float currentHealthPoints;
+        [Space(10)]
         [SerializeField] AudioClip[] damageSounds = null;
         [SerializeField] AudioClip[] deathSounds = null;
         [SerializeField] float deathVanishSeconds = 2.0f;
 
         const string DEATH_TRIGGER = "Death";
 
-        float currentHealthPoints;
         Animator animator;
         AudioSource audioSource;
         Character characterMovement;
 
         GameObject enemyHealth;
 
-        public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
+        public float healthAsPercentage;
 
         void Start()
         {
@@ -39,7 +40,6 @@ namespace RPG.Characters
             enemyHealth = Instantiate(enemyCanvas, enemyCanvasPosition, transform.rotation);
             enemyHealth.transform.SetParent(transform);
 
-            enemyCanvas.transform.GetChild(1).GetComponent<Image>().fillAmount = healthAsPercentage;
         }
 
         void Update()
@@ -49,7 +49,9 @@ namespace RPG.Characters
 
         void UpdateHealthBar()
         {
-            enemyCanvas.transform.GetChild(1).GetComponent<Image>().fillAmount = healthAsPercentage;
+            healthAsPercentage = currentHealthPoints / maxHealthPoints;
+            Image enemyCanvas = gameObject.transform.GetChild(4).GetChild(1).GetComponent<Image>();
+            enemyCanvas.fillAmount = healthAsPercentage;
         }
 
         public void TakeDamage(float damage)
@@ -63,6 +65,8 @@ namespace RPG.Characters
             {
                 StartCoroutine(KillEnemy());
             }
+
+            UpdateHealthBar();
         }
 
         public void Heal(float points)

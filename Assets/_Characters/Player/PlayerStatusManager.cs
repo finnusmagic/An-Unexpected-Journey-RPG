@@ -104,7 +104,7 @@ namespace RPG.Characters
 
             if (currentHealth <= 1)
             {
-                Die();
+                // Die();
             }
 
             UpdatePlayerStats();

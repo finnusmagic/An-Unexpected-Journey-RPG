@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 114842419081193470}
   - component: {fileID: 114783947271730020}
   - component: {fileID: 114388725849675564}
+  - component: {fileID: 114529296015932254}
   m_Layer: 0
   m_Name: Enemy Default
   m_TagString: Untagged
@@ -1721,10 +1722,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f280a43b95148498ecb6ffa9d03e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  weaponDamage: 0
   currentWeaponConfig: {fileID: 11400000, guid: 83ecc35a55090584bb8847dcff93d049,
     type: 2}
-  currentWeaponID: 0
+--- !u!114 &114529296015932254
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1112032646070892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e361943d259d7ca458c4aaea1b1e472f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCanvas: {fileID: 1751071195537254, guid: 094e17e8b47220e43b901fdd7a8d9f2a,
+    type: 2}
+  maxHealthPoints: 100
+  currentHealthPoints: 0
+  damageSounds:
+  - {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
+  deathVanishSeconds: 2
 --- !u!114 &114593323177195790
 MonoBehaviour:
   m_ObjectHideFlags: 1

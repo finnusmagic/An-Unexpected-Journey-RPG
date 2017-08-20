@@ -1,14 +1,16 @@
 ﻿using UnityEngine.Assertions;
 using UnityEngine;
+using RPG.CameraUI;
+using System.Collections;
 
 namespace RPG.Characters
 {
     public class WeaponSystem : MonoBehaviour
     {
         [SerializeField] float weaponDamage;
-        [SerializeField] WeaponConfig currentWeaponConfig = null;
+        public WeaponConfig currentWeaponConfig = null;
 
-       // GameObject target;
+        public GameObject target = null;
         GameObject weaponObject;
         Animator animator;
         Character character;
@@ -17,13 +19,15 @@ namespace RPG.Characters
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
 
-        public int currentWeaponID;
+        private CameraRaycaster cameraRaycaster;
+
+        bool isAttacking = false;
 
         void Start()
         {
+            animator = GetComponent<Animator>();
             character = GetComponent<Character>();
-
-            currentWeaponID = -1;
+            cameraRaycaster = FindObjectOfType<CameraRaycaster>();
 
             PutWeaponInHand(currentWeaponConfig); 
             SetAttackAnimation();
@@ -41,7 +45,6 @@ namespace RPG.Characters
         {
             if (currentWeaponConfig != null)
             {
-                currentWeaponID = currentWeaponConfig.ID;
                 currentWeaponConfig = weaponToUse;
                 var weaponPrefab = weaponToUse.GetWeaponPrefab();
                 GameObject dominantHand = RequestDominantHand();
@@ -75,25 +78,22 @@ namespace RPG.Characters
 
         public void AttackTarget(GameObject targetToAttack)
         {
-           // target = targetToAttack;
-            // use a repeat attack co-routine
-        }
-
-        public void AttackTarget(HealthSystem target)
-        {
-            if (Time.time - lastHitTime > currentWeaponConfig.GetMinTimeBetweenHits())
+            if (!isAttacking)
             {
-                SetAttackAnimation();
-                DamageTarget(target);
-                animator.SetTrigger(ATTACK_TRIGGER);
-                lastHitTime = Time.time;
+                target = targetToAttack;
+                StartCoroutine("DamageEnemy");
             }
         }
 
-        public void DamageTarget(HealthSystem targetHealth)
+        IEnumerator DamageEnemy()
         {
-            targetHealth.TakeDamage(CalculateDamage());
+            isAttacking = true;
+            animator.SetTrigger(ATTACK_TRIGGER);
+            target.GetComponent<EnemyStatus>().TakeDamage(5);
+            yield return new WaitForSeconds(1f);
+            isAttacking = false;
         }
+
 
         public float CalculateDamage()
         {

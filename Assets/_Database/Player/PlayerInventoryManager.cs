@@ -11,7 +11,7 @@ namespace RPG.Database
         public GameObject characterSystem;
         public GameObject craftSystem;
         [Space(10)]
-        public GameObject weaponHand;
+        public DominantHand weaponHand;
 
         private Inventory craftSystemInventory;
         private CraftSystem cS;
@@ -132,7 +132,10 @@ namespace RPG.Database
         {
             if (item.itemType == ItemType.Weapon)
             {
-                Instantiate(item.itemModel, weaponHand.transform);
+                var currentWeapon = GetComponent<WeaponSystem>().currentWeaponConfig = Resources.Load<WeaponConfig>("Weapons/" + item.itemName);
+                GameObject weaponObject = Instantiate(item.itemModel, weaponHand.transform, true);
+                weaponObject.transform.localPosition = currentWeapon.gripTransform.localPosition;
+                weaponObject.transform.localRotation = currentWeapon.gripTransform.localRotation;
             }
         }
 
@@ -140,7 +143,7 @@ namespace RPG.Database
         {
             if (item.itemType == ItemType.Weapon)
             {
-                Destroy(weaponHand.transform.GetChild(0).gameObject);
+                Destroy(weaponHand.transform.GetChild(3).gameObject);
             }
         }
 

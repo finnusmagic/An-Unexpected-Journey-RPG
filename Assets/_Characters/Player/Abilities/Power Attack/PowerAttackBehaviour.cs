@@ -16,7 +16,7 @@ namespace RPG.Characters
         private void DealDamage(GameObject target)
         {
             float damageToDeal = (config as PowerAttackConfig).GetExtraDamage();
-            target.GetComponent<HealthSystem>().TakeDamage(damageToDeal);
+            target.GetComponent<EnemyStatus>().TakeDamage(damageToDeal);
         }
     }
 }

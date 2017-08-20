@@ -1682,13 +1682,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956513106158802}
-  m_LocalRotation: {x: 0.5950738, y: 0.54261774, z: -0.47707644, w: -0.35192493}
-  m_LocalPosition: {x: -61.619038, y: 64.98837, z: 8.30958}
-  m_LocalScale: {x: 100.00027, y: 100.00027, z: 100.00024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4745113765923242}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 234.603, y: 20.526993, z: -9.421997}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4672764294933696
 Transform:
   m_ObjectHideFlags: 1
@@ -2475,7 +2475,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   characterSystem: {fileID: 0}
   craftSystem: {fileID: 0}
-  weaponHand: {fileID: 1956513106158802}
+  weaponHand: {fileID: 114045705153964256}
   itemDamage: 0
   itemArmor: 0
   itemHealth: 0
@@ -2553,7 +2553,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDamage: 0
   currentWeaponConfig: {fileID: 0}
-  currentWeaponID: 0
 --- !u!114 &114991543371149220
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2583,6 +2582,7 @@ MonoBehaviour:
   maxCritChance: 0
   currentCritDamage: 0
   maxCritDamage: 0
+  isAlive: 1
 --- !u!137 &137360792070529704
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
