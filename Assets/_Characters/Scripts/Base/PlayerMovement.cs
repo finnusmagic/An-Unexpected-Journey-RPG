@@ -13,7 +13,7 @@ namespace RPG.Characters
 
         CameraRaycaster cameraRaycaster;
         Character character;
-        Enemy enemy;
+        EnemyAI enemy;
         NavMeshAgent agent;
 
         public bool canMove = true;
@@ -58,7 +58,7 @@ namespace RPG.Characters
             }
         }
 
-        void OnMouseOverEnemy(Enemy enemyToSet)
+        void OnMouseOverEnemy(EnemyAI enemyToSet)
         {
             enemy = enemyToSet;
 
@@ -79,7 +79,7 @@ namespace RPG.Characters
             return distanceToTarget <= weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
         }
 
-        private void RotateTowards(Enemy enemy)
+        private void RotateTowards(EnemyAI enemy)
         {
             agent = character.GetComponent<NavMeshAgent>();
             agent.updateRotation = true;

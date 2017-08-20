@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using RPG.Database;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
 {
@@ -68,8 +70,11 @@ namespace RPG.Characters
         private LevelUpSystem playerLevel;
         private PlayerInventoryManager playerInventory;
 
+        public bool isAlive = true;
+
         private void Start()
         {
+
             playerLevel = FindObjectOfType<LevelUpSystem>();
             playerInventory = FindObjectOfType<PlayerInventoryManager>();
 
@@ -97,7 +102,26 @@ namespace RPG.Characters
                 AddManaPoints();
             }
 
+            if (currentHealth <= 1)
+            {
+                Die();
+            }
+
             UpdatePlayerStats();
+        }
+
+        void Die()
+        {
+            isAlive = false;
+
+            GetComponent<Animator>().SetTrigger("Death");
+            GetComponent<NavMeshAgent>().isStopped = true;
+            Invoke("RestartScene", 2f);
+        }
+
+        void RestartScene()
+        {
+            SceneManager.LoadScene("02_Start_Game_Scene");
         }
 
         public void InitiatePlayerStats()

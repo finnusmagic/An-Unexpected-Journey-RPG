@@ -122,7 +122,7 @@ MonoBehaviour:
     rarity: 1
     itemAttributes:
     - attributeName: Health
-      attributeValue: 10
+      attributeValue: 50
   - itemName: Small Mana Potion
     itemID: 5
     itemDesc: A small mana potion. If the energy to perform abilities leaks, this
@@ -137,7 +137,7 @@ MonoBehaviour:
     rarity: 1
     itemAttributes:
     - attributeName: Mana
-      attributeValue: 10
+      attributeValue: 50
   - itemName: TZest
     itemID: 6
     itemDesc: test
@@ -162,3 +162,31 @@ MonoBehaviour:
       attributeValue: 0
     - attributeName: Crit Chance
       attributeValue: 0
+  - itemName: Necklace of Cheating
+    itemID: 7
+    itemDesc: For testing Stats and Damage.
+    itemIcon: {fileID: 21300000, guid: 3a3d27cd3cf55ad4dad9fb5eea5f37bd, type: 3}
+    itemModel: {fileID: 176636, guid: b4ea2f3e0e40943219a8997915f71646, type: 2}
+    itemValue: 1
+    itemType: 5
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 100
+    itemAttributes:
+    - attributeName: Damage
+      attributeValue: 25
+    - attributeName: Armor
+      attributeValue: 10
+    - attributeName: Health
+      attributeValue: 100
+    - attributeName: Mana
+      attributeValue: 100
+    - attributeName: Mana Reg
+      attributeValue: 1
+    - attributeName: Health Reg
+      attributeValue: 1
+    - attributeName: Crit Damage
+      attributeValue: 10
+    - attributeName: Crit Chance
+      attributeValue: 10

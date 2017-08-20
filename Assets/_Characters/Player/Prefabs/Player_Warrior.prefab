@@ -2442,7 +2442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelBar: {fileID: 0}
-  cheatXPSpeed: 1
+  cheatXPSpeed: 0
   xpToGive: 5
   currentLevel: 0
   baseXP: 20
@@ -2551,7 +2551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f280a43b95148498ecb6ffa9d03e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 10
+  weaponDamage: 0
   currentWeaponConfig: {fileID: 0}
   currentWeaponID: 0
 --- !u!114 &114991543371149220

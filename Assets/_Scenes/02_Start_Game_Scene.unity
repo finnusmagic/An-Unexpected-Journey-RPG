@@ -2086,11 +2086,11 @@ MonoBehaviour:
     itemType: 2
     itemWeight: 0
     maxStack: 1
-    indexItemInList: 4
+    indexItemInList: 999
     rarity: 1
     itemAttributes:
     - attributeName: Mana
-      attributeValue: 10
+      attributeValue: 50
 --- !u!1 &366712444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2625,11 +2625,11 @@ MonoBehaviour:
     itemType: 2
     itemWeight: 0
     maxStack: 1
-    indexItemInList: 2
+    indexItemInList: 999
     rarity: 1
     itemAttributes:
     - attributeName: Health
-      attributeValue: 10
+      attributeValue: 50
 --- !u!1 &417384869
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,6 +2752,80 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 417384869}
+--- !u!1 &434076125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 434076126}
+  - component: {fileID: 434076128}
+  - component: {fileID: 434076127}
+  m_Layer: 0
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &434076126
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 434076125}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 462823752}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 11.7, y: 2.5}
+  m_SizeDelta: {x: 33.1, y: 35}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &434076127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 434076125}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &434076128
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 434076125}
 --- !u!1 &455179939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2826,6 +2900,163 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 455179939}
+--- !u!1 &462823751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 462823752}
+  - component: {fileID: 462823758}
+  - component: {fileID: 462823757}
+  - component: {fileID: 462823756}
+  - component: {fileID: 462823755}
+  - component: {fileID: 462823754}
+  - component: {fileID: 462823753}
+  m_Layer: 0
+  m_Name: Item(Clone)
+  m_TagString: Item
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &462823752
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 462823751}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1103324345}
+  - {fileID: 434076126}
+  - {fileID: 1041372618}
+  m_Father: {fileID: 1952051849}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 40, y: 40}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &462823753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 462823751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 318f45603efdc3b4fbe11ecb2cb60f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    itemName: 
+    itemID: 0
+    itemDesc: 
+    itemIcon: {fileID: 0}
+    itemModel: {fileID: 0}
+    itemValue: 1
+    itemType: 0
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 0
+    itemAttributes: []
+  itemTypeOfSlot: 
+  duplication: {fileID: 0}
+--- !u!114 &462823754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 462823751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36171bceef7f2a146bab94e9de4f3e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 0}
+  tooltipGameObject: {fileID: 0}
+  canvasRectTransform: {fileID: 0}
+  tooltipRectTransform: {fileID: 0}
+--- !u!114 &462823755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 462823751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59983abdb09e6cc45adef3f7edbfac42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inv: {fileID: 0}
+--- !u!225 &462823756
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 462823751}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &462823757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 462823751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3acc7ccf38860f848a4fce885e800178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &462823758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 462823751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9749f34375714d646aee2fb9c9fedf72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    itemName: Necklace of Cheating
+    itemID: 7
+    itemDesc: For testing Stats and Damage.
+    itemIcon: {fileID: 21300000, guid: 3a3d27cd3cf55ad4dad9fb5eea5f37bd, type: 3}
+    itemModel: {fileID: 176636, guid: b4ea2f3e0e40943219a8997915f71646, type: 2}
+    itemValue: 1
+    itemType: 5
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 4
+    rarity: 100
+    itemAttributes:
+    - attributeName: Damage
+      attributeValue: 25
+    - attributeName: Armor
+      attributeValue: 10
+    - attributeName: Health
+      attributeValue: 100
+    - attributeName: Mana
+      attributeValue: 100
+    - attributeName: Mana Reg
+      attributeValue: 1
+    - attributeName: Health Reg
+      attributeValue: 1
+    - attributeName: Crit Damage
+      attributeValue: 10
+    - attributeName: Crit Chance
+      attributeValue: 10
 --- !u!1 &463590708
 GameObject:
   m_ObjectHideFlags: 0
@@ -6050,6 +6281,74 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1041372617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1041372618}
+  - component: {fileID: 1041372620}
+  - component: {fileID: 1041372619}
+  m_Layer: 0
+  m_Name: SlotCover
+  m_TagString: ItemIcon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1041372618
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1041372617}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 462823752}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 55, y: 55}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1041372619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1041372617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1041372620
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1041372617}
 --- !u!1 &1064110134
 GameObject:
   m_ObjectHideFlags: 0
@@ -6213,6 +6512,74 @@ MonoBehaviour:
   m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1103324344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1103324345}
+  - component: {fileID: 1103324347}
+  - component: {fileID: 1103324346}
+  m_Layer: 0
+  m_Name: ItemIcon
+  m_TagString: ItemIcon
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1103324345
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1103324344}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 462823752}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 3}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1103324346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1103324344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 3a3d27cd3cf55ad4dad9fb5eea5f37bd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1103324347
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1103324344}
 --- !u!1 &1119773241
 GameObject:
   m_ObjectHideFlags: 0
@@ -7578,16 +7945,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
+    - target: {fileID: 114290178735193028, guid: a36116e3c501eda41bca2346c67ed1af,
         type: 2}
-      propertyPath: inventory
+      propertyPath: levelBar
       value: 
-      objectReference: {fileID: 1979641124}
-    - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
-        type: 2}
-      propertyPath: characterSystem
-      value: 
-      objectReference: {fileID: 174026967}
+      objectReference: {fileID: 145828334}
     - target: {fileID: 114991543371149220, guid: a36116e3c501eda41bca2346c67ed1af,
         type: 2}
       propertyPath: playerStatusPanel
@@ -7598,11 +7960,16 @@ Prefab:
       propertyPath: playerStatsPanel
       value: 
       objectReference: {fileID: 1609074247}
-    - target: {fileID: 114290178735193028, guid: a36116e3c501eda41bca2346c67ed1af,
+    - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
         type: 2}
-      propertyPath: levelBar
+      propertyPath: inventory
       value: 
-      objectReference: {fileID: 145828334}
+      objectReference: {fileID: 1979641124}
+    - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
+        type: 2}
+      propertyPath: characterSystem
+      value: 
+      objectReference: {fileID: 174026967}
     - target: {fileID: 1371042566339608, guid: a36116e3c501eda41bca2346c67ed1af, type: 2}
       propertyPath: m_Name
       value: Player
@@ -10728,7 +11095,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 462823752}
   m_Father: {fileID: 306238403}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11118,11 +11486,11 @@ MonoBehaviour:
     - attributeName: Health
       attributeValue: 5
     - attributeName: Health Reg
-      attributeValue: 2
+      attributeValue: 0.05
     - attributeName: Crit Damage
-      attributeValue: 5
-    - attributeName: Crit Chance
       attributeValue: 2
+    - attributeName: Crit Chance
+      attributeValue: 1.5
   - itemName: Simple Bow
     itemID: 2
     itemDesc: Just a simple Bow. It looks as if it has already been used in many fights.
@@ -11143,11 +11511,11 @@ MonoBehaviour:
     - attributeName: Health
       attributeValue: 2
     - attributeName: Health Reg
-      attributeValue: 2
+      attributeValue: 0.01
     - attributeName: Crit Damage
-      attributeValue: 5
-    - attributeName: Crit Chance
       attributeValue: 2
+    - attributeName: Crit Chance
+      attributeValue: 1.5
   - itemName: Simple Staff
     itemID: 3
     itemDesc: 'Just a simple Staff. It looks as if it could break at any moment. '
@@ -11167,11 +11535,11 @@ MonoBehaviour:
     - attributeName: Mana
       attributeValue: 5
     - attributeName: Health Reg
-      attributeValue: 2
+      attributeValue: 0.01
     - attributeName: Crit Damage
-      attributeValue: 5
+      attributeValue: 1
     - attributeName: Crit Chance
-      attributeValue: 2
+      attributeValue: 0.5
   - itemName: Small Health Potion
     itemID: 4
     itemDesc: A small healing pot. When it becomes dangerous, this potion can possibly
@@ -11182,40 +11550,38 @@ MonoBehaviour:
     itemType: 2
     itemWeight: 0
     maxStack: 1
-    indexItemInList: 2
+    indexItemInList: 999
     rarity: 1
     itemAttributes:
     - attributeName: Health
-      attributeValue: 10
-  - itemName: Small Health Potion
-    itemID: 4
-    itemDesc: A small healing pot. When it becomes dangerous, this potion can possibly
-      save lives.
-    itemIcon: {fileID: 21300000, guid: 26a1d6e02bf678b48b6ff65f68c7bf49, type: 3}
-    itemModel: {fileID: 100000, guid: 2a7aeccaf51cb44258e96e4127ac8d7e, type: 3}
+      attributeValue: 50
+  - itemName: Necklace of Cheating
+    itemID: 7
+    itemDesc: For testing Stats and Damage.
+    itemIcon: {fileID: 21300000, guid: 3a3d27cd3cf55ad4dad9fb5eea5f37bd, type: 3}
+    itemModel: {fileID: 176636, guid: b4ea2f3e0e40943219a8997915f71646, type: 2}
     itemValue: 1
-    itemType: 2
-    itemWeight: 0
-    maxStack: 1
-    indexItemInList: 3
-    rarity: 1
-    itemAttributes:
-    - attributeName: Health
-      attributeValue: 10
-  - itemName: Small Mana Potion
-    itemID: 5
-    itemDesc: A small mana potion. If the energy to perform abilities leaks, this
-      could help.
-    itemIcon: {fileID: 21300000, guid: 81192211eadb9f342b12ff375a7bf7ad, type: 3}
-    itemModel: {fileID: 100000, guid: a7b94700af64d4331af2f449bf00b987, type: 3}
-    itemValue: 1
-    itemType: 2
+    itemType: 5
     itemWeight: 0
     maxStack: 1
     indexItemInList: 4
-    rarity: 1
+    rarity: 100
     itemAttributes:
+    - attributeName: Damage
+      attributeValue: 25
+    - attributeName: Armor
+      attributeValue: 10
+    - attributeName: Health
+      attributeValue: 100
     - attributeName: Mana
+      attributeValue: 100
+    - attributeName: Mana Reg
+      attributeValue: 1
+    - attributeName: Health Reg
+      attributeValue: 1
+    - attributeName: Crit Damage
+      attributeValue: 10
+    - attributeName: Crit Chance
       attributeValue: 10
   - itemName: Small Mana Potion
     itemID: 5
@@ -11227,35 +11593,11 @@ MonoBehaviour:
     itemType: 2
     itemWeight: 0
     maxStack: 1
-    indexItemInList: 5
+    indexItemInList: 999
     rarity: 1
     itemAttributes:
     - attributeName: Mana
-      attributeValue: 10
-  - itemName: TZest
-    itemID: 6
-    itemDesc: test
-    itemIcon: {fileID: 21300000, guid: 5245b23bf5b259f40a030a004284ec1c, type: 3}
-    itemModel: {fileID: 166914, guid: 35def8c4f8304524785a18281440c268, type: 2}
-    itemValue: 1
-    itemType: 12
-    itemWeight: 0
-    maxStack: 1
-    indexItemInList: 6
-    rarity: 1
-    itemAttributes:
-    - attributeName: Armor
-      attributeValue: 0
-    - attributeName: Health
-      attributeValue: 0
-    - attributeName: Mana
-      attributeValue: 0
-    - attributeName: Health Reg
-      attributeValue: 0
-    - attributeName: Mana Reg
-      attributeValue: 0
-    - attributeName: Crit Chance
-      attributeValue: 0
+      attributeValue: 50
   height: 6
   width: 6
   stackable: 0

@@ -5,7 +5,7 @@ namespace RPG.Characters
 {
     public class WeaponSystem : MonoBehaviour
     {
-        [SerializeField] float baseDamage = 10f;
+        [SerializeField] float weaponDamage;
         [SerializeField] WeaponConfig currentWeaponConfig = null;
 
        // GameObject target;
@@ -27,6 +27,9 @@ namespace RPG.Characters
 
             PutWeaponInHand(currentWeaponConfig); 
             SetAttackAnimation();
+
+            if (currentWeaponConfig != null)
+            weaponDamage = currentWeaponConfig.GetAdditionalDamage();
         }
 
         public WeaponConfig GetCurrentWeapon()
@@ -92,9 +95,9 @@ namespace RPG.Characters
             targetHealth.TakeDamage(CalculateDamage());
         }
 
-        private float CalculateDamage()
+        public float CalculateDamage()
         {
-            return  baseDamage;
+            return weaponDamage;
         }
     }
 }
