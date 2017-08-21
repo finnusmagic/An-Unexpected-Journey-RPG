@@ -11,8 +11,6 @@ namespace RPG.Characters
         [SerializeField] GameObject projectileSocket = null;
         [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
-        private static FloatingText popupText;
-
         public WeaponConfig currentWeaponConfig = null;
 
         public GameObject target = null;
@@ -43,21 +41,6 @@ namespace RPG.Characters
 
             if (currentWeaponConfig != null)
             weaponDamage = currentWeaponConfig.GetAdditionalDamage();
-
-            InitializeFloatingText();
-        }
-
-        public static void InitializeFloatingText()
-        {
-            if(!popupText)
-            popupText = Resources.Load<FloatingText>("Prefabs/Damage Number");
-        }
-
-        public void CreateFloatingText(string text, Transform location)
-        {
-            FloatingText instance = Instantiate(popupText);
-            instance.transform.SetParent(target.transform, false);
-            instance.SetText(text);
         }
 
         public WeaponConfig GetCurrentWeapon()
@@ -114,8 +97,6 @@ namespace RPG.Characters
                 {
                     target = targetToAttack;
                     StartCoroutine("DamageEnemyRanged");
-
-                    CreateFloatingText(playerStatus.CalculateDamage().ToString(), target.transform);
                 }
             }
 
@@ -127,8 +108,6 @@ namespace RPG.Characters
                 {
                     target = targetToAttack;
                     StartCoroutine("DamageEnemyMeele");
-
-                    CreateFloatingText(playerStatus.CalculateDamage().ToString(), target.transform);
                 }
             }
         }

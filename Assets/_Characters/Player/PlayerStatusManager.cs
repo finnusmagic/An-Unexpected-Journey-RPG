@@ -148,7 +148,7 @@ namespace RPG.Characters
         {
             maxDamage = GameInfo.Damage;
             maxArmor = GameInfo.Armor;
-            maxHealth = GameInfo.Health;
+           // maxHealth = GameInfo.Health;
             maxMana = GameInfo.Mana;
 
             maxHealthReg = GameInfo.HealthRegen;
@@ -223,7 +223,7 @@ namespace RPG.Characters
         {
             currentHealth = Mathf.Clamp(currentHealth - damage, 0f, maxHealth);
 
-            bool characterDies = (currentHealth - damage <= 0);
+            bool characterDies = (currentHealth <= 0);
 
             if (characterDies)
             {

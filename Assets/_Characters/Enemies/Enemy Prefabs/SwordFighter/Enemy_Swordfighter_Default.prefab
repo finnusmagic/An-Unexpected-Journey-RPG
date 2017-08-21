@@ -1678,6 +1678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDamage: 0
   projectileSocket: {fileID: 0}
+  aimOffset: {x: 0, y: 1, z: 0}
   currentWeaponConfig: {fileID: 11400000, guid: 83ecc35a55090584bb8847dcff93d049,
     type: 2}
   target: {fileID: 0}
@@ -1752,7 +1753,7 @@ MonoBehaviour:
   enemyImage: {fileID: 21300000, guid: b31f0c47a0d06f24598fbcbf6ae9609d, type: 3}
   enemyName: Cruel Bandit
   enemyLevel: 1
-  xpToGive: 20
+  xpToGive: 15
   maxHealthPoints: 150
   currentHealthPoints: 0
   damageSounds:
@@ -1776,6 +1777,7 @@ MonoBehaviour:
   chaseRadius: 6
   projectileSocket: {fileID: 0}
   projectile: {fileID: 0}
+  aimOffset: {x: 0, y: 1, z: 0}
   PathToFollow: {fileID: 0}
   patrolSpeed: 0.5
 --- !u!137 &137656870400686090

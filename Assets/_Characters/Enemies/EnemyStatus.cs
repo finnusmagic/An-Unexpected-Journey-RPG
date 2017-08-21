@@ -29,6 +29,8 @@ namespace RPG.Characters
         AudioSource audioSource;
         Character characterMovement;
 
+        private static FloatingText popupText;
+
         GameObject enemyHealth;
         LevelUpSystem levelSystem;
 
@@ -64,11 +66,26 @@ namespace RPG.Characters
             characterMovement = GetComponent<Character>();
 
             currentHealthPoints = maxHealthPoints;
+
+            InitializeFloatingText();
         }
 
         void Update()
         {
             UpdateHealthBar();
+        }
+
+        public static void InitializeFloatingText()
+        {
+            if (!popupText)
+                popupText = Resources.Load<FloatingText>("Prefabs/Damage Number");
+        }
+
+        public void CreateFloatingText(string text, Transform location)
+        {
+            FloatingText instance = Instantiate(popupText);
+            instance.transform.SetParent(transform, false);
+            instance.SetText(text);
         }
 
         void UpdateHealthBar()
@@ -78,6 +95,9 @@ namespace RPG.Characters
 
         public void TakeDamage(float damage)
         {
+            CreateFloatingText(damage.ToString(), transform);
+            GetComponent<EnemyAI>().underAttack = true;
+
             bool characterDies = (currentHealthPoints - damage <= 0);
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
             var clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];

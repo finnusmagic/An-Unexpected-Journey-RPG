@@ -52,6 +52,8 @@ namespace RPG.Characters
         public enum State { idle, patrolling, attacking, chasing }
         State state = State.patrolling;
 
+        public bool underAttack = false;
+
 
         public float GetEnemyPatrolSpeed()
         {
@@ -79,14 +81,14 @@ namespace RPG.Characters
             distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
 
-            if (distanceToPlayer > chaseRadius && state != State.idle)
+            if (distanceToPlayer > chaseRadius && state != State.idle && !underAttack)
             {
                 character.isPatrolling = true;
                 StopAllCoroutines();
                 StartCoroutine(StartPatrolling());
             }
 
-            if (distanceToPlayer > chaseRadius && state != State.patrolling)
+            if (distanceToPlayer > chaseRadius && state != State.patrolling && !underAttack)
             {
                 character.isPatrolling = false;
                 StopAllCoroutines();
@@ -103,6 +105,13 @@ namespace RPG.Characters
                 character.isPatrolling = false;
                 StopAllCoroutines();
                 StartCoroutine(AttackPlayer());
+            }
+
+            if(underAttack)
+            {
+                character.isPatrolling = false;
+                StopAllCoroutines();
+                character.SetDestination(player.transform.position);
             }
         }
 
@@ -141,6 +150,7 @@ namespace RPG.Characters
         IEnumerator AttackPlayer()
         {
             state = State.attacking;
+
             while (distanceToPlayer <= currentWeaponRange)
             {
                 PerformAttack();
