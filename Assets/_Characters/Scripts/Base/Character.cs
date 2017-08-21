@@ -41,6 +41,7 @@ namespace RPG.Characters
         float turnAmount;
         float forwardAmount;
         bool isAlive = true;
+        bool isEnemy;
 
         void Awake()
         {
@@ -73,6 +74,11 @@ namespace RPG.Characters
             navMeshAgent.updatePosition = true;
             navMeshAgent.radius = navMeshAgentRadius;
             navMeshAgent.height = navMeshAgentHeight;
+
+            if (GetComponent<EnemyAI>() != null)
+            {
+                isEnemy = true;
+            }
         }
 
         void Update()
@@ -90,6 +96,7 @@ namespace RPG.Characters
         public void Kill()
         {
             isAlive = false;
+            navMeshAgent.isStopped = true;
         }
 
         public void SetDesination(Vector3 worldPos)

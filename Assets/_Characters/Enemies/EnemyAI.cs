@@ -12,23 +12,28 @@ namespace RPG.Characters
         float currentWeaponRange;
 
         PlayerMovement player = null;
+        PlayerStatusManager playerStatus;
         NavMeshAgent agent;
         Animator animator;
         WeaponSystem weaponSystem;
         EnemyStatus enemyStatus;
+        Character character;
 
         const string ATTACK_TRIGGER = "Attack";
+        const string DEFAULT_ATTACK = "DEFAULT ATTACK";
 
         float distanceToPlayer;
         float lastTimeHit;
 
         void Start()
         {
+            playerStatus = FindObjectOfType<PlayerStatusManager>();
             player = FindObjectOfType<PlayerMovement>();
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
             weaponSystem = GetComponent<WeaponSystem>();
             enemyStatus = GetComponent<EnemyStatus>();
+            character = GetComponent<Character>();
         }
 
         void Update()
@@ -48,10 +53,23 @@ namespace RPG.Characters
 
         }
 
+        private void SetAttackAnimation()
+        {
+            if (weaponSystem != null)
+            {
+                animator = GetComponent<Animator>();
+                var animatorOverrideController = character.GetOverrideController();
+
+                animator.runtimeAnimatorController = animatorOverrideController;
+                animatorOverrideController[DEFAULT_ATTACK] = weaponSystem.GetCurrentWeapon().GetAttackAnimClip();
+            }
+        }
+
         void AttackPlayer()
         {
             if (Time.time - lastTimeHit > weaponSystem.GetCurrentWeapon().GetMinTimeBetweenHits() && enemyStatus.isAlive)
             {
+                SetAttackAnimation();
                 animator.SetTrigger(ATTACK_TRIGGER);
                 lastTimeHit = Time.time;
                 Invoke("DamagePlayer", .5f);

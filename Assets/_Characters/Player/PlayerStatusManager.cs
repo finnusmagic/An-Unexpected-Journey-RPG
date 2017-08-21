@@ -4,15 +4,26 @@ using UnityEngine.UI;
 using RPG.Database;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace RPG.Characters
 {
     public class PlayerStatusManager : MonoBehaviour
     {
-
+        [Header("Panel Setup")]
         public GameObject playerStatusPanel;
         public GameObject playerStatsPanel;
         public GameObject playerAbilityPanel;
+
+        [Header("Sound Setup")]
+        [SerializeField] AudioClip[] damageSounds = null;
+        [SerializeField] AudioClip[] deathSounds = null;
+        [SerializeField] float deathVanishSeconds = 2.0f;
+
+        private Character character;
+        private Animator animator;
+        const string DEATH_TRIGGER = "Death";
+        AudioSource audioSource;
 
         Text hpText = null;
         Text manaText = null;
@@ -77,6 +88,10 @@ namespace RPG.Characters
 
         private void Start()
         {
+            character = GetComponent<Character>();
+            animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
+
             playerLevel = FindObjectOfType<LevelUpSystem>();
             playerInventory = FindObjectOfType<PlayerInventoryManager>();
 
@@ -104,11 +119,6 @@ namespace RPG.Characters
                 AddManaPoints();
             }
 
-            if (currentHealth <= 1)
-            {
-                // Die();
-            }
-
             UpdatePlayerStats();
         }
 
@@ -127,15 +137,6 @@ namespace RPG.Characters
             {
                 return damageBeforeCritical;
             }
-        }
-
-        void Die()
-        {
-            isAlive = false;
-
-            GetComponent<Animator>().SetTrigger("Death");
-            GetComponent<NavMeshAgent>().isStopped = true;
-            Invoke("RestartScene", 2f);
         }
 
         void RestartScene()
@@ -221,6 +222,14 @@ namespace RPG.Characters
         public void DamagePlayer(float damage)
         {
             currentHealth = Mathf.Clamp(currentHealth - damage, 0f, maxHealth);
+
+            bool characterDies = (currentHealth - damage <= 0);
+
+            if (characterDies)
+            {
+                isAlive = false;
+                StartCoroutine(KillPlayer());
+            }
         }
 
         public void ConsumeMana(float amount)
@@ -267,6 +276,24 @@ namespace RPG.Characters
         public void Heal(float points)
         {
             currentHealth = Mathf.Clamp(currentHealth + points, 0f, maxHealth);
+        }
+
+        IEnumerator KillPlayer()
+        {
+            character.Kill();
+            animator.SetTrigger(DEATH_TRIGGER);
+            var playerComponent = GetComponent<Character>();
+            if (playerComponent && playerComponent.isActiveAndEnabled) // relying on lazy evaluation
+            {
+                audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
+                audioSource.Play(); // overrind any existing sounds
+                yield return new WaitForSecondsRealtime(audioSource.clip.length);
+                SceneManager.LoadScene("02_Start_Game_Scene");
+            }
+            else // assume is enemy fr now, reconsider on other NPCs
+            {
+                DestroyObject(gameObject, deathVanishSeconds);
+            }
         }
     }
 }

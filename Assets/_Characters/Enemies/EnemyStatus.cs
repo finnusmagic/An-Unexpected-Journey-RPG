@@ -11,9 +11,10 @@ namespace RPG.Characters
     public class EnemyStatus : MonoBehaviour
     {
         [Header("Enemy Information")]
-        public Sprite enemyImage;
-        public string enemyName;
-        public int enemyLevel;
+        [SerializeField] Sprite enemyImage;
+        [SerializeField] string enemyName;
+        [SerializeField] int enemyLevel;
+        [SerializeField] int xpToGive;
         [Space(10)]
         public float maxHealthPoints = 1000;
         public float currentHealthPoints;
@@ -29,19 +30,40 @@ namespace RPG.Characters
         Character characterMovement;
 
         GameObject enemyHealth;
+        LevelUpSystem levelSystem;
 
         public float healthAsPercentage;
 
         public bool isAlive = true;
 
+        public Sprite GetEnemyImage()
+        {
+            return enemyImage;
+        }
+
+        public string GetEnemyName()
+        {
+            return enemyName;
+        }
+
+        public int GetEnemyLevel()
+        {
+            return enemyLevel;
+        }
+
+        int GetEnemyXP()
+        {
+            return xpToGive;
+        }
+
         void Start()
         {
+            levelSystem = FindObjectOfType<LevelUpSystem>();
             animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
             characterMovement = GetComponent<Character>();
 
             currentHealthPoints = maxHealthPoints;
-
         }
 
         void Update()
@@ -74,27 +96,9 @@ namespace RPG.Characters
             currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
         }
 
-        IEnumerator KillPlayer()
-        {
-            StopAllCoroutines();
-            characterMovement.Kill();
-            animator.SetTrigger(DEATH_TRIGGER);
-            var playerComponent = GetComponent<Character>();
-            if (playerComponent && playerComponent.isActiveAndEnabled) // relying on lazy evaluation
-            {
-                audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
-                audioSource.Play(); // overrind any existing sounds
-                yield return new WaitForSecondsRealtime(audioSource.clip.length);
-                SceneManager.LoadScene(0);
-            }
-            else // assume is enemy fr now, reconsider on other NPCs
-            {
-                DestroyObject(gameObject, deathVanishSeconds);
-            }
-        }
-
         IEnumerator KillEnemy()
         {
+            levelSystem.AddXP(GetEnemyXP());
             isAlive = false;
             characterMovement.Kill();
             animator.SetTrigger(DEATH_TRIGGER);

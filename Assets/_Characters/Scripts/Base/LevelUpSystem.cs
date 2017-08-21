@@ -13,10 +13,7 @@ public class LevelUpSystem : MonoBehaviour {
 
     private float fillAmount;
     private float reverseFillAmount;
-
-    public float cheatXPSpeed = 0;
     [Space(10)]
-    public int xpToGive = 5;
     public int currentLevel;
     public int baseXP = 20;
     public int currentXP;
@@ -43,14 +40,13 @@ public class LevelUpSystem : MonoBehaviour {
 
 	void Start ()
     {
-        InvokeRepeating("AddXP", cheatXPSpeed, cheatXPSpeed);
-
         VisualiseLevel();
+        AddXP(0);
     }
 
-    public void AddXP()
+    public void AddXP(int amount)
     {
-        CalculateLevel(xpToGive);
+        CalculateLevel(amount);
         VisualiseLevel();
     }
 

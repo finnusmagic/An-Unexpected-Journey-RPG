@@ -44,9 +44,9 @@ namespace RPG.Characters
             targetPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = enemy.healthAsPercentage;
             targetPanel.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (int)enemy.currentHealthPoints + " / " + enemy.maxHealthPoints;
 
-            targetPanel.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = enemy.enemyImage;
-            targetPanel.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = enemy.enemyName;
-            targetPanel.transform.GetChild(1).GetChild(3).GetComponent<Text>().text = enemy.enemyLevel.ToString();
+            targetPanel.transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = enemy.GetEnemyImage();
+            targetPanel.transform.GetChild(1).GetChild(1).GetComponent<Text>().text = enemy.GetEnemyName();
+            targetPanel.transform.GetChild(1).GetChild(3).GetComponent<Text>().text = enemy.GetEnemyLevel().ToString();
         }
     }
 }
