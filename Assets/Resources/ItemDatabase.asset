@@ -117,7 +117,7 @@ MonoBehaviour:
     itemValue: 1
     itemType: 2
     itemWeight: 0
-    maxStack: 1
+    maxStack: 10
     indexItemInList: 999
     rarity: 1
     itemAttributes:
@@ -132,7 +132,7 @@ MonoBehaviour:
     itemValue: 1
     itemType: 2
     itemWeight: 0
-    maxStack: 1
+    maxStack: 10
     indexItemInList: 999
     rarity: 1
     itemAttributes:
