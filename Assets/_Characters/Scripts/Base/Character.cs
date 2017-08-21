@@ -15,22 +15,19 @@ namespace RPG.Characters
         float audioSourceSpatialBlend = 0.5f;
 
         [Header("Capsule Collider")]
-        [SerializeField]
-        Vector3 colliderCenter = new Vector3(0, 1.03f, 0);
+        [SerializeField] Vector3 colliderCenter = new Vector3(0, 1.03f, 0);
         [SerializeField] float colliderRadius = 0.2f;
         [SerializeField] float colliderHeight = 2.03f;
 
         [Header("Movement")]
-        [SerializeField]
-        float moveSpeedMultiplier = .7f;
+        [SerializeField] float moveSpeedMultiplier = .7f;
         [SerializeField] float animationSpeedMultiplier = 1.5f;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] float moveThreshold = 1f;
 
         [Header("Nav Mesh Agent")]
-        [SerializeField]
-        float navMeshAgentSteeringSpeed = 1.0f;
+        [SerializeField] float navMeshAgentSteeringSpeed = 1.0f;
         [SerializeField] float navMeshAgentStoppingDistance = 1.3f;
         [SerializeField] float navMeshAgentRadius = 0.3f;
         [SerializeField] float navMeshAgentHeight = 1.8f;
@@ -40,12 +37,25 @@ namespace RPG.Characters
         Rigidbody ridigBody;
         float turnAmount;
         float forwardAmount;
+        float originalSpeed;
+
         bool isAlive = true;
         bool isEnemy;
+        public bool isPatrolling;
 
         void Awake()
         {
             AddRequiredComponents();
+        }
+
+        public float GetTurnSpeed()
+        {
+            return movingTurnSpeed;
+        }
+
+        public float GetMoveSpeed()
+        {
+            return moveSpeedMultiplier;
         }
 
         private void AddRequiredComponents()
@@ -62,12 +72,13 @@ namespace RPG.Characters
             audioSource.spatialBlend = audioSourceSpatialBlend;
             audioSource.dopplerLevel = 0;
 
-            animator = gameObject.AddComponent<Animator>();
-            animator.runtimeAnimatorController = animatorController;
-            animator.avatar = characterAvatar;
+             animator = gameObject.AddComponent<Animator>();
+             animator.runtimeAnimatorController = animatorOverrideController;
+             animator.avatar = characterAvatar;
 
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
             navMeshAgent.speed = navMeshAgentSteeringSpeed;
+            originalSpeed = navMeshAgent.speed;
             navMeshAgent.stoppingDistance = navMeshAgentStoppingDistance;
             navMeshAgent.autoBraking = false;
             navMeshAgent.updateRotation = false;
@@ -78,6 +89,7 @@ namespace RPG.Characters
             if (GetComponent<EnemyAI>() != null)
             {
                 isEnemy = true;
+                
             }
         }
 
@@ -91,6 +103,16 @@ namespace RPG.Characters
             {
                 Move(Vector3.zero);
             }
+
+            if (isPatrolling)
+            {
+                float patrollingSpeed = GetComponent<EnemyAI>().patrolSpeed;
+                navMeshAgent.speed = patrollingSpeed;
+            }
+            else
+            {
+                navMeshAgent.speed = originalSpeed;
+            }
         }
 
         public void Kill()
@@ -99,7 +121,7 @@ namespace RPG.Characters
             navMeshAgent.isStopped = true;
         }
 
-        public void SetDesination(Vector3 worldPos)
+        public void SetDestination(Vector3 worldPos)
         {
             navMeshAgent.destination = worldPos;
         }
@@ -109,7 +131,7 @@ namespace RPG.Characters
             return animatorOverrideController;
         }
 
-        void Move(Vector3 movement)
+        public void Move(Vector3 movement)
         {
             SetForwardAndTurn(movement);
             ApplyExtraTurnRotation();

@@ -56,7 +56,7 @@ namespace RPG.Characters
             {
                 if (!playerMovement.IsTargetInRange(enemyTarget))
                 {
-                    character.SetDesination(enemyTarget.transform.position);
+                    character.SetDestination(enemyTarget.transform.position);
                 }
 
                 else if (playerMovement.IsTargetInRange(enemyTarget))

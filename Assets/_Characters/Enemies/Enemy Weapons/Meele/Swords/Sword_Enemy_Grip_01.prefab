@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4445512928333840}
   m_Layer: 0
-  m_Name: Sword Grip
+  m_Name: Sword_Enemy_Grip_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

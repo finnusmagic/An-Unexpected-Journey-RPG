@@ -41,7 +41,7 @@ namespace RPG.Characters
         {
             if (Input.GetMouseButton(0) && canMove)
             {
-                character.SetDesination(destination);
+                character.SetDestination(destination);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha1))
             {

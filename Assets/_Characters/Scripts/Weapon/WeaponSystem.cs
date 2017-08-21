@@ -106,7 +106,7 @@ namespace RPG.Characters
             {
                 if (!isAttacking && !player.IsTargetInRange(targetToAttack) && target != null)
                 {
-                    character.SetDesination(lockTarget.target.transform.position);
+                    character.SetDestination(lockTarget.target.transform.position);
                 }
                 else if (!isAttacking && player.IsTargetInRange(targetToAttack) && target != null)
                 {
@@ -120,7 +120,7 @@ namespace RPG.Characters
 
             else if (!currentWeaponConfig.isRanged && target != null)
             {
-                character.SetDesination(lockTarget.target.transform.position);
+                character.SetDestination(lockTarget.target.transform.position);
 
                 if (!isAttacking && player.IsTargetInRange(targetToAttack) && target!= null)
                 {

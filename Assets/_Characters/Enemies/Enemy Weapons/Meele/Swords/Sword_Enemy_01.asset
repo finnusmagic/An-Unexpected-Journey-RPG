@@ -9,14 +9,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db6b7c87650a08145868ec674c685f60, type: 3}
-  m_Name: Sword
+  m_Name: Sword_Enemy_01
   m_EditorClassIdentifier: 
   gripTransform: {fileID: 4445512928333840, guid: 3e0d2db25af30654f8f70119163a8e2b,
     type: 2}
-  ID: 0
   weaponPrefab: {fileID: 1358036631176394, guid: a80c4cea75823e34da05d59b17890b89,
     type: 2}
-  attackAnimation: {fileID: 7400000, guid: dce280ced5e006c4cb0eb0fab2f51b75, type: 3}
+  attackAnimation: {fileID: 7400000, guid: 7b5b17e2d42e0424f9c36012595dc9b6, type: 3}
   minTimeBetweenHits: 2
   maxAttackRange: 2
   additionalDamage: 20
+  isRanged: 0
+  projectile: {fileID: 0}
+  projectileSpeed: 10
