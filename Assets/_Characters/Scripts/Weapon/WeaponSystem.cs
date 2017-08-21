@@ -9,6 +9,7 @@ namespace RPG.Characters
     {
         [SerializeField] float weaponDamage;
         [SerializeField] GameObject projectileSocket = null;
+        private static FloatingText popupText;
 
         public WeaponConfig currentWeaponConfig = null;
 
@@ -40,6 +41,21 @@ namespace RPG.Characters
 
             if (currentWeaponConfig != null)
             weaponDamage = currentWeaponConfig.GetAdditionalDamage();
+
+            InitializeFloatingText();
+        }
+
+        public static void InitializeFloatingText()
+        {
+            if(!popupText)
+            popupText = Resources.Load<FloatingText>("Prefabs/Damage Number");
+        }
+
+        public void CreateFloatingText(string text, Transform location)
+        {
+            FloatingText instance = Instantiate(popupText);
+            instance.transform.SetParent(target.transform, false);
+            instance.SetText(text);
         }
 
         public WeaponConfig GetCurrentWeapon()
@@ -97,6 +113,8 @@ namespace RPG.Characters
                     target = targetToAttack;
                     player.RotateTowards(target.GetComponent<EnemyAI>());
                     StartCoroutine("DamageEnemyRanged");
+
+                    CreateFloatingText(playerStatus.CalculateDamage().ToString(), target.transform);
                 }
             }
 
@@ -109,6 +127,8 @@ namespace RPG.Characters
                     target = targetToAttack;
                     player.RotateTowards(target.GetComponent<EnemyAI>());
                     StartCoroutine("DamageEnemyMeele");
+
+                    CreateFloatingText(playerStatus.CalculateDamage().ToString(), target.transform);
                 }
             }
         }
