@@ -9,6 +9,8 @@ namespace RPG.Characters
     {
         [SerializeField] float weaponDamage;
         [SerializeField] GameObject projectileSocket = null;
+        [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
+
         private static FloatingText popupText;
 
         public WeaponConfig currentWeaponConfig = null;
@@ -111,7 +113,6 @@ namespace RPG.Characters
                 else if (!isAttacking && player.IsTargetInRange(targetToAttack) && target != null)
                 {
                     target = targetToAttack;
-                    player.RotateTowards(target.GetComponent<EnemyAI>());
                     StartCoroutine("DamageEnemyRanged");
 
                     CreateFloatingText(playerStatus.CalculateDamage().ToString(), target.transform);
@@ -125,7 +126,6 @@ namespace RPG.Characters
                 if (!isAttacking && player.IsTargetInRange(targetToAttack) && target!= null)
                 {
                     target = targetToAttack;
-                    player.RotateTowards(target.GetComponent<EnemyAI>());
                     StartCoroutine("DamageEnemyMeele");
 
                     CreateFloatingText(playerStatus.CalculateDamage().ToString(), target.transform);
@@ -149,7 +149,6 @@ namespace RPG.Characters
             player.RotateTowards(target.GetComponent<EnemyAI>());
             isAttacking = true;
             animator.SetTrigger(ATTACK_TRIGGER);
-            target.GetComponent<EnemyStatus>().TakeDamage(playerStatus.CalculateDamage());
             yield return new WaitForSeconds(1f);
             isAttacking = false;
         }
@@ -167,10 +166,14 @@ namespace RPG.Characters
 
         void SpawnProjectile()
         {
+            Projectile projectile = currentWeaponConfig.GetProjectilePrefab().GetComponent<Projectile>();
+            projectile.damageCaused = playerStatus.CalculateDamage();
+            projectile.isPlayer = true;
+
             if (target != null)
             {
                 GameObject newProjectile = Instantiate(currentWeaponConfig.GetProjectilePrefab(), projectileSocket.transform.position, Quaternion.identity);
-                Vector3 unitVectorToEnemy = (target.transform.position - projectileSocket.transform.position).normalized;
+                Vector3 unitVectorToEnemy = (target.transform.position + aimOffset - projectileSocket.transform.position).normalized;
                 newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToEnemy * currentWeaponConfig.GetProjectileSpeed();
             }
         }

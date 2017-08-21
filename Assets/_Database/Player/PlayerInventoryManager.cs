@@ -11,8 +11,9 @@ namespace RPG.Database
         public GameObject characterSystem;
         public GameObject craftSystem;
         [Space(10)]
-        public DominantHand weaponHandR;
-        public DominantHand weaponHandL;
+        [SerializeField] GameObject HandL;
+        [SerializeField] GameObject HandR;
+        WeaponConfig currentWeapon;
 
         private Inventory craftSystemInventory;
         private CraftSystem cS;
@@ -133,16 +134,27 @@ namespace RPG.Database
         {
             if (item.itemType == ItemType.Weapon)
             {
-                var currentWeapon = GetComponent<WeaponSystem>().currentWeaponConfig = Resources.Load<WeaponConfig>("Weapons/" + item.itemName);
+                if (HandL.transform.childCount != 0)
+                {
+                    Destroy(HandL.transform.GetChild(0).gameObject);
+                }
+                if (HandR.transform.childCount != 0)
+                {
+                    Destroy(HandR.transform.GetChild(0).gameObject);
+                }
+
+                currentWeapon = GetComponent<WeaponSystem>().currentWeaponConfig = Resources.Load<WeaponConfig>("Weapons/" + item.itemName);
+
                 if (!currentWeapon.isRanged)
                 {
-                    GameObject weaponObject = Instantiate(item.itemModel, weaponHandR.transform, true);
+                    GameObject weaponObject = Instantiate(item.itemModel, HandR.transform, true);
                     weaponObject.transform.localPosition = currentWeapon.gripTransform.localPosition;
                     weaponObject.transform.localRotation = currentWeapon.gripTransform.localRotation;
+
                 }
                 if (currentWeapon.isRanged)
                 {
-                    GameObject weaponObject = Instantiate(item.itemModel, weaponHandL.transform, true);
+                    GameObject weaponObject = Instantiate(item.itemModel, HandL.transform, true);
                     weaponObject.transform.localPosition = currentWeapon.gripTransform.localPosition;
                     weaponObject.transform.localRotation = currentWeapon.gripTransform.localRotation;
                 }
@@ -153,15 +165,7 @@ namespace RPG.Database
         {
             if (item.itemType == ItemType.Weapon)
             {
-                var currentWeapon = GetComponent<WeaponSystem>().currentWeaponConfig = Resources.Load<WeaponConfig>("Weapons/" + item.itemName);
-                if (!currentWeapon.isRanged)
-                {
-                    Destroy(weaponHandR.transform.GetChild(3).gameObject);
-                }
-                if (currentWeapon.isRanged)
-                {
-                    Destroy(weaponHandL.transform.GetChild(3).gameObject);
-                }
+                // TODO Fix
             }
         }
 

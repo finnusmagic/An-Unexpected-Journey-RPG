@@ -544,6 +544,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1476698698577802
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4958353611566324}
+  m_Layer: 11
+  m_Name: WeaponHolderR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1477668954294694
 GameObject:
   m_ObjectHideFlags: 1
@@ -1043,6 +1058,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1961247537822576
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4559035163601896}
+  m_Layer: 11
+  m_Name: WeaponHolderL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1970713848336678
 GameObject:
   m_ObjectHideFlags: 1
@@ -1085,7 +1115,7 @@ Transform:
   m_Children:
   - {fileID: 4808804474461354}
   m_Father: {fileID: 4745113765923242}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4024392072036918
 Transform:
@@ -1099,7 +1129,7 @@ Transform:
   m_Children:
   - {fileID: 4678633061873436}
   m_Father: {fileID: 4113715933976298}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4025447811447542
 Transform:
@@ -1211,9 +1241,10 @@ Transform:
   m_LocalPosition: {x: -27.114529, y: 0, z: -0.038136426}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4290128795198206}
-  - {fileID: 4920359670763928}
   - {fileID: 4024392072036918}
+  - {fileID: 4920359670763928}
+  - {fileID: 4290128795198206}
+  - {fileID: 4559035163601896}
   m_Father: {fileID: 4100035100937420}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1229,7 +1260,7 @@ Transform:
   m_Children:
   - {fileID: 4328759556163102}
   m_Father: {fileID: 4745113765923242}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4153213464658618
 Transform:
@@ -1313,7 +1344,7 @@ Transform:
   m_Children:
   - {fileID: 4535157396192540}
   m_Father: {fileID: 4113715933976298}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4302012431978524
 Transform:
@@ -1590,6 +1621,19 @@ Transform:
   m_Father: {fileID: 4588957241764402}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4559035163601896
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1961247537822576}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4113715933976298}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4570914969351118
 Transform:
   m_ObjectHideFlags: 1
@@ -1782,9 +1826,10 @@ Transform:
   m_LocalPosition: {x: 27.11449, y: -2.842171e-14, z: 0.038136087}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4147616252298832}
   - {fileID: 4814573504816130}
   - {fileID: 4021009134201804}
-  - {fileID: 4147616252298832}
+  - {fileID: 4958353611566324}
   m_Father: {fileID: 4440221820873678}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1814,7 +1859,7 @@ Transform:
   m_Children:
   - {fileID: 4074208732145566}
   m_Father: {fileID: 4745113765923242}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4832714811141322
 Transform:
@@ -1955,6 +2000,19 @@ Transform:
   - {fileID: 4693324347726874}
   m_Father: {fileID: 4173059279899460}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4958353611566324
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476698698577802}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4745113765923242}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4958358708446362
 Transform:
@@ -2444,8 +2502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelBar: {fileID: 0}
-  cheatXPSpeed: 0
-  xpToGive: 5
   currentLevel: 0
   baseXP: 20
   currentXP: 0
@@ -2477,8 +2533,8 @@ MonoBehaviour:
   inventory: {fileID: 0}
   characterSystem: {fileID: 0}
   craftSystem: {fileID: 0}
-  weaponHandR: {fileID: 114045705153964256}
-  weaponHandL: {fileID: 114378762873257970}
+  HandL: {fileID: 1961247537822576}
+  HandR: {fileID: 1476698698577802}
   itemDamage: 0
   itemArmor: 0
   itemHealth: 0
@@ -2527,7 +2583,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd53b6c78a1c6b040806ac43be6d9501, type: 2}
   - {fileID: 11400000, guid: 3b6b4ad46ab809447b0ec2d1f1b95301, type: 2}
   abilityPanel: {fileID: 0}
-  enemyTarget: {fileID: 0}
 --- !u!114 &114519105505950122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2556,6 +2611,7 @@ MonoBehaviour:
   navMeshAgentStoppingDistance: 1
   navMeshAgentRadius: 0.3
   navMeshAgentHeight: 1.8
+  isPatrolling: 0
 --- !u!114 &114598100056089872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2569,6 +2625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponDamage: 0
   projectileSocket: {fileID: 1063599861428208}
+  aimOffset: {x: 0, y: 1, z: 0}
   currentWeaponConfig: {fileID: 0}
   target: {fileID: 0}
 --- !u!114 &114805597329526328
@@ -2598,6 +2655,18 @@ MonoBehaviour:
   playerStatusPanel: {fileID: 0}
   playerStatsPanel: {fileID: 0}
   playerAbilityPanel: {fileID: 0}
+  damageSounds:
+  - {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
+  - {fileID: 8300000, guid: 35a9e30fa232a844098ae0254b98dc9d, type: 3}
+  - {fileID: 8300000, guid: 5d50e61fcedf44e42b796d2e017af755, type: 3}
+  - {fileID: 8300000, guid: 4891244ec0e6bde4b8253a5c9481bb8f, type: 3}
+  - {fileID: 8300000, guid: 4784a29557ed91045b61d00cec2a7360, type: 3}
+  - {fileID: 8300000, guid: 362578f4c62b2e443a4d6847659c372f, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
+  - {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
+  - {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
+  deathVanishSeconds: 2
   currentHealth: 0
   maxHealth: 0
   currentMana: 0

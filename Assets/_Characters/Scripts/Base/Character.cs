@@ -106,7 +106,7 @@ namespace RPG.Characters
 
             if (isPatrolling)
             {
-                float patrollingSpeed = GetComponent<EnemyAI>().patrolSpeed;
+                float patrollingSpeed = GetComponent<EnemyAI>().GetEnemyPatrolSpeed();
                 navMeshAgent.speed = patrollingSpeed;
             }
             else

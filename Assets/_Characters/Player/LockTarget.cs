@@ -26,13 +26,11 @@ namespace RPG.Characters
             if (target != null)
             {
                 GetTarget();
-                abilities.enemyTarget = target.gameObject;
                 weaponSystem.target = target.gameObject;
             }
             if (target != null && target.GetComponent<EnemyStatus>().isAlive == false)
             {
                 targetPanel.SetActive(false);
-                abilities.enemyTarget = null;
                 weaponSystem.target = null;
                 target = null;
             }

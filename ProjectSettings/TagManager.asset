@@ -19,6 +19,7 @@ TagManager:
   - Tooltip
   - ItemIcon
   - MainInventory
+  - Enemy
   layers:
   - Default
   - TransparentFX

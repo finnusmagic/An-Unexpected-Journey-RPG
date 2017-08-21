@@ -13,6 +13,11 @@ namespace RPG.Characters
         bool isAttacking = false;
         float currentWeaponRange;
 
+        [Space(10)]
+        [SerializeField] GameObject projectileSocket;
+        [SerializeField] Projectile projectile;
+        [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
+
         PlayerMovement player = null;
         PlayerStatusManager playerStatus;
         NavMeshAgent agent;
@@ -29,23 +34,29 @@ namespace RPG.Characters
 
         [Header("Patrolling Setup")]
         public EditorPathScript PathToFollow;
-        public float patrolSpeed = 0;
-        private float waitTime = 20f;
-        private float walkTime = 20f;
-        private float currentWaitTime;
-        private float currentWalkTime;
+        [SerializeField] float patrolSpeed = 0;
 
-        public int CurrentWaypointID = 0;
-        private float reachDistance = 1.5f;
-        public string pathName;
+        float waitTime = 20f;
+        float walkTime = 20f;
+        float currentWaitTime;
+        float currentWalkTime;
+
+        int CurrentWaypointID = 0;
+        float reachDistance = 1.5f;
+        string pathName;
         Vector3 last_position;
         Vector3 current_position;
 
         Vector3 MoveToNextPath;
 
-
         public enum State { idle, patrolling, attacking, chasing }
         State state = State.patrolling;
+
+
+        public float GetEnemyPatrolSpeed()
+        {
+            return patrolSpeed;
+        }
 
         void Start()
         {
@@ -56,6 +67,11 @@ namespace RPG.Characters
             weaponSystem = GetComponent<WeaponSystem>();
             enemyStatus = GetComponent<EnemyStatus>();
             character = GetComponent<Character>();
+
+            if (weaponSystem.currentWeaponConfig.isRanged)
+            {
+                projectile = weaponSystem.currentWeaponConfig.GetProjectilePrefab().GetComponent<Projectile>();
+            }
         }
 
         void Update()
@@ -176,8 +192,31 @@ namespace RPG.Characters
                 SetAttackAnimation();
                 animator.SetTrigger(ATTACK_TRIGGER);
                 lastTimeHit = Time.time;
-                Invoke("DamagePlayer", .5f);
+
+                if (!weaponSystem.currentWeaponConfig.isRanged)
+                {
+                    Invoke("DamagePlayer", .5f);
+                }
+
+                if (weaponSystem.currentWeaponConfig.isRanged)
+                {
+                    StartCoroutine(ShootPlayer());
+                }
             }
+        }
+
+        IEnumerator ShootPlayer()
+        {
+            SpawnProjectile();
+            yield return new WaitForSeconds(.3f);
+        }
+
+        void SpawnProjectile()
+        {
+            projectile.damageCaused = weaponSystem.currentWeaponConfig.GetAdditionalDamage();
+            GameObject newProjectile = Instantiate(weaponSystem.currentWeaponConfig.GetProjectilePrefab(), projectileSocket.transform.position, Quaternion.identity);
+            Vector3 unitVectorToPlayer = (player.transform.position + aimOffset - projectileSocket.transform.position).normalized;
+            newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * weaponSystem.currentWeaponConfig.GetProjectileSpeed();
         }
 
         public void DamagePlayer()

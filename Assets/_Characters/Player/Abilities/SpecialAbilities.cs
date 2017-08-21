@@ -14,7 +14,6 @@ namespace RPG.Characters
         private PlayerStatusManager player;
         private PlayerMovement playerMovement;
         public GameObject abilityPanel;
-        public GameObject enemyTarget = null;
 
         InputManager inputManager;
         Character character;
@@ -52,21 +51,23 @@ namespace RPG.Characters
                     abilities[1].currentCooldown = 0;
                 }
             }
-            else if (Input.GetKeyDown(inputManager.Ability_03_KeyCode))
+            else if (Input.GetKeyDown(inputManager.Ability_03_KeyCode) && GetComponent<LockTarget>().target != null)
             {
-                if (!playerMovement.IsTargetInRange(enemyTarget))
+                EnemyAI enemyTarget = GetComponent<LockTarget>().target;
+
+                if (!playerMovement.IsTargetInRange(enemyTarget.gameObject) && enemyTarget != null)
                 {
                     character.SetDestination(enemyTarget.transform.position);
                 }
 
-                else if (playerMovement.IsTargetInRange(enemyTarget))
+                else if (playerMovement.IsTargetInRange(enemyTarget.gameObject) && enemyTarget != null)
                 {
                     if (abilities[2].currentCooldown >= abilities[2].coolDown && abilities[2].GetManaCost() <= player.currentMana)
                     {
                         playerMovement.RotateTowards(enemyTarget.GetComponent<EnemyAI>());
 
                         player.ConsumeMana(abilities[2].GetManaCost());
-                        abilities[2].Use(enemyTarget);
+                        abilities[2].Use(enemyTarget.gameObject);
                         abilities[2].currentCooldown = 0;
                     }
                 }
