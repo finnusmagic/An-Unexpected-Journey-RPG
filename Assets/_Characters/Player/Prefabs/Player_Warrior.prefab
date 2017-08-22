@@ -2565,7 +2565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc42eca8427da1a4cb7e49c706c92f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 50
   canMove: 1
 --- !u!114 &114477762546080258
 MonoBehaviour:
@@ -2599,6 +2598,10 @@ MonoBehaviour:
     type: 2}
   characterAvatar: {fileID: 9000000, guid: d288a0e4a2d923b46898986e979da643, type: 3}
   audioSourceSpatialBlend: 0.5
+  deathSounds:
+  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
+  - {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
+  - {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
   colliderCenter: {x: 0, y: 0.9, z: 0}
   colliderRadius: 0.3
   colliderHeight: 1.9
@@ -2612,6 +2615,7 @@ MonoBehaviour:
   navMeshAgentRadius: 0.3
   navMeshAgentHeight: 1.8
   isPatrolling: 0
+  characterAlive: 1
 --- !u!114 &114598100056089872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2628,6 +2632,7 @@ MonoBehaviour:
   aimOffset: {x: 0, y: 1, z: 0}
   currentWeaponConfig: {fileID: 0}
   target: {fileID: 0}
+  isAlive: 1
 --- !u!114 &114805597329526328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2655,18 +2660,6 @@ MonoBehaviour:
   playerStatusPanel: {fileID: 0}
   playerStatsPanel: {fileID: 0}
   playerAbilityPanel: {fileID: 0}
-  damageSounds:
-  - {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
-  - {fileID: 8300000, guid: 35a9e30fa232a844098ae0254b98dc9d, type: 3}
-  - {fileID: 8300000, guid: 5d50e61fcedf44e42b796d2e017af755, type: 3}
-  - {fileID: 8300000, guid: 4891244ec0e6bde4b8253a5c9481bb8f, type: 3}
-  - {fileID: 8300000, guid: 4784a29557ed91045b61d00cec2a7360, type: 3}
-  - {fileID: 8300000, guid: 362578f4c62b2e443a4d6847659c372f, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
-  - {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
-  - {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
-  deathVanishSeconds: 2
   currentHealth: 0
   maxHealth: 0
   currentMana: 0

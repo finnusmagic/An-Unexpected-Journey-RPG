@@ -1682,6 +1682,7 @@ MonoBehaviour:
   currentWeaponConfig: {fileID: 11400000, guid: 83ecc35a55090584bb8847dcff93d049,
     type: 2}
   target: {fileID: 0}
+  isAlive: 1
 --- !u!114 &114302498882775726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1715,6 +1716,10 @@ MonoBehaviour:
     type: 2}
   characterAvatar: {fileID: 9000000, guid: d3d5692891e10cf43a756c443850b3f1, type: 3}
   audioSourceSpatialBlend: 0.5
+  deathSounds:
+  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
+  - {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
+  - {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
   colliderCenter: {x: 0, y: 1.03, z: 0}
   colliderRadius: 0.2
   colliderHeight: 2.03
@@ -1728,6 +1733,7 @@ MonoBehaviour:
   navMeshAgentRadius: 0.3
   navMeshAgentHeight: 1.8
   isPatrolling: 0
+  characterAlive: 1
 --- !u!114 &114644376912376022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1758,9 +1764,6 @@ MonoBehaviour:
   currentHealthPoints: 0
   damageSounds:
   - {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
-  deathVanishSeconds: 2
   healthAsPercentage: 0
   isAlive: 1
 --- !u!114 &114798610422819398
@@ -1776,10 +1779,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseRadius: 6
   projectileSocket: {fileID: 0}
-  projectile: {fileID: 0}
-  aimOffset: {x: 0, y: 1, z: 0}
   PathToFollow: {fileID: 0}
   patrolSpeed: 0.5
+  underAttack: 0
 --- !u!137 &137656870400686090
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

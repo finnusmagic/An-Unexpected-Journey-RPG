@@ -2,6 +2,7 @@
 using UnityEngine;
 using RPG.CameraUI;
 using System.Collections;
+using UnityEngine.AI;
 
 namespace RPG.Characters
 {
@@ -22,30 +23,156 @@ namespace RPG.Characters
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
 
-        private PlayerStatusManager playerStatus;
-        private PlayerMovement player;
-        private LockTarget lockTarget;
-
         bool isAttacking = false;
-        bool rotatedTowardsEnemy = false;
 
         void Start()
         {
             animator = GetComponent<Animator>();
             character = GetComponent<Character>();
-            playerStatus = FindObjectOfType<PlayerStatusManager>();
-            player = FindObjectOfType<PlayerMovement>();
-            lockTarget = GetComponent<LockTarget>();
-
-            PutWeaponInHand(currentWeaponConfig); 
 
             if (currentWeaponConfig != null)
-            weaponDamage = currentWeaponConfig.GetAdditionalDamage();
+            PutWeaponInHand(currentWeaponConfig);
+        }
+
+        private void Update()
+        {
+            CheckAttackState();
+        }
+
+        private void CheckAttackState()
+        {
+            if (isAttacking)
+            {
+                GetComponent<NavMeshAgent>().isStopped = true;
+            }
+            else
+            {
+                GetComponent<NavMeshAgent>().isStopped = false;
+            }
         }
 
         public WeaponConfig GetCurrentWeapon()
         {
             return currentWeaponConfig;
+        }
+
+        private void SetAttackAnimation()
+        {
+            if (currentWeaponConfig != null)
+            {
+                animator = GetComponent<Animator>();
+                var animatorOverrideController = character.GetOverrideController();
+
+                animator.runtimeAnimatorController = animatorOverrideController;
+                animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
+            }
+        }
+
+        public void AttackTarget(GameObject targetToAttack)
+        {
+            if (character.characterAlive && currentWeaponConfig != null)
+            {
+                SetAttackAnimation();
+
+                if (currentWeaponConfig.isRanged && target != null)
+                {
+                    if (!isAttacking && !IsTargetInRange(targetToAttack) && target != null)
+                    {
+                        character.SetDestination(target.transform.position);
+                    }
+                    else if (!isAttacking && IsTargetInRange(targetToAttack) && target != null)
+                    {
+                        target = targetToAttack;
+                        StartCoroutine(DamageTargetRanged());
+                    }
+                }
+
+                else if (!currentWeaponConfig.isRanged && target != null)
+                {
+                    character.SetDestination(target.transform.position);
+
+                    if (!isAttacking && IsTargetInRange(targetToAttack) && target != null)
+                    {
+                        target = targetToAttack;
+                        StartCoroutine(DamageTargetMeele());
+                    }
+                }
+            }
+            else
+            {
+                StopAllCoroutines();
+            }
+        }
+
+        IEnumerator DamageTargetMeele()
+        {
+            transform.LookAt(target.transform);
+            isAttacking = true;
+            animator.SetTrigger(ATTACK_TRIGGER);
+            if (target.GetComponent<EnemyStatus>() != null)
+            {
+                target.GetComponent<EnemyStatus>().TakeDamage(FindObjectOfType<PlayerStatusManager>().CalculateDamage());
+            }
+            else if (target.GetComponent<PlayerStatusManager>() != null)
+            {
+                target.GetComponent<PlayerStatusManager>().DamagePlayer(currentWeaponConfig.GetAdditionalDamage());
+            }
+            yield return new WaitForSeconds(1f);
+            isAttacking = false;
+        }
+
+        IEnumerator DamageTargetRanged()
+        {
+            transform.LookAt(target.transform);
+            StartCoroutine(ShootTarget());
+            isAttacking = true;
+            animator.SetTrigger(ATTACK_TRIGGER);
+            yield return new WaitForSeconds(1f);
+            isAttacking = false;
+        }
+
+        IEnumerator ShootTarget()
+        {
+            yield return new WaitForSeconds(.3f);
+            SpawnProjectile();
+        }
+
+        public float CalculateDamage()
+        {
+            if (currentWeaponConfig != null)
+                weaponDamage = currentWeaponConfig.GetAdditionalDamage();
+
+            return weaponDamage;
+        }
+
+        void SpawnProjectile()
+        {
+            Projectile projectile = currentWeaponConfig.GetProjectilePrefab().GetComponent<Projectile>();
+
+            if (GetComponent<EnemyAI>() != null) // check if shooter in enemy
+            {
+                projectile.targetIsPlayer = true;
+                projectile.damageCaused = currentWeaponConfig.GetAdditionalDamage();
+            }        
+
+            if (GetComponent<PlayerMovement>() != null) // check if shooter is player
+            {
+                projectile.targetIsEnemy = true;
+                projectile.damageCaused = FindObjectOfType<PlayerStatusManager>().CalculateDamage();
+            }
+
+            if (target != null)
+            {
+                GameObject newProjectile = Instantiate(currentWeaponConfig.GetProjectilePrefab(), projectileSocket.transform.position, Quaternion.identity);
+                Vector3 unitVectorToEnemy = (target.transform.position + aimOffset - projectileSocket.transform.position).normalized;
+                newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToEnemy * currentWeaponConfig.GetProjectileSpeed();
+            }
+        }
+
+        public bool IsTargetInRange(GameObject target)
+        {
+            float distanceToTarget = (target.transform.position - transform.position).magnitude;
+            return distanceToTarget <= GetCurrentWeapon().GetMaxAttackRange();
         }
 
         public void PutWeaponInHand(WeaponConfig weaponToUse)
@@ -62,18 +189,6 @@ namespace RPG.Characters
             }
         }
 
-        private void SetAttackAnimation()
-        {
-            if (currentWeaponConfig != null)
-            {
-                animator = GetComponent<Animator>();
-                var animatorOverrideController = character.GetOverrideController();
-
-                animator.runtimeAnimatorController = animatorOverrideController;
-                animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
-            }
-        }
-
         private GameObject RequestDominantHand()
         {
             var dominantHands = GetComponentsInChildren<DominantHand>();
@@ -81,80 +196,6 @@ namespace RPG.Characters
             Assert.IsFalse(numberOfDominantHands <= 0, "No DominantHand found on Player, please add one");
             Assert.IsFalse(numberOfDominantHands > 1, "Multiple DominantHand scripts on Player, please remove one");
             return dominantHands[0].gameObject;
-        }
-
-        public void AttackTarget(GameObject targetToAttack)
-        {
-            SetAttackAnimation();
-
-            if (currentWeaponConfig.isRanged && target != null)
-            {
-                if (!isAttacking && !player.IsTargetInRange(targetToAttack) && target != null)
-                {
-                    character.SetDestination(lockTarget.target.transform.position);
-                }
-                else if (!isAttacking && player.IsTargetInRange(targetToAttack) && target != null)
-                {
-                    target = targetToAttack;
-                    StartCoroutine("DamageEnemyRanged");
-                }
-            }
-
-            else if (!currentWeaponConfig.isRanged && target != null)
-            {
-                character.SetDestination(lockTarget.target.transform.position);
-
-                if (!isAttacking && player.IsTargetInRange(targetToAttack) && target!= null)
-                {
-                    target = targetToAttack;
-                    StartCoroutine("DamageEnemyMeele");
-                }
-            }
-        }
-
-        IEnumerator DamageEnemyMeele()
-        {
-            player.RotateTowards(target.GetComponent<EnemyAI>());
-            isAttacking = true;
-            animator.SetTrigger(ATTACK_TRIGGER);
-            target.GetComponent<EnemyStatus>().TakeDamage(playerStatus.CalculateDamage());
-            yield return new WaitForSeconds(1f);
-            isAttacking = false;
-        }
-
-        IEnumerator DamageEnemyRanged()
-        {
-            StartCoroutine("ShootEnemy");
-            player.RotateTowards(target.GetComponent<EnemyAI>());
-            isAttacking = true;
-            animator.SetTrigger(ATTACK_TRIGGER);
-            yield return new WaitForSeconds(1f);
-            isAttacking = false;
-        }
-
-        IEnumerator ShootEnemy()
-        {
-            yield return new WaitForSeconds(.3f);
-            SpawnProjectile();
-        }
-
-        public float CalculateDamage()
-        {
-            return weaponDamage;
-        }
-
-        void SpawnProjectile()
-        {
-            Projectile projectile = currentWeaponConfig.GetProjectilePrefab().GetComponent<Projectile>();
-            projectile.damageCaused = playerStatus.CalculateDamage();
-            projectile.isPlayer = true;
-
-            if (target != null)
-            {
-                GameObject newProjectile = Instantiate(currentWeaponConfig.GetProjectilePrefab(), projectileSocket.transform.position, Quaternion.identity);
-                Vector3 unitVectorToEnemy = (target.transform.position + aimOffset - projectileSocket.transform.position).normalized;
-                newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToEnemy * currentWeaponConfig.GetProjectileSpeed();
-            }
         }
     }
 }

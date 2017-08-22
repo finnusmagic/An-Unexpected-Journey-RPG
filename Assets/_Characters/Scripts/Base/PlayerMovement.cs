@@ -9,14 +9,11 @@ namespace RPG.Characters
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] float rotationSpeed = 10f;
-
         WeaponSystem weaponSystem;
 
         CameraRaycaster cameraRaycaster;
         Character character;
         EnemyAI enemy;
-        NavMeshAgent agent;
 
         LockTarget lockTarget;
 
@@ -58,22 +55,6 @@ namespace RPG.Characters
                 lockTarget.targetPanel.SetActive(true);
                 lockTarget.target = enemy;
             }
-        }
-
-        public bool IsTargetInRange(GameObject target)
-        {
-            float distanceToTarget = (target.transform.position - transform.position).magnitude;
-            return distanceToTarget <= weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
-        }
-
-        public void RotateTowards(EnemyAI enemy)
-        {
-            agent = character.GetComponent<NavMeshAgent>();
-            agent.updateRotation = true;
-            Vector3 direction = (enemy.transform.position - agent.transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
-            agent.updateRotation = false;
         }
     }
 }

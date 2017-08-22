@@ -10,20 +10,13 @@ namespace RPG.Characters
     {
         [Header("Combat Setup")]
         [SerializeField] float chaseRadius = 6f;
-        bool isAttacking = false;
         float currentWeaponRange;
 
         [Space(10)]
         [SerializeField] GameObject projectileSocket;
-        [SerializeField] Projectile projectile;
-        [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
         PlayerMovement player = null;
-        PlayerStatusManager playerStatus;
-        NavMeshAgent agent;
-        Animator animator;
         WeaponSystem weaponSystem;
-        EnemyStatus enemyStatus;
         Character character;
 
         const string ATTACK_TRIGGER = "Attack";
@@ -33,6 +26,7 @@ namespace RPG.Characters
         float lastTimeHit;
 
         [Header("Patrolling Setup")]
+
         public EditorPathScript PathToFollow;
         [SerializeField] float patrolSpeed = 0;
 
@@ -44,12 +38,14 @@ namespace RPG.Characters
         int CurrentWaypointID = 0;
         float reachDistance = 1.5f;
         string pathName;
+
         Vector3 last_position;
         Vector3 current_position;
 
         Vector3 MoveToNextPath;
 
         public enum State { idle, patrolling, attacking, chasing }
+
         State state = State.patrolling;
 
         public bool underAttack = false;
@@ -62,18 +58,9 @@ namespace RPG.Characters
 
         void Start()
         {
-            playerStatus = FindObjectOfType<PlayerStatusManager>();
             player = FindObjectOfType<PlayerMovement>();
-            agent = GetComponent<NavMeshAgent>();
-            animator = GetComponent<Animator>();
             weaponSystem = GetComponent<WeaponSystem>();
-            enemyStatus = GetComponent<EnemyStatus>();
             character = GetComponent<Character>();
-
-            if (weaponSystem.currentWeaponConfig.isRanged)
-            {
-                projectile = weaponSystem.currentWeaponConfig.GetProjectilePrefab().GetComponent<Projectile>();
-            }
         }
 
         void Update()
@@ -81,33 +68,16 @@ namespace RPG.Characters
             distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
 
-            if (distanceToPlayer > chaseRadius && state != State.idle && !underAttack)
-            {
-                character.isPatrolling = true;
-                StopAllCoroutines();
-                StartCoroutine(StartPatrolling());
-            }
+            CheckForIdle();
+            CheckForPatrolling();
+            CheckForChasing();
+            CheckForAttacking();
+            CheckIfUnderAttack();
+        }
 
-            if (distanceToPlayer > chaseRadius && state != State.patrolling && !underAttack)
-            {
-                character.isPatrolling = false;
-                StopAllCoroutines();
-               // state = State.idle;
-            }
-            if (distanceToPlayer <= chaseRadius && state != State.chasing)
-            {
-                character.isPatrolling = false;
-                StopAllCoroutines();
-                StartCoroutine(ChasePlayer());
-            }
-            if (distanceToPlayer <= currentWeaponRange && state != State.attacking)
-            {
-                character.isPatrolling = false;
-                StopAllCoroutines();
-                StartCoroutine(AttackPlayer());
-            }
-
-            if(underAttack)
+        private void CheckIfUnderAttack()
+        {
+            if (underAttack) //Under Attack
             {
                 character.isPatrolling = false;
                 StopAllCoroutines();
@@ -115,9 +85,44 @@ namespace RPG.Characters
             }
         }
 
-        void InstantiateEnemyPath()
+        private void CheckForAttacking()
         {
-            last_position = transform.position;
+            if (distanceToPlayer <= currentWeaponRange) //Attacking
+            {
+                character.isPatrolling = false;
+                StopAllCoroutines();
+                StartCoroutine(AttackPlayer());
+            }
+        }
+
+        private void CheckForChasing()
+        {
+            if (distanceToPlayer <= chaseRadius) //Chasing
+            {
+                character.isPatrolling = false;
+                StopAllCoroutines();
+                StartCoroutine(ChasePlayer());
+            }
+        }
+
+        private void CheckForPatrolling()
+        {
+            if (distanceToPlayer > chaseRadius && state != State.idle && !underAttack && state != State.attacking) // Patrolling
+            {
+                character.isPatrolling = true;
+                StopAllCoroutines();
+                StartCoroutine(StartPatrolling());
+            }
+        }
+
+        private void CheckForIdle()
+        {
+            if (distanceToPlayer > chaseRadius && state != State.patrolling && state != State.idle && !underAttack) //Idle
+            {
+                character.isPatrolling = false;
+                StopAllCoroutines();
+                state = State.idle;
+            }
         }
 
         void PatrollPath()
@@ -153,7 +158,8 @@ namespace RPG.Characters
 
             while (distanceToPlayer <= currentWeaponRange)
             {
-                PerformAttack();
+                weaponSystem.target = player.gameObject;
+                weaponSystem.AttackTarget(player.gameObject);
                 yield return new WaitForEndOfFrame();
             }
         }
@@ -180,59 +186,9 @@ namespace RPG.Characters
                     currentWalkTime = Random.Range(5, walkTime);
                     currentWaitTime = Random.Range (5, waitTime);
                 }
+
                 yield return new WaitForEndOfFrame();
             }
-        }
-
-        private void SetAttackAnimation()
-        {
-            if (weaponSystem != null)
-            {
-
-                var animatorOverrideController = character.GetOverrideController();
-                animator.runtimeAnimatorController = animatorOverrideController;
-                animatorOverrideController[DEFAULT_ATTACK] = weaponSystem.GetCurrentWeapon().GetAttackAnimClip();
-            }
-        }
-
-        void PerformAttack()
-        {
-            if (Time.time - lastTimeHit > weaponSystem.GetCurrentWeapon().GetMinTimeBetweenHits() && enemyStatus.isAlive)
-            {
-                SetAttackAnimation();
-                animator.SetTrigger(ATTACK_TRIGGER);
-                lastTimeHit = Time.time;
-
-                if (!weaponSystem.currentWeaponConfig.isRanged)
-                {
-                    Invoke("DamagePlayer", .5f);
-                }
-
-                if (weaponSystem.currentWeaponConfig.isRanged)
-                {
-                    StartCoroutine(ShootPlayer());
-                }
-            }
-        }
-
-        IEnumerator ShootPlayer()
-        {
-            SpawnProjectile();
-            yield return new WaitForSeconds(.3f);
-        }
-
-        void SpawnProjectile()
-        {
-            projectile.damageCaused = weaponSystem.currentWeaponConfig.GetAdditionalDamage();
-            GameObject newProjectile = Instantiate(weaponSystem.currentWeaponConfig.GetProjectilePrefab(), projectileSocket.transform.position, Quaternion.identity);
-            Vector3 unitVectorToPlayer = (player.transform.position + aimOffset - projectileSocket.transform.position).normalized;
-            newProjectile.GetComponent<Rigidbody>().velocity = unitVectorToPlayer * weaponSystem.currentWeaponConfig.GetProjectileSpeed();
-        }
-
-        public void DamagePlayer()
-        {
-            var weaponDamage = weaponSystem.CalculateDamage();
-            player.GetComponent<PlayerStatusManager>().DamagePlayer(weaponDamage);
         }
 
         void OnDrawGizmos()

@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
 {
@@ -10,9 +12,13 @@ namespace RPG.Characters
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         [SerializeField] Avatar characterAvatar;
 
+        const string DEATH_TRIGGER = "Death";
+
         [Header("Audio")]
-        [SerializeField]
-        float audioSourceSpatialBlend = 0.5f;
+        [SerializeField] float audioSourceSpatialBlend = 0.5f;
+        [SerializeField] AudioClip[] deathSounds = null;
+
+        AudioSource audioSource;
 
         [Header("Capsule Collider")]
         [SerializeField] Vector3 colliderCenter = new Vector3(0, 1.03f, 0);
@@ -39,9 +45,10 @@ namespace RPG.Characters
         float forwardAmount;
         float originalSpeed;
 
-        bool isAlive = true;
-        bool isEnemy;
+        private static FloatingText popupText;
+
         public bool isPatrolling;
+        public bool characterAlive = true;
 
         void Awake()
         {
@@ -60,6 +67,8 @@ namespace RPG.Characters
 
         private void AddRequiredComponents()
         {
+            InitializeFloatingText();
+
             var capsuleCollider = gameObject.AddComponent<CapsuleCollider>();
             capsuleCollider.center = colliderCenter;
             capsuleCollider.radius = colliderRadius;
@@ -86,16 +95,12 @@ namespace RPG.Characters
             navMeshAgent.radius = navMeshAgentRadius;
             navMeshAgent.height = navMeshAgentHeight;
 
-            if (GetComponent<EnemyAI>() != null)
-            {
-                isEnemy = true;
-                
-            }
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
 
         void Update()
         {
-            if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance && isAlive)
+            if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
             {
                 Move(navMeshAgent.desiredVelocity);
             }
@@ -115,10 +120,31 @@ namespace RPG.Characters
             }
         }
 
-        public void Kill()
+        public IEnumerator KillCharacter()
         {
-            isAlive = false;
-            navMeshAgent.isStopped = true;
+            characterAlive = false;
+
+            if (GetComponent<EnemyStatus>() != null)
+            {
+                FindObjectOfType<LevelUpSystem>().AddXP(GetComponent<EnemyStatus>().GetEnemyXP());
+            }
+
+            GetComponent<NavMeshAgent>().isStopped = true;
+            GetComponent<Animator>().SetTrigger(DEATH_TRIGGER);
+
+            audioSource = GetComponent<AudioSource>();
+            audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
+            audioSource.Play();
+
+            yield return new WaitForSecondsRealtime(audioSource.clip.length);
+
+            if (GetComponent<PlayerMovement>() != null)
+            {
+                SceneManager.LoadScene("02_Start_Game_Scene");
+            }
+
+            StopAllCoroutines();
+            Destroy(gameObject);
         }
 
         public void SetDestination(Vector3 worldPos)
@@ -177,6 +203,19 @@ namespace RPG.Characters
                 velocity.y = ridigBody.velocity.y;
                 ridigBody.velocity = velocity;
             }
+        }
+
+        public static void InitializeFloatingText()
+        {
+            if (!popupText)
+                popupText = Resources.Load<FloatingText>("Prefabs/Damage Number");
+        }
+
+        public void CreateFloatingText(string text, Transform location)
+        {
+            FloatingText instance = Instantiate(popupText);
+            instance.transform.SetParent(transform, false);
+            instance.SetText(text);
         }
     }
 }
