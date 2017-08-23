@@ -24,6 +24,11 @@ namespace RPG.Characters
                 GetTarget();
                 weaponSystem.target = target.gameObject;
             }
+            else
+            {
+                targetPanel.SetActive(false);
+            }
+
             if (target != null && target.GetComponent<Character>().characterAlive == false)
             {
                 targetPanel.SetActive(false);

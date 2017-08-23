@@ -10,13 +10,13 @@ namespace RPG.Characters
     {
         [Header("Combat Setup")]
         [SerializeField] float chaseRadius = 6f;
+        [SerializeField] float chaseSpeed = 1f;
         float currentWeaponRange;
 
         [Space(10)]
         [SerializeField] GameObject projectileSocket;
 
         PlayerMovement player = null;
-        WeaponSystem weaponSystem;
         Character character;
 
         const string ATTACK_TRIGGER = "Attack";
@@ -25,126 +25,119 @@ namespace RPG.Characters
         float distanceToPlayer;
         float lastTimeHit;
 
+        Character playerCharacter;
+
         [Header("Patrolling Setup")]
 
-        public EditorPathScript PathToFollow;
-        [SerializeField] float patrolSpeed = 0;
-
-        float waitTime = 20f;
-        float walkTime = 20f;
-        float currentWaitTime;
-        float currentWalkTime;
-
-        int CurrentWaypointID = 0;
-        float reachDistance = 1.5f;
-        string pathName;
-
-        Vector3 last_position;
-        Vector3 current_position;
-
-        Vector3 MoveToNextPath;
-
-        public enum State { idle, patrolling, attacking, chasing }
-
-        State state = State.patrolling;
-
-        public bool underAttack = false;
+        [SerializeField] WaypointContainer patrolPath;
+        [SerializeField] float waitTime = 2f;
+        [SerializeField] float patrolSpeed = 0.5f;
+        [SerializeField] float waypointTolerance = 2f;
+        int nextWaypointIndex;
 
 
-        public float GetEnemyPatrolSpeed()
-        {
-            return patrolSpeed;
-        }
+        public enum State { idle, patrolling, attacking, chasing, gettingAttacked }
+        State state = State.idle;
+
+        public bool gettingAttacked = false;
+
 
         void Start()
         {
             player = FindObjectOfType<PlayerMovement>();
-            weaponSystem = GetComponent<WeaponSystem>();
             character = GetComponent<Character>();
         }
 
         void Update()
         {
             distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+            WeaponSystem weaponSystem = GetComponent<WeaponSystem>();
             currentWeaponRange = weaponSystem.GetCurrentWeapon().GetMaxAttackRange();
+            playerCharacter = player.GetComponent<Character>();
 
-            CheckForIdle();
-            CheckForPatrolling();
-            CheckForChasing();
-            CheckForAttacking();
-            CheckIfUnderAttack();
-        }
-
-        private void CheckIfUnderAttack()
-        {
-            if (underAttack) //Under Attack
+            if (character.characterAlive && playerCharacter.characterAlive)
             {
-                character.isPatrolling = false;
-                StopAllCoroutines();
-                character.SetDestination(player.transform.position);
+                CheckForPatrolling();
+                CheckForGettingAttacked();
+                CheckForChasing();
+                CheckForAttacking();
             }
-        }
-
-        private void CheckForAttacking()
-        {
-            if (distanceToPlayer <= currentWeaponRange) //Attacking
+            else
             {
-                character.isPatrolling = false;
                 StopAllCoroutines();
-                StartCoroutine(AttackPlayer());
-            }
-        }
-
-        private void CheckForChasing()
-        {
-            if (distanceToPlayer <= chaseRadius) //Chasing
-            {
-                character.isPatrolling = false;
-                StopAllCoroutines();
-                StartCoroutine(ChasePlayer());
             }
         }
 
         private void CheckForPatrolling()
         {
-            if (distanceToPlayer > chaseRadius && state != State.idle && !underAttack && state != State.attacking) // Patrolling
+            if (patrolPath != null)
             {
-                character.isPatrolling = true;
-                StopAllCoroutines();
-                StartCoroutine(StartPatrolling());
+                if (distanceToPlayer > chaseRadius && state != State.patrolling) // Patrolling
+                {
+                    GetComponent<NavMeshAgent>().speed = patrolSpeed;
+                    StopAllCoroutines();
+                    StartCoroutine(Patrol());
+                }
             }
         }
 
-        private void CheckForIdle()
+        private void CheckForGettingAttacked()
         {
-            if (distanceToPlayer > chaseRadius && state != State.patrolling && state != State.idle && !underAttack) //Idle
+            if (gettingAttacked && state != State.gettingAttacked) // Getting Attacked
             {
-                character.isPatrolling = false;
+                GetComponent<NavMeshAgent>().speed = chaseSpeed;
                 StopAllCoroutines();
-                state = State.idle;
+                StartCoroutine(ReactToAttack());
             }
         }
 
-        void PatrollPath()
+        private void CheckForChasing()
         {
-            float distance = Vector3.Distance(PathToFollow.path_objs[CurrentWaypointID].position, transform.position);
-
-            var rotation = Quaternion.LookRotation(PathToFollow.path_objs[CurrentWaypointID].position - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 1f);
-
-            if (distance <= reachDistance)
+            if (distanceToPlayer <= chaseRadius && state != State.chasing) //Chasing
             {
-                CurrentWaypointID++;
+                GetComponent<NavMeshAgent>().speed = chaseSpeed;
+                StopAllCoroutines();
+                StartCoroutine(ChasePlayer());
             }
-            if (CurrentWaypointID >= PathToFollow.path_objs.Count)
+        }
+
+        private void CheckForAttacking()
+        {
+            if (distanceToPlayer <= currentWeaponRange && state != State.attacking) //Attacking
             {
-                CurrentWaypointID = 0;
+                StopAllCoroutines();
+                StartCoroutine(AttackPlayer());
+            }
+        }
+
+        IEnumerator Patrol()
+        {
+            state = State.patrolling;
+
+            while (true)
+            {
+                Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
+                character.SetDestination(nextWaypointPos);
+                CycleWaypointWhenClose(nextWaypointPos);
+                yield return new WaitForSeconds(waitTime);
+            }
+        }
+
+        IEnumerator ReactToAttack()
+        {
+            state = State.gettingAttacked;
+
+            while (gettingAttacked)
+            {
+                character.SetDestination(player.transform.position);
+                yield return new WaitForEndOfFrame();
             }
         }
 
         IEnumerator ChasePlayer()
         {
             state = State.chasing;
+
             while (distanceToPlayer <= chaseRadius)
             {
                 character.SetDestination(player.transform.position);
@@ -158,36 +151,18 @@ namespace RPG.Characters
 
             while (distanceToPlayer <= currentWeaponRange)
             {
+                WeaponSystem weaponSystem = GetComponent<WeaponSystem>();
                 weaponSystem.target = player.gameObject;
-                weaponSystem.AttackTarget(player.gameObject);
+                weaponSystem.AttackPlayer(player.gameObject);
                 yield return new WaitForEndOfFrame();
             }
         }
 
-        IEnumerator StartPatrolling()
+        void CycleWaypointWhenClose(Vector3 nextWaypointPos)
         {
-            state = State.patrolling;
-
-            while (distanceToPlayer >= chaseRadius)
+            if(Vector3.Distance(transform.position, nextWaypointPos) <= waypointTolerance)
             {
-                PatrollPath();
-
-                if (currentWalkTime <= walkTime)
-                {
-                    character.SetDestination(PathToFollow.path_objs[CurrentWaypointID].position);
-                    currentWalkTime += Time.deltaTime;
-                }
-                if (currentWalkTime >= walkTime)
-                {
-                    currentWaitTime += Time.deltaTime;
-                }
-                if (currentWaitTime >= waitTime)
-                {
-                    currentWalkTime = Random.Range(5, walkTime);
-                    currentWaitTime = Random.Range (5, waitTime);
-                }
-
-                yield return new WaitForEndOfFrame();
+                nextWaypointIndex = (nextWaypointIndex + 1) % patrolPath.transform.childCount;
             }
         }
 

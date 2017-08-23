@@ -20,5 +20,5 @@ MonoBehaviour:
   maxAttackRange: 8
   additionalDamage: 10
   isRanged: 1
-  projectile: {fileID: 1379784505194008, guid: f9ee7c16d0ef5894abbeb510303f1254, type: 2}
+  projectile: {fileID: 1869599611109266, guid: 9cccb00925888344c81e1de6e30830e6, type: 2}
   projectileSpeed: 15

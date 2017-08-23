@@ -135,7 +135,7 @@ namespace RPG.Characters
         {
             maxDamage = GameInfo.Damage;
             maxArmor = GameInfo.Armor;
-           // maxHealth = GameInfo.Health;
+            maxHealth = GameInfo.Health;
             maxMana = GameInfo.Mana;
 
             maxHealthReg = GameInfo.HealthRegen;

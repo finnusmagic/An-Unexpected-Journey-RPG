@@ -19,5 +19,7 @@ MonoBehaviour:
   maxAttackRange: 10
   additionalDamage: 0
   isRanged: 1
-  projectile: {fileID: 1715973643450372, guid: 2a461e3d6e8ca48459f2f630669435f6, type: 2}
+  leftHanded: 0
+  rightHanded: 1
+  projectile: {fileID: 100004, guid: 11e0f277569b549c9bcece5449a4608c, type: 2}
   projectileSpeed: 10

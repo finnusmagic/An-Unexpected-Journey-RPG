@@ -16,6 +16,8 @@ namespace RPG.Characters
         [SerializeField] float additionalDamage = 10f;
 
         public bool isRanged;
+        public bool leftHanded;
+        public bool rightHanded;
         [SerializeField] GameObject projectile = null;
         [SerializeField] float projectileSpeed = 10f;
 

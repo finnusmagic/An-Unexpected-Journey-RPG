@@ -49,6 +49,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4906226208400364}
+  - component: {fileID: 114635649120495380}
   m_Layer: 0
   m_Name: Hand_L
   m_TagString: Untagged
@@ -657,7 +658,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4210220134796724}
-  - component: {fileID: 114930286498585984}
   m_Layer: 0
   m_Name: Hand_R
   m_TagString: Untagged
@@ -968,7 +968,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1183673263586170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.593, z: 0.672}
+  m_LocalPosition: {x: 0, y: 1.504, z: 0.589}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4058299215451178}
@@ -1714,19 +1714,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
   - {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
   - {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
-  colliderCenter: {x: 0, y: 1.03, z: 0}
-  colliderRadius: 0.2
-  colliderHeight: 2.03
+  colliderCenter: {x: 0, y: 1, z: 0}
+  colliderRadius: 0.3
+  colliderHeight: 2
   moveSpeedMultiplier: 0.2
   animationSpeedMultiplier: 1
   movingTurnSpeed: 360
   stationaryTurnSpeed: 180
   moveThreshold: 1
+  navMeshAgentBaseOffset: -0.27
   navMeshAgentSteeringSpeed: 1
-  navMeshAgentStoppingDistance: 1.3
+  navMeshAgentStoppingDistance: 1.5
   navMeshAgentRadius: 0.3
   navMeshAgentHeight: 1.8
-  isPatrolling: 0
   characterAlive: 1
 --- !u!114 &114436410009112284
 MonoBehaviour:
@@ -1757,10 +1757,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRadius: 3
-  projectileSocket: {fileID: 1183673263586170}
-  PathToFollow: {fileID: 0}
+  chaseSpeed: 1
+  projectileSocket: {fileID: 0}
+  patrolPath: {fileID: 0}
+  waitTime: 2
   patrolSpeed: 0.5
-  underAttack: 0
+  waypointTolerance: 2
+  gettingAttacked: 0
+--- !u!114 &114635649120495380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1034939270935300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efee7db9b586d6b44b6d3ba0e6a56d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114791874839043748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1781,7 +1795,6 @@ MonoBehaviour:
   damageSounds:
   - {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
   healthAsPercentage: 0
-  isAlive: 1
 --- !u!114 &114914988583462284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1799,18 +1812,7 @@ MonoBehaviour:
   currentWeaponConfig: {fileID: 11400000, guid: 654938996a7a8aa42863ec8e03073949,
     type: 2}
   target: {fileID: 0}
-  isAlive: 1
---- !u!114 &114930286498585984
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1779710970060996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efee7db9b586d6b44b6d3ba0e6a56d71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  isAttacking: 0
 --- !u!137 &137605486118481752
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -12,23 +12,36 @@ namespace RPG.Characters
         public bool targetIsPlayer = false;
         public bool targetIsEnemy = false;
 
+        bool hit = false;
+
+        private void Update()
+        {
+            transform.LookAt(transform.position - GetComponent<Rigidbody>().velocity);
+            transform.Rotate(90, 180, 0);
+        }
+
         private void OnTriggerEnter(Collider collider)
         {
-            if (collider.gameObject.tag == "Enemy" && targetIsEnemy)
+            if (hit == false)
             {
-                collider.gameObject.GetComponent<EnemyStatus>().TakeDamage(damageCaused);
-                Destroy(gameObject, DESTROY_DELAY_AFTER_HIT);
-            }
+                if (collider.gameObject.tag == "Enemy" && targetIsEnemy)
+                {
+                    collider.gameObject.GetComponent<EnemyStatus>().TakeDamage(damageCaused);
+                    Destroy(gameObject, DESTROY_DELAY_AFTER_HIT);
+                    hit = true;
+                }
 
-            else if (collider.gameObject.tag == "Player" && targetIsPlayer)
-            {
-                collider.gameObject.GetComponent<PlayerStatusManager>().DamagePlayer(damageCaused);
-                Destroy(gameObject, DESTROY_DELAY_AFTER_HIT);
-            }
+                else if (collider.gameObject.tag == "Player" && targetIsPlayer)
+                {
+                    collider.gameObject.GetComponent<PlayerStatusManager>().DamagePlayer(damageCaused);
+                    Destroy(gameObject, DESTROY_DELAY_AFTER_HIT);
+                    hit = true;
+                }
 
-            else
-            {
-                Destroy(gameObject, DESTROY_DELAY);
+                else
+                {
+                    Destroy(gameObject, DESTROY_DELAY);
+                }
             }
         }
     }

@@ -20,8 +20,6 @@ namespace RPG.Characters
         public float currentHealthPoints;
 
         [Header("Enemy Setup")]
-        [SerializeField] AudioClip[] damageSounds = null;
-        AudioSource audioSource;
         Character character;
 
         GameObject enemyHealth;
@@ -50,8 +48,6 @@ namespace RPG.Characters
 
         void Start()
         {
-            audioSource = GetComponent<AudioSource>();
-
             currentHealthPoints = maxHealthPoints;
         }
 
@@ -69,13 +65,10 @@ namespace RPG.Characters
         {
             character = GetComponent<Character>();
             character.CreateFloatingText(damage.ToString(), transform);
-            GetComponent<EnemyAI>().underAttack = true;
 
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            var clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
-            audioSource.PlayOneShot(clip);
+            currentHealthPoints = currentHealthPoints - damage;
 
-            bool characterDies = (currentHealthPoints - damage <= 0);
+            bool characterDies = (currentHealthPoints  <= 0);
 
             if (characterDies)
             {
@@ -84,11 +77,19 @@ namespace RPG.Characters
             }
 
             UpdateHealthBar();
+            StartCoroutine(GettingAttacked());
         }
 
         public void Heal(float points)
         {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
+        }
+
+        IEnumerator GettingAttacked()
+        {
+            GetComponent<EnemyAI>().gettingAttacked = true;
+            yield return new WaitForSeconds(4f);
+            GetComponent<EnemyAI>().gettingAttacked = false;
         }
     }
 }

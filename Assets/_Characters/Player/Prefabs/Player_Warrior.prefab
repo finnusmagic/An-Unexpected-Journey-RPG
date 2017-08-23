@@ -994,6 +994,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1924566738931382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4961834873237044}
+  m_Layer: 11
+  m_Name: Camera Target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1937710535155252
 GameObject:
   m_ObjectHideFlags: 1
@@ -1302,7 +1317,7 @@ Transform:
   - {fileID: 4615914809663800}
   - {fileID: 4952177424421052}
   m_Father: {fileID: 4832714811141322}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4219465638458398
 Transform:
@@ -1871,11 +1886,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -3.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4961834873237044}
   - {fileID: 4875246722779592}
   - {fileID: 4173059279899460}
   - {fileID: 4943137366863362}
-  - {fileID: 4869355412779832}
   - {fileID: 4872449739446362}
+  - {fileID: 4869355412779832}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1931,7 +1947,7 @@ Transform:
   m_Children:
   - {fileID: 4588957241764402}
   m_Father: {fileID: 4832714811141322}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4872449739446362
 Transform:
@@ -1940,7 +1956,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1063599861428208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.333, z: 0.755}
+  m_LocalPosition: {x: 0, y: 1.415, z: 0.964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4832714811141322}
@@ -1957,7 +1973,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4832714811141322}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4920359670763928
 Transform:
@@ -1984,7 +2000,7 @@ Transform:
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 4832714811141322}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4952177424421052
 Transform:
@@ -2025,6 +2041,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4397118847714058}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4961834873237044
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924566738931382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.491, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4832714811141322}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4962900095503244
@@ -2565,6 +2594,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc42eca8427da1a4cb7e49c706c92f68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 1
+  runSpeed: 2
+  turnSmoothTime: 0.1
+  speedSmoothTime: 0.1
   canMove: 1
 --- !u!114 &114477762546080258
 MonoBehaviour:
@@ -2602,19 +2635,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
   - {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
   - {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
-  colliderCenter: {x: 0, y: 0.9, z: 0}
+  colliderCenter: {x: 0, y: 1, z: 0}
   colliderRadius: 0.3
-  colliderHeight: 1.9
+  colliderHeight: 2
   moveSpeedMultiplier: 0.5
   animationSpeedMultiplier: 1
   movingTurnSpeed: 1500
   stationaryTurnSpeed: 800
   moveThreshold: 1
+  navMeshAgentBaseOffset: -0.27
   navMeshAgentSteeringSpeed: 1
   navMeshAgentStoppingDistance: 1
   navMeshAgentRadius: 0.3
   navMeshAgentHeight: 1.8
-  isPatrolling: 0
   characterAlive: 1
 --- !u!114 &114598100056089872
 MonoBehaviour:
@@ -2632,7 +2665,7 @@ MonoBehaviour:
   aimOffset: {x: 0, y: 1, z: 0}
   currentWeaponConfig: {fileID: 0}
   target: {fileID: 0}
-  isAlive: 1
+  isAttacking: 0
 --- !u!114 &114805597329526328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2676,7 +2709,6 @@ MonoBehaviour:
   maxCritChance: 0
   currentCritDamage: 0
   maxCritDamage: 0
-  isAlive: 1
 --- !u!137 &137360792070529704
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2803,7 +2835,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1223812374
+  randomSeed: 1650450208
   InitialModule:
     serializedVersion: 3
     enabled: 1

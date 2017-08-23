@@ -18,12 +18,13 @@ namespace RPG.Characters
         GameObject weaponObject;
         Animator animator;
         Character character;
-        float lastHitTime;
 
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
 
-        bool isAttacking = false;
+        public bool isAttacking = false;
+
+        private AudioManager audioManager;
 
         void Start()
         {
@@ -32,22 +33,11 @@ namespace RPG.Characters
 
             if (currentWeaponConfig != null)
             PutWeaponInHand(currentWeaponConfig);
-        }
 
-        private void Update()
-        {
-            CheckAttackState();
-        }
-
-        private void CheckAttackState()
-        {
-            if (isAttacking)
+            audioManager = AudioManager.instance;
+            if (audioManager == null)
             {
-                GetComponent<NavMeshAgent>().isStopped = true;
-            }
-            else
-            {
-                GetComponent<NavMeshAgent>().isStopped = false;
+                Debug.LogError("No AudioManager found in the Scene.");
             }
         }
 
@@ -68,7 +58,7 @@ namespace RPG.Characters
             }
         }
 
-        public void AttackTarget(GameObject targetToAttack)
+        public void AttackPlayer(GameObject targetToAttack)
         {
             if (character.characterAlive && currentWeaponConfig != null)
             {
@@ -104,9 +94,45 @@ namespace RPG.Characters
             }
         }
 
+        public void AttackEnemy(GameObject targetToAttack)
+        {
+            float attackTimer = currentWeaponConfig.GetMinTimeBetweenHits();
+
+            if (currentWeaponConfig.GetMinTimeBetweenHits() == attackTimer)
+            {
+
+                if (character.characterAlive && currentWeaponConfig != null)
+                {
+                    SetAttackAnimation();
+
+                    if (currentWeaponConfig.isRanged && target != null)
+                    {
+                        if (!isAttacking && IsTargetInRange(targetToAttack) && target != null)
+                        {
+                            target = targetToAttack;
+                            StartCoroutine(DamageTargetRanged());
+                        }
+                    }
+
+                    else if (!currentWeaponConfig.isRanged && target != null)
+                    {
+                        if (!isAttacking && IsTargetInRange(targetToAttack) && target != null)
+                        {
+                            target = targetToAttack;
+                            StartCoroutine(DamageTargetMeele());
+                        }
+                    }
+                }
+                else
+                {
+                    StopAllCoroutines();
+                }
+            }
+        }
+
         IEnumerator DamageTargetMeele()
         {
-            transform.LookAt(target.transform);
+            audioManager.PlaySound("Meele Attack");
             isAttacking = true;
             animator.SetTrigger(ATTACK_TRIGGER);
             if (target.GetComponent<EnemyStatus>() != null)
@@ -117,17 +143,18 @@ namespace RPG.Characters
             {
                 target.GetComponent<PlayerStatusManager>().DamagePlayer(currentWeaponConfig.GetAdditionalDamage());
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(currentWeaponConfig.GetMinTimeBetweenHits());
             isAttacking = false;
         }
 
         IEnumerator DamageTargetRanged()
         {
+            audioManager.PlaySound("Ranged Attack");
             transform.LookAt(target.transform);
             StartCoroutine(ShootTarget());
             isAttacking = true;
             animator.SetTrigger(ATTACK_TRIGGER);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(currentWeaponConfig.GetMinTimeBetweenHits());
             isAttacking = false;
         }
 
@@ -135,14 +162,6 @@ namespace RPG.Characters
         {
             yield return new WaitForSeconds(.3f);
             SpawnProjectile();
-        }
-
-        public float CalculateDamage()
-        {
-            if (currentWeaponConfig != null)
-                weaponDamage = currentWeaponConfig.GetAdditionalDamage();
-
-            return weaponDamage;
         }
 
         void SpawnProjectile()

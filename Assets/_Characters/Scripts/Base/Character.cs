@@ -14,12 +14,6 @@ namespace RPG.Characters
 
         const string DEATH_TRIGGER = "Death";
 
-        [Header("Audio")]
-        [SerializeField] float audioSourceSpatialBlend = 0.5f;
-        [SerializeField] AudioClip[] deathSounds = null;
-
-        AudioSource audioSource;
-
         [Header("Capsule Collider")]
         [SerializeField] Vector3 colliderCenter = new Vector3(0, 1.03f, 0);
         [SerializeField] float colliderRadius = 0.2f;
@@ -27,28 +21,27 @@ namespace RPG.Characters
 
         [Header("Movement")]
         [SerializeField] float moveSpeedMultiplier = .7f;
-        [SerializeField] float animationSpeedMultiplier = 1.5f;
+        public float animationSpeedMultiplier = 1.5f;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] float moveThreshold = 1f;
 
         [Header("Nav Mesh Agent")]
+        [SerializeField] float navMeshAgentBaseOffset = 0f;
         [SerializeField] float navMeshAgentSteeringSpeed = 1.0f;
         [SerializeField] float navMeshAgentStoppingDistance = 1.3f;
         [SerializeField] float navMeshAgentRadius = 0.3f;
         [SerializeField] float navMeshAgentHeight = 1.8f;
 
+        [Space(10)] public bool characterAlive = true;
+
         NavMeshAgent navMeshAgent;
         Animator animator;
-        Rigidbody ridigBody;
+        Rigidbody rigidBody;
         float turnAmount;
         float forwardAmount;
-        float originalSpeed;
-
         private static FloatingText popupText;
 
-        public bool isPatrolling;
-        public bool characterAlive = true;
 
         void Awake()
         {
@@ -74,33 +67,27 @@ namespace RPG.Characters
             capsuleCollider.radius = colliderRadius;
             capsuleCollider.height = colliderHeight;
 
-            ridigBody = gameObject.AddComponent<Rigidbody>();
-            ridigBody.constraints = RigidbodyConstraints.FreezeRotation;
+            rigidBody = gameObject.AddComponent<Rigidbody>();
+            rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
 
-            var audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.spatialBlend = audioSourceSpatialBlend;
-            audioSource.dopplerLevel = 0;
-
-             animator = gameObject.AddComponent<Animator>();
-             animator.runtimeAnimatorController = animatorOverrideController;
-             animator.avatar = characterAvatar;
+            animator = gameObject.AddComponent<Animator>();
+            animator.runtimeAnimatorController = animatorOverrideController;
+            animator.avatar = characterAvatar;
 
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
             navMeshAgent.speed = navMeshAgentSteeringSpeed;
-            originalSpeed = navMeshAgent.speed;
             navMeshAgent.stoppingDistance = navMeshAgentStoppingDistance;
             navMeshAgent.autoBraking = false;
             navMeshAgent.updateRotation = false;
             navMeshAgent.updatePosition = true;
             navMeshAgent.radius = navMeshAgentRadius;
             navMeshAgent.height = navMeshAgentHeight;
-
-            audioSource = gameObject.AddComponent<AudioSource>();
+            navMeshAgent.baseOffset = navMeshAgentBaseOffset;
         }
 
         void Update()
         {
-            if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
+            if (navMeshAgent != null && navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
             {
                 Move(navMeshAgent.desiredVelocity);
             }
@@ -109,14 +96,11 @@ namespace RPG.Characters
                 Move(Vector3.zero);
             }
 
-            if (isPatrolling)
+            if (!characterAlive)
             {
-                float patrollingSpeed = GetComponent<EnemyAI>().GetEnemyPatrolSpeed();
-                navMeshAgent.speed = patrollingSpeed;
-            }
-            else
-            {
-                navMeshAgent.speed = originalSpeed;
+                navMeshAgent.velocity = Vector3.zero;
+                navMeshAgent.updateRotation = false;
+                Move(Vector3.zero);
             }
         }
 
@@ -129,14 +113,12 @@ namespace RPG.Characters
                 FindObjectOfType<LevelUpSystem>().AddXP(GetComponent<EnemyStatus>().GetEnemyXP());
             }
 
-            GetComponent<NavMeshAgent>().isStopped = true;
+            var agent = GetComponent<NavMeshAgent>();
+            agent.velocity = Vector3.zero;
+
             GetComponent<Animator>().SetTrigger(DEATH_TRIGGER);
 
-            audioSource = GetComponent<AudioSource>();
-            audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
-            audioSource.Play();
-
-            yield return new WaitForSecondsRealtime(audioSource.clip.length);
+            yield return new WaitForSecondsRealtime(2f);
 
             if (GetComponent<PlayerMovement>() != null)
             {
@@ -200,8 +182,8 @@ namespace RPG.Characters
                 Vector3 velocity = (animator.deltaPosition * moveSpeedMultiplier) / Time.deltaTime;
 
                 // we preserve the existing y part of the current velocity.
-                velocity.y = ridigBody.velocity.y;
-                ridigBody.velocity = velocity;
+                velocity.y = rigidBody.velocity.y;
+                rigidBody.velocity = velocity;
             }
         }
 

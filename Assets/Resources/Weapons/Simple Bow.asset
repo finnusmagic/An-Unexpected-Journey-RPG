@@ -17,8 +17,10 @@ MonoBehaviour:
     type: 2}
   attackAnimation: {fileID: 7400000, guid: 522e6e5c331853c46a1b4bf644d62789, type: 3}
   minTimeBetweenHits: 1
-  maxAttackRange: 10
+  maxAttackRange: 12
   additionalDamage: 0
   isRanged: 1
+  leftHanded: 1
+  rightHanded: 0
   projectile: {fileID: 1874979086049940, guid: 62f3111ab9274e346bbd73a7eac13658, type: 2}
   projectileSpeed: 20
