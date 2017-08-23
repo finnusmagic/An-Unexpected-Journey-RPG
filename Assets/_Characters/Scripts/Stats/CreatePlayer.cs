@@ -38,6 +38,10 @@ public class CreatePlayer : MonoBehaviour {
         classIcon = Resources.Load<Sprite>("Sprites/Classes/noSelection");
 
         UpdateUI();
+
+        AudioManager audioManager = AudioManager.instance;
+        Scene scene = SceneManager.GetActiveScene();
+        audioManager.PlayMusic(scene.name);
     }
 
     public void CreateNewPlayer()

@@ -33,14 +33,14 @@ function Update() {
 }
 
 function ToggleLights(){
-	if (lights.active)
+	if (lights)
 		lights.SetActive(false);
 	else
 		lights.SetActive(true);
 }
 
-function ToggleCubes(){
-	if (cubes.active)
+function ToggleCubes() {
+    if (cubes)
 		cubes.SetActive(false);
 	else
 		cubes.SetActive(true);

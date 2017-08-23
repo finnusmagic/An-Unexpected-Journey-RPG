@@ -208,6 +208,9 @@ namespace RPG.Characters
 
         public void DamagePlayer(float damage)
         {
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            audioManager.PlaySound("Player Getting Damage");
+
             character = GetComponent<Character>();
             character.CreateFloatingText(damage.ToString(), transform);
             currentHealth = Mathf.Clamp(currentHealth - damage, 0f, maxHealth);

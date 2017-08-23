@@ -132,7 +132,8 @@ namespace RPG.Characters
 
         IEnumerator DamageTargetMeele()
         {
-            audioManager.PlaySound("Meele Attack");
+            audioManager.PlaySound(currentWeaponConfig.soundName);
+
             isAttacking = true;
             animator.SetTrigger(ATTACK_TRIGGER);
             if (target.GetComponent<EnemyStatus>() != null)
@@ -149,7 +150,8 @@ namespace RPG.Characters
 
         IEnumerator DamageTargetRanged()
         {
-            audioManager.PlaySound("Ranged Attack");
+            audioManager.PlaySound(currentWeaponConfig.soundName);
+
             transform.LookAt(target.transform);
             StartCoroutine(ShootTarget());
             isAttacking = true;

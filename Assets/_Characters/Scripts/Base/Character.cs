@@ -106,6 +106,9 @@ namespace RPG.Characters
 
         public IEnumerator KillCharacter()
         {
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            audioManager.PlaySound("Player Death");
+
             characterAlive = false;
 
             if (GetComponent<EnemyStatus>() != null)

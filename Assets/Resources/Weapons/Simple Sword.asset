@@ -24,3 +24,4 @@ MonoBehaviour:
   rightHanded: 1
   projectile: {fileID: 0}
   projectileSpeed: 10
+  soundName: Sword Sound

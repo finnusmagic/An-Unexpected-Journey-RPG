@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Database;
 using RPG.Characters;
+using UnityEngine.SceneManagement;
 
 public class InstantiatePlayer : MonoBehaviour {
 
@@ -20,6 +21,11 @@ public class InstantiatePlayer : MonoBehaviour {
         InstantiatePlayerModel();
 
         Inventory.GetComponent<Inventory>();
+
+        AudioManager audioManager = AudioManager.instance;
+        audioManager.StopMusic();
+        Scene scene = SceneManager.GetActiveScene();
+        audioManager.PlayMusic(scene.name);
     }
 
     private void InstantiatePlayerModel()

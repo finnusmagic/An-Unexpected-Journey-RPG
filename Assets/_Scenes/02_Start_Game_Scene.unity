@@ -1566,6 +1566,48 @@ MonoBehaviour:
   m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &262676909
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &268093128
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1634,7 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 268093128}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1602,9 +1644,9 @@ RectTransform:
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &268093130
 MonoBehaviour:
@@ -4099,63 +4141,6 @@ MonoBehaviour:
   m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &667859641
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 667859643}
-  - component: {fileID: 667859642}
-  - component: {fileID: 667859644}
-  m_Layer: 0
-  m_Name: GameInfo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &667859642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 667859641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f93511c8fca55a447a547856e8bdceed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &667859643
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 667859641}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2244618, y: 1.8155165, z: 6.382388}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &667859644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 667859641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d4164510514a04459c4861ffb062ca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMesh: {fileID: 2136507916}
-  warriorMesh: {fileID: 4300026, guid: d288a0e4a2d923b46898986e979da643, type: 3}
-  archerMesh: {fileID: 4300044, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
-  mageMesh: {fileID: 4300046, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
-  Inventory: {fileID: 1979641124}
 --- !u!1 &686713768
 GameObject:
   m_ObjectHideFlags: 0
@@ -4741,7 +4726,7 @@ Transform:
   - {fileID: 1952061543}
   - {fileID: 571772163}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &773716378
 GameObject:
@@ -5932,31 +5917,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114290178735193028, guid: a36116e3c501eda41bca2346c67ed1af,
+    - target: {fileID: 114368486361594620, guid: a36116e3c501eda41bca2346c67ed1af,
         type: 2}
-      propertyPath: levelBar
-      value: 
-      objectReference: {fileID: 145828334}
-    - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
-        type: 2}
-      propertyPath: inventory
+      propertyPath: Inventory
       value: 
       objectReference: {fileID: 1979641124}
-    - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
-        type: 2}
-      propertyPath: characterSystem
-      value: 
-      objectReference: {fileID: 174026967}
-    - target: {fileID: 114477762546080258, guid: a36116e3c501eda41bca2346c67ed1af,
-        type: 2}
-      propertyPath: abilityPanel
-      value: 
-      objectReference: {fileID: 1126569987}
-    - target: {fileID: 114805597329526328, guid: a36116e3c501eda41bca2346c67ed1af,
-        type: 2}
-      propertyPath: targetPanel
-      value: 
-      objectReference: {fileID: 978629247}
     - target: {fileID: 114991543371149220, guid: a36116e3c501eda41bca2346c67ed1af,
         type: 2}
       propertyPath: playerStatusPanel
@@ -5972,6 +5937,31 @@ Prefab:
       propertyPath: playerAbilityPanel
       value: 
       objectReference: {fileID: 1126569987}
+    - target: {fileID: 114805597329526328, guid: a36116e3c501eda41bca2346c67ed1af,
+        type: 2}
+      propertyPath: targetPanel
+      value: 
+      objectReference: {fileID: 978629247}
+    - target: {fileID: 114477762546080258, guid: a36116e3c501eda41bca2346c67ed1af,
+        type: 2}
+      propertyPath: abilityPanel
+      value: 
+      objectReference: {fileID: 1126569987}
+    - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
+        type: 2}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1979641124}
+    - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
+        type: 2}
+      propertyPath: characterSystem
+      value: 
+      objectReference: {fileID: 174026967}
+    - target: {fileID: 114290178735193028, guid: a36116e3c501eda41bca2346c67ed1af,
+        type: 2}
+      propertyPath: levelBar
+      value: 
+      objectReference: {fileID: 145828334}
     - target: {fileID: 1371042566339608, guid: a36116e3c501eda41bca2346c67ed1af, type: 2}
       propertyPath: m_Name
       value: Player
@@ -6302,61 +6292,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1029089063}
---- !u!1001 &1037388738
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 5.6929536
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -8.486267
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0.34202015
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.9396927
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114342250068780204, guid: b4d85e4a13048e94eb722d1b711993f0,
-        type: 2}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1637342301}
-    - target: {fileID: 114185620874455954, guid: b4d85e4a13048e94eb722d1b711993f0,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 81906356440057274, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-    - {fileID: 114344506911011430, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-    - {fileID: 114613034994385344, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-  m_ParentPrefab: {fileID: 100100000, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1064110134
 GameObject:
   m_ObjectHideFlags: 0
@@ -7669,6 +7604,53 @@ MonoBehaviour:
   m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1273583247
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 5.6929536
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -8.486267
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.34202015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.9396927
+      objectReference: {fileID: 0}
+    - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114342250068780204, guid: b4d85e4a13048e94eb722d1b711993f0,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1637342301}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1279249159
 GameObject:
   m_ObjectHideFlags: 0
@@ -8752,67 +8734,6 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!1 &1475178253
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1475178255}
-  - component: {fileID: 1475178256}
-  - component: {fileID: 1475178254}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1475178254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1475178253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd808eb03f34e245865534987702f02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: Meele Attack
-    clip: {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
-    volume: 0.5
-    pitch: 1
-    randomVolume: 0.25
-    randomPitch: 0.5
-  - name: Ranged Attack
-    clip: {fileID: 8300000, guid: 5318c0c653ad54db7be081c1a391547e, type: 3}
-    volume: 0.5
-    pitch: 1
-    randomVolume: 0.25
-    randomPitch: 0.5
---- !u!4 &1475178255
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1475178253}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &1475178256
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1475178253}
-  m_Enabled: 1
 --- !u!1 &1494351862
 GameObject:
   m_ObjectHideFlags: 0
@@ -12257,140 +12178,7 @@ MonoBehaviour:
   SlotGridLayout: {fileID: 306238404}
   SlotGridRectTransform: {fileID: 306238403}
   mainInventory: 1
-  ItemsInInventory:
-  - itemName: Simple Sword
-    itemID: 1
-    itemDesc: Just a simple sword. It's blade does not look very sharp and it's grip
-      is rusty.
-    itemIcon: {fileID: 21300000, guid: 60639bba7a2b7734cba5b3c006fb3441, type: 3}
-    itemModel: {fileID: 1358036631176394, guid: 71dd502105dd4e54d92f599bc8c82dff,
-      type: 2}
-    itemValue: 1
-    itemType: 12
-    itemWeight: 0
-    maxStack: 1
-    indexItemInList: 999
-    rarity: 1
-    itemAttributes:
-    - attributeName: Damage
-      attributeValue: 5
-    - attributeName: Armor
-      attributeValue: 4
-    - attributeName: Health
-      attributeValue: 5
-    - attributeName: Health Reg
-      attributeValue: 0.05
-    - attributeName: Crit Damage
-      attributeValue: 2
-    - attributeName: Crit Chance
-      attributeValue: 1.5
-  - itemName: Simple Bow
-    itemID: 2
-    itemDesc: Just a simple Bow. It looks as if it has already been used in many fights.
-    itemIcon: {fileID: 21300000, guid: 9f79de080511c19449ca0d3ebc913c7b, type: 3}
-    itemModel: {fileID: 1830904260501586, guid: ecbbb7b06d2369f4dbb5911995363e1f,
-      type: 2}
-    itemValue: 1
-    itemType: 12
-    itemWeight: 0
-    maxStack: 1
-    indexItemInList: 999
-    rarity: 1
-    itemAttributes:
-    - attributeName: Damage
-      attributeValue: 6
-    - attributeName: Armor
-      attributeValue: 2
-    - attributeName: Health
-      attributeValue: 2
-    - attributeName: Health Reg
-      attributeValue: 0.01
-    - attributeName: Crit Damage
-      attributeValue: 2
-    - attributeName: Crit Chance
-      attributeValue: 1.5
-  - itemName: Simple Staff
-    itemID: 3
-    itemDesc: 'Just a simple Staff. It looks as if it could break at any moment. '
-    itemIcon: {fileID: 21300000, guid: c7bf940d020f4334a9cc56e3490e90b3, type: 3}
-    itemModel: {fileID: 141714, guid: 90914c334262f7140a0cf37f0b182e5c, type: 2}
-    itemValue: 1
-    itemType: 12
-    itemWeight: 0
-    maxStack: 1
-    indexItemInList: 999
-    rarity: 1
-    itemAttributes:
-    - attributeName: Damage
-      attributeValue: 2
-    - attributeName: Health
-      attributeValue: 1
-    - attributeName: Mana
-      attributeValue: 5
-    - attributeName: Health Reg
-      attributeValue: 0.01
-    - attributeName: Crit Damage
-      attributeValue: 1
-    - attributeName: Crit Chance
-      attributeValue: 0.5
-  - itemName: Small Health Potion
-    itemID: 4
-    itemDesc: A small healing pot. When it becomes dangerous, this potion can possibly
-      save lives.
-    itemIcon: {fileID: 21300000, guid: 26a1d6e02bf678b48b6ff65f68c7bf49, type: 3}
-    itemModel: {fileID: 100000, guid: 2a7aeccaf51cb44258e96e4127ac8d7e, type: 3}
-    itemValue: 5
-    itemType: 2
-    itemWeight: 0
-    maxStack: 10
-    indexItemInList: 2
-    rarity: 1
-    itemAttributes:
-    - attributeName: Health
-      attributeValue: 50
-  - itemName: Small Mana Potion
-    itemID: 5
-    itemDesc: A small mana potion. If the energy to perform abilities leaks, this
-      could help.
-    itemIcon: {fileID: 21300000, guid: 81192211eadb9f342b12ff375a7bf7ad, type: 3}
-    itemModel: {fileID: 100000, guid: a7b94700af64d4331af2f449bf00b987, type: 3}
-    itemValue: 5
-    itemType: 2
-    itemWeight: 0
-    maxStack: 10
-    indexItemInList: 3
-    rarity: 1
-    itemAttributes:
-    - attributeName: Mana
-      attributeValue: 50
-  - itemName: Necklace of Cheating
-    itemID: 7
-    itemDesc: For testing Stats and Damage.
-    itemIcon: {fileID: 21300000, guid: 3a3d27cd3cf55ad4dad9fb5eea5f37bd, type: 3}
-    itemModel: {fileID: 176636, guid: b4ea2f3e0e40943219a8997915f71646, type: 2}
-    itemValue: 1
-    itemType: 5
-    itemWeight: 0
-    maxStack: 1
-    indexItemInList: 4
-    rarity: 100
-    itemAttributes:
-    - attributeName: Damage
-      attributeValue: 25
-    - attributeName: Armor
-      attributeValue: 10
-    - attributeName: Health
-      attributeValue: 100
-    - attributeName: Mana
-      attributeValue: 100
-    - attributeName: Mana Reg
-      attributeValue: 2.5
-    - attributeName: Health Reg
-      attributeValue: 2.5
-    - attributeName: Crit Damage
-      attributeValue: 100
-    - attributeName: Crit Chance
-      attributeValue: 100
+  ItemsInInventory: []
   height: 6
   width: 6
   stackable: 1
@@ -13155,8 +12943,3 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2121717506}
---- !u!1 &2136507916 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1947662928860196, guid: a36116e3c501eda41bca2346c67ed1af,
-    type: 2}
-  m_PrefabInternal: {fileID: 950458864}

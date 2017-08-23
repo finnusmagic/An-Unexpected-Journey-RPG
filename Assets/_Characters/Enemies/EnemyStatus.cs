@@ -63,6 +63,9 @@ namespace RPG.Characters
 
         public void TakeDamage(float damage)
         {
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            audioManager.PlaySound("Enemy Getting Damage");
+
             character = GetComponent<Character>();
             character.CreateFloatingText(damage.ToString(), transform);
 

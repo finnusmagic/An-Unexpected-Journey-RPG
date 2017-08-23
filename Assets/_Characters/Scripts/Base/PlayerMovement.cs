@@ -41,34 +41,37 @@ namespace RPG.Characters
 
         private void Update()
         {
-            Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            Vector2 inputDir = input.normalized;
-
-            if (inputDir != Vector2.zero)
+            if (canMove)
             {
-                turnSmoothTime = 0.1f;
-            }
-            else
-            {
-                turnSmoothTime = 0.5f;
-            }
+                Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                Vector2 inputDir = input.normalized;
 
-            float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
+                if (inputDir != Vector2.zero)
+                {
+                    turnSmoothTime = 0.1f;
+                }
+                else
+                {
+                    turnSmoothTime = 0.5f;
+                }
 
-            bool walking = Input.GetKey(KeyCode.LeftShift);
-            float targetSpeed = ((walking) ? walkSpeed : runSpeed) * inputDir.magnitude;
-            currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
+                float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
+                transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
 
-            transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+                bool walking = Input.GetKey(KeyCode.LeftShift);
+                float targetSpeed = ((walking) ? walkSpeed : runSpeed) * inputDir.magnitude;
+                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
 
-            float animationSpeedPercent = ((walking) ? 1f : 2f) *inputDir.magnitude;
-            animator.SetFloat("Forward", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
+                transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && character.characterAlive)
-            {
-                if (enemy != null)
-                    weaponSystem.AttackEnemy(enemy.gameObject);
+                float animationSpeedPercent = ((walking) ? 1f : 2f) * inputDir.magnitude;
+                animator.SetFloat("Forward", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
+
+                if (Input.GetKeyDown(KeyCode.Alpha1) && character.characterAlive)
+                {
+                    if (enemy != null)
+                        weaponSystem.AttackEnemy(enemy.gameObject);
+                }
             }
         }
 
