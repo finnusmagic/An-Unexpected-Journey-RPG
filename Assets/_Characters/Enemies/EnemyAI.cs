@@ -49,14 +49,8 @@ namespace RPG.Characters
 
         Vector3 MoveToNextPath;
 
-<<<<<<< HEAD
         public enum State { idle, patrolling, attacking, chasing }
         State state = State.patrolling;
-=======
-
-        public enum State { idle, patrolling, attacking, chasing, gettingAttacked }
-        State state = State.idle;
->>>>>>> parent of ed691a1... NPC / Dialogue / Audio Manager Fix
 
         public bool underAttack = false;
 
@@ -65,7 +59,6 @@ namespace RPG.Characters
         {
             return patrolSpeed;
         }
-
 
         void Start()
         {
@@ -94,16 +87,8 @@ namespace RPG.Characters
                 StopAllCoroutines();
                 StartCoroutine(StartPatrolling());
             }
-<<<<<<< HEAD
 
             if (distanceToPlayer > chaseRadius && state != State.patrolling && !underAttack)
-=======
-        }
-
-        private void CheckForPatrolling()
-        {
-            if (patrolPath != null)
->>>>>>> parent of ed691a1... NPC / Dialogue / Audio Manager Fix
             {
                 character.isPatrolling = false;
                 StopAllCoroutines();
@@ -111,21 +96,13 @@ namespace RPG.Characters
             }
             if (distanceToPlayer <= chaseRadius && state != State.chasing)
             {
-<<<<<<< HEAD
                 character.isPatrolling = false;
-=======
-                GetComponent<NavMeshAgent>().speed = chaseSpeed;
->>>>>>> parent of ed691a1... NPC / Dialogue / Audio Manager Fix
                 StopAllCoroutines();
                 StartCoroutine(ChasePlayer());
             }
             if (distanceToPlayer <= currentWeaponRange && state != State.attacking)
             {
-<<<<<<< HEAD
                 character.isPatrolling = false;
-=======
-                GetComponent<NavMeshAgent>().speed = chaseSpeed;
->>>>>>> parent of ed691a1... NPC / Dialogue / Audio Manager Fix
                 StopAllCoroutines();
                 StartCoroutine(AttackPlayer());
             }
