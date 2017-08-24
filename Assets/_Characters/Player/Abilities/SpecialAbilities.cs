@@ -12,11 +12,11 @@ namespace RPG.Characters
         [SerializeField] List<AbilityConfig> abilities;
 
         private PlayerStatusManager player;
+        private PlayerMovement playerMovement;
         public GameObject abilityPanel;
 
         InputManager inputManager;
         Character character;
-        WeaponSystem weaponSystem;
 
         void Start()
         {
@@ -24,8 +24,8 @@ namespace RPG.Characters
                 inputManager = (InputManager)Resources.Load("InputManager");
 
             player = GetComponent<PlayerStatusManager>();
+            playerMovement = GetComponent<PlayerMovement>();
             character = GetComponent<Character>();
-            weaponSystem = GetComponent<WeaponSystem>();
 
             AttachInitialAbilities();
             player.UpdatePlayerMana();
@@ -55,16 +55,16 @@ namespace RPG.Characters
             {
                 EnemyAI enemyTarget = GetComponent<LockTarget>().target;
 
-                if (!weaponSystem.IsTargetInRange(enemyTarget.gameObject) && enemyTarget != null)
+                if (!playerMovement.IsTargetInRange(enemyTarget.gameObject) && enemyTarget != null)
                 {
                     character.SetDestination(enemyTarget.transform.position);
                 }
 
-                else if (weaponSystem.IsTargetInRange(enemyTarget.gameObject) && enemyTarget != null)
+                else if (playerMovement.IsTargetInRange(enemyTarget.gameObject) && enemyTarget != null)
                 {
                     if (abilities[2].currentCooldown >= abilities[2].coolDown && abilities[2].GetManaCost() <= player.currentMana)
                     {
-                        transform.LookAt(enemyTarget.GetComponent<EnemyAI>().transform);
+                        playerMovement.RotateTowards(enemyTarget.GetComponent<EnemyAI>());
 
                         player.ConsumeMana(abilities[2].GetManaCost());
                         abilities[2].Use(enemyTarget.gameObject);

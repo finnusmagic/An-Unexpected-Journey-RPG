@@ -20,8 +20,5 @@ MonoBehaviour:
   maxAttackRange: 2
   additionalDamage: 15
   isRanged: 0
-  leftHanded: 0
-  rightHanded: 0
   projectile: {fileID: 0}
   projectileSpeed: 10
-  soundName: Sword Sound

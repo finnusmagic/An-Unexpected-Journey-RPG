@@ -19,12 +19,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4582433635942160}
-  - component: {fileID: 114185620874455954}
   - component: {fileID: 20673352541753510}
   - component: {fileID: 92237048766172546}
   - component: {fileID: 124059639417307490}
+  - component: {fileID: 81906356440057274}
+  - component: {fileID: 114344506911011430}
   - component: {fileID: 114575263218139092}
-  - component: {fileID: 114342250068780204}
+  - component: {fileID: 114613034994385344}
+  - component: {fileID: 114185620874455954}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -38,8 +40,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021387032470026}
-  m_LocalRotation: {x: 0.34202015, y: 0, z: 0, w: 0.9396927}
-  m_LocalPosition: {x: 0, y: 5.6929536, z: -8.486267}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 5, z: -7.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,6 +83,13 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
+--- !u!81 &81906356440057274
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021387032470026}
+  m_Enabled: 1
 --- !u!92 &92237048766172546
 Behaviour:
   m_ObjectHideFlags: 1
@@ -94,7 +103,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021387032470026}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
@@ -106,16 +115,16 @@ MonoBehaviour:
   stopNaNPropagation: 1
   antialiasingMode: 3
   temporalAntialiasing:
-    jitterSpread: 0.46
-    sharpen: 0.65
+    jitterSpread: 0.524
+    sharpen: 0.51
     stationaryBlending: 0.99
-    motionBlending: 0.153
+    motionBlending: 0.314
   fastApproximateAntialiasing:
     mobileOptimized: 0
     keepAlpha: 0
   ambientOcclusion:
     enabled: 1
-    intensity: 0.31
+    intensity: 0.28
     radius: 0.25
     quality: 3
     ambientOnly: 0
@@ -145,7 +154,7 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &114342250068780204
+--- !u!114 &114344506911011430
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -153,15 +162,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1021387032470026}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38cb67e541fc7414f9fb8634ce78f849, type: 3}
+  m_Script: {fileID: 11500000, guid: b7c9a272f6969f445889ef8cc0392a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 5
-  target: {fileID: 0}
-  distanceFromTarget: 8
-  rotationToPlayer: 40
-  pitchMinMax: {x: 0, y: 65}
-  rotationSmoothTime: 0.5
+  PlayerCameraDistance: 7
 --- !u!114 &114575263218139092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,6 +180,19 @@ MonoBehaviour:
   walkCursor: {fileID: 2800000, guid: cc8e2339ec0761d4ba1aa3a3460c250f, type: 3}
   enemyCursor: {fileID: 2800000, guid: 8a31b5c268031a84a872f286e2382061, type: 3}
   cursorOffset: {x: 23, y: 8}
+--- !u!114 &114613034994385344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021387032470026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd808eb03f34e245865534987702f02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 1f5ff12f4e119694f936189c7647d398, type: 3}
+  audioVolume: 0.3
 --- !u!124 &124059639417307490
 Behaviour:
   m_ObjectHideFlags: 1

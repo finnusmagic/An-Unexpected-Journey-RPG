@@ -49,7 +49,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4906226208400364}
-  - component: {fileID: 114635649120495380}
   m_Layer: 0
   m_Name: Hand_L
   m_TagString: Untagged
@@ -204,7 +203,6 @@ GameObject:
   - component: {fileID: 114572198601381870}
   - component: {fileID: 114914988583462284}
   - component: {fileID: 114791874839043748}
-  - component: {fileID: 114769999597873672}
   m_Layer: 0
   m_Name: Enemy_Archer_Default
   m_TagString: Enemy
@@ -659,6 +657,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4210220134796724}
+  - component: {fileID: 114930286498585984}
   m_Layer: 0
   m_Name: Hand_R
   m_TagString: Untagged
@@ -692,6 +691,22 @@ GameObject:
   - component: {fileID: 4315124385923406}
   m_Layer: 0
   m_Name: Finger_02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1876109914958198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4010642332757398}
+  - component: {fileID: 114436410009112284}
+  m_Layer: 0
+  m_Name: Audio Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -832,6 +847,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4010642332757398
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1876109914958198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4058299215451178}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4038248285721020
 Transform:
   m_ObjectHideFlags: 1
@@ -870,6 +898,7 @@ Transform:
   m_Children:
   - {fileID: 4109506726867038}
   - {fileID: 4118600288981020}
+  - {fileID: 4010642332757398}
   - {fileID: 4398404921520840}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -939,7 +968,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1183673263586170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.504, z: 0.589}
+  m_LocalPosition: {x: 0, y: 1.593, z: 0.672}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4058299215451178}
@@ -1180,7 +1209,7 @@ Transform:
   m_Children:
   - {fileID: 4367042609412964}
   m_Father: {fileID: 4058299215451178}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4427950510975974
 Transform:
@@ -1680,20 +1709,37 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: 96c93efca801fdd4ebda45714884a13e,
     type: 2}
   characterAvatar: {fileID: 9000000, guid: d3d5692891e10cf43a756c443850b3f1, type: 3}
-  colliderCenter: {x: 0, y: 1, z: 0}
-  colliderRadius: 0.3
-  colliderHeight: 2
+  audioSourceSpatialBlend: 0.5
+  colliderCenter: {x: 0, y: 1.03, z: 0}
+  colliderRadius: 0.2
+  colliderHeight: 2.03
   moveSpeedMultiplier: 0.2
   animationSpeedMultiplier: 1
   movingTurnSpeed: 360
   stationaryTurnSpeed: 180
   moveThreshold: 1
-  navMeshAgentBaseOffset: -0.27
   navMeshAgentSteeringSpeed: 1
-  navMeshAgentStoppingDistance: 1.5
+  navMeshAgentStoppingDistance: 1.3
   navMeshAgentRadius: 0.3
   navMeshAgentHeight: 1.8
-  characterAlive: 1
+  isPatrolling: 0
+--- !u!114 &114436410009112284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1876109914958198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9a0586bad600e4cbf8dd55298204b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 3aac7baf965ba8142bfd2ccbe2ebd297, type: 3}
+  volume: 0.3
+  layerFilter: 11
+  triggerRadius: 6
+  isOneTimeOnly: 1
+  hasPlayed: 0
 --- !u!114 &114572198601381870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1706,36 +1752,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRadius: 3
-  chaseSpeed: 1
-  projectileSocket: {fileID: 0}
-  patrolPath: {fileID: 0}
-  waitTime: 2
+  projectileSocket: {fileID: 1183673263586170}
+  projectile: {fileID: 0}
+  aimOffset: {x: 0, y: 1, z: 0}
+  PathToFollow: {fileID: 0}
   patrolSpeed: 0.5
-  waypointTolerance: 2
-  gettingAttacked: 0
---- !u!114 &114635649120495380
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1034939270935300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efee7db9b586d6b44b6d3ba0e6a56d71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114769999597873672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1191251574343216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc9a0586bad600e4cbf8dd55298204b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTriggerSound: Archer Trigger
 --- !u!114 &114791874839043748
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1747,14 +1768,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e361943d259d7ca458c4aaea1b1e472f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentClass: 0
   enemyImage: {fileID: 21300000, guid: b31f0c47a0d06f24598fbcbf6ae9609d, type: 3}
   enemyName: Cruel Bandit
   enemyLevel: 1
   xpToGive: 15
   maxHealthPoints: 150
   currentHealthPoints: 0
+  damageSounds:
+  - {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
+  deathVanishSeconds: 2
   healthAsPercentage: 0
+  isAlive: 1
 --- !u!114 &114914988583462284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1772,7 +1798,17 @@ MonoBehaviour:
   currentWeaponConfig: {fileID: 11400000, guid: 654938996a7a8aa42863ec8e03073949,
     type: 2}
   target: {fileID: 0}
-  isAttacking: 0
+--- !u!114 &114930286498585984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1779710970060996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efee7db9b586d6b44b6d3ba0e6a56d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137605486118481752
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

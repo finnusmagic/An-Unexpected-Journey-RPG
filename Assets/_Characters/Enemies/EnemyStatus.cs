@@ -11,8 +11,6 @@ namespace RPG.Characters
     public class EnemyStatus : MonoBehaviour
     {
         [Header("Enemy Information")]
-        [SerializeField] Class currentClass;
-        [Space(10)]
         [SerializeField] Sprite enemyImage;
         [SerializeField] string enemyName;
         [SerializeField] int enemyLevel;
@@ -20,15 +18,25 @@ namespace RPG.Characters
         [Space(10)]
         public float maxHealthPoints = 1000;
         public float currentHealthPoints;
-
         [Header("Enemy Setup")]
-        Character character;
+        [SerializeField] AudioClip[] damageSounds = null;
+        [SerializeField] AudioClip[] deathSounds = null;
+        [SerializeField] float deathVanishSeconds = 2.0f;
+
+        const string DEATH_TRIGGER = "Death";
+
+        Animator animator;
+        AudioSource audioSource;
+        Character characterMovement;
+
+        private static FloatingText popupText;
 
         GameObject enemyHealth;
-
-        public enum Class { Archer, Swordfighter, AxeFighter }
+        LevelUpSystem levelSystem;
 
         public float healthAsPercentage;
+
+        public bool isAlive = true;
 
         public Sprite GetEnemyImage()
         {
@@ -45,19 +53,39 @@ namespace RPG.Characters
             return enemyLevel;
         }
 
-        public int GetEnemyXP()
+        int GetEnemyXP()
         {
             return xpToGive;
         }
 
         void Start()
         {
+            levelSystem = FindObjectOfType<LevelUpSystem>();
+            animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
+            characterMovement = GetComponent<Character>();
+
             currentHealthPoints = maxHealthPoints;
+
+            InitializeFloatingText();
         }
 
         void Update()
         {
             UpdateHealthBar();
+        }
+
+        public static void InitializeFloatingText()
+        {
+            if (!popupText)
+                popupText = Resources.Load<FloatingText>("Prefabs/Damage Number");
+        }
+
+        public void CreateFloatingText(string text, Transform location)
+        {
+            FloatingText instance = Instantiate(popupText);
+            instance.transform.SetParent(transform, false);
+            instance.SetText(text);
         }
 
         void UpdateHealthBar()
@@ -67,24 +95,20 @@ namespace RPG.Characters
 
         public void TakeDamage(float damage)
         {
-            CheckForDamageSounds();
+            CreateFloatingText(damage.ToString(), transform);
+            GetComponent<EnemyAI>().underAttack = true;
 
-            character = GetComponent<Character>();
-            character.CreateFloatingText(damage.ToString(), transform);
-
-            currentHealthPoints = currentHealthPoints - damage;
-
-            bool characterDies = (currentHealthPoints  <= 0);
+            bool characterDies = (currentHealthPoints - damage <= 0);
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+            var clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
+            audioSource.PlayOneShot(clip);
 
             if (characterDies)
             {
-                CheckForDeathSounds();
-                character = GetComponent<Character>();
-                StartCoroutine(character.KillCharacter());
+                StartCoroutine(KillEnemy());
             }
 
             UpdateHealthBar();
-            StartCoroutine(GettingAttacked());
         }
 
         public void Heal(float points)
@@ -92,64 +116,22 @@ namespace RPG.Characters
             currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
         }
 
-        IEnumerator GettingAttacked()
+        IEnumerator KillEnemy()
         {
-            GetComponent<EnemyAI>().gettingAttacked = true;
-            yield return new WaitForSeconds(4f);
-            GetComponent<EnemyAI>().gettingAttacked = false;
-        }
+            levelSystem.AddXP(GetEnemyXP());
+            isAlive = false;
+            characterMovement.Kill();
+            animator.SetTrigger(DEATH_TRIGGER);
+            GetComponent<NavMeshAgent>().isStopped = true;
 
-        void CheckForDamageSounds()
-        {
-            AudioManager audioManager = AudioManager.instance;
-
-            if (currentClass == Class.Archer)
+            var enemyComponent = GetComponent<Character>();
+            if (enemyComponent && enemyComponent.isActiveAndEnabled)
             {
-                audioManager.PlaySound("Archer Damage");
-            }
-            if (currentClass == Class.Swordfighter)
-            {
-                audioManager.PlaySound("Swordfighter Damage");
-            }
-            if (currentClass == Class.AxeFighter)
-            {
-                audioManager.PlaySound("Axefighter Damage");
-            }
-        }
-
-        void CheckForDeathSounds()
-        {
-            AudioManager audioManager = AudioManager.instance;
-
-            if (currentClass == Class.Archer)
-            {
-                audioManager.PlaySound("Archer Death");
-            }
-            if (currentClass == Class.Swordfighter)
-            {
-                audioManager.PlaySound("Swordfighter Death");
-            }
-            if (currentClass == Class.AxeFighter)
-            {
-                audioManager.PlaySound("Axefighter Death");
-            }
-        }
-
-        public void  CheckForTriggerSounds()
-        {
-            AudioManager audioManager = AudioManager.instance;
-
-            if (currentClass == Class.Archer)
-            {
-                audioManager.PlaySound("Archer Trigger");
-            }
-            if (currentClass == Class.Swordfighter)
-            {
-                audioManager.PlaySound("Swordfighter Trigger");
-            }
-            if (currentClass == Class.AxeFighter)
-            {
-                audioManager.PlaySound("Axefighter Trigger");
+                audioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
+                audioSource.Play();
+                yield return new WaitForSecondsRealtime(audioSource.clip.length);
+                StopAllCoroutines();
+                Destroy(gameObject);
             }
         }
     }
