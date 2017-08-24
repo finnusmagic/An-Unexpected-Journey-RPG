@@ -14,10 +14,16 @@ namespace RPG.Characters
         [SerializeField] float minTimeBetweenHits = .5f;
         [SerializeField] float maxAttackRange = 2f;
         [SerializeField] float additionalDamage = 10f;
-
+        [Space(10)]
         public bool isRanged;
+        [Space(10)]
+        public bool leftHanded;
+        public bool rightHanded;
+        [Space(10)]
         [SerializeField] GameObject projectile = null;
         [SerializeField] float projectileSpeed = 10f;
+        [Space(10)]
+        public string soundName;
 
         public float GetMinTimeBetweenHits()
         {
