@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Characters;
 
-public class ThirdPersonCamera : MonoBehaviour {
+public class ThirdPersonCamera : MonoBehaviour
+{
 
     public float mouseSensitivity = 5;
     public Transform player;
@@ -26,7 +27,7 @@ public class ThirdPersonCamera : MonoBehaviour {
 
     void LateUpdate()
     {
-        if(FindObjectOfType<PlayerMovement>().canMove)
+        if (FindObjectOfType<PlayerMovement>().canMove)
         {
             if (Input.GetKey(KeyCode.Mouse1))
             {

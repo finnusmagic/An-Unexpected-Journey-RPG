@@ -204,7 +204,6 @@ GameObject:
   - component: {fileID: 114572198601381870}
   - component: {fileID: 114914988583462284}
   - component: {fileID: 114791874839043748}
-  - component: {fileID: 114769999597873672}
   m_Layer: 0
   m_Name: Enemy_Archer_Default
   m_TagString: Enemy
@@ -1724,18 +1723,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efee7db9b586d6b44b6d3ba0e6a56d71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114769999597873672
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1191251574343216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc9a0586bad600e4cbf8dd55298204b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTriggerSound: Archer Trigger
 --- !u!114 &114791874839043748
 MonoBehaviour:
   m_ObjectHideFlags: 1

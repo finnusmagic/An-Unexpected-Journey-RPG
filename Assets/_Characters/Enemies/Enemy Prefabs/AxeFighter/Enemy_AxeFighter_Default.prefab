@@ -53,7 +53,6 @@ GameObject:
   - component: {fileID: 114434339593025296}
   - component: {fileID: 114172310401218110}
   - component: {fileID: 114957393433197162}
-  - component: {fileID: 114336782590086812}
   m_Layer: 0
   m_Name: Enemy_AxeFighter_Default
   m_TagString: Enemy
@@ -1173,7 +1172,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1064046166583576}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.3, y: 0, z: 0.75}
+  m_LocalPosition: {x: 6.93, y: 0, z: -0.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4909588905133864}
@@ -1665,18 +1664,6 @@ MonoBehaviour:
     type: 2}
   target: {fileID: 0}
   isAttacking: 0
---- !u!114 &114336782590086812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1064046166583576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc9a0586bad600e4cbf8dd55298204b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTriggerSound: Axefighter Trigger
 --- !u!114 &114392750511646796
 MonoBehaviour:
   m_ObjectHideFlags: 1

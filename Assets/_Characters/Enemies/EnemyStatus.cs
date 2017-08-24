@@ -11,9 +11,11 @@ namespace RPG.Characters
     public class EnemyStatus : MonoBehaviour
     {
         [Header("Enemy Information")]
-        [SerializeField] Class currentClass;
+        [SerializeField]
+        Class currentClass;
         [Space(10)]
-        [SerializeField] Sprite enemyImage;
+        [SerializeField]
+        Sprite enemyImage;
         [SerializeField] string enemyName;
         [SerializeField] int enemyLevel;
         [SerializeField] int xpToGive;
@@ -74,7 +76,7 @@ namespace RPG.Characters
 
             currentHealthPoints = currentHealthPoints - damage;
 
-            bool characterDies = (currentHealthPoints  <= 0);
+            bool characterDies = (currentHealthPoints <= 0);
 
             if (characterDies)
             {
@@ -84,11 +86,19 @@ namespace RPG.Characters
             }
 
             UpdateHealthBar();
+            StartCoroutine(GettingAttacked());
         }
 
         public void Heal(float points)
         {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
+        }
+
+        IEnumerator GettingAttacked()
+        {
+            GetComponent<EnemyAI>().gettingAttacked = true;
+            yield return new WaitForSeconds(4f);
+            GetComponent<EnemyAI>().gettingAttacked = false;
         }
 
         void CheckForDamageSounds()
@@ -127,7 +137,7 @@ namespace RPG.Characters
             }
         }
 
-        public void  CheckForTriggerSounds()
+        public void CheckForTriggerSounds()
         {
             AudioManager audioManager = AudioManager.instance;
 
