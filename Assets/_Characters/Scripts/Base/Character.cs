@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
 {
@@ -10,9 +12,7 @@ namespace RPG.Characters
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         [SerializeField] Avatar characterAvatar;
 
-        [Header("Audio")]
-        [SerializeField]
-        float audioSourceSpatialBlend = 0.5f;
+        const string DEATH_TRIGGER = "Death";
 
         [Header("Capsule Collider")]
         [SerializeField] Vector3 colliderCenter = new Vector3(0, 1.03f, 0);
@@ -21,27 +21,27 @@ namespace RPG.Characters
 
         [Header("Movement")]
         [SerializeField] float moveSpeedMultiplier = .7f;
-        [SerializeField] float animationSpeedMultiplier = 1.5f;
+        public float animationSpeedMultiplier = 1.5f;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] float moveThreshold = 1f;
 
         [Header("Nav Mesh Agent")]
+        [SerializeField] float navMeshAgentBaseOffset = 0f;
         [SerializeField] float navMeshAgentSteeringSpeed = 1.0f;
         [SerializeField] float navMeshAgentStoppingDistance = 1.3f;
         [SerializeField] float navMeshAgentRadius = 0.3f;
         [SerializeField] float navMeshAgentHeight = 1.8f;
 
+        [Space(10)] public bool characterAlive = true;
+
         NavMeshAgent navMeshAgent;
         Animator animator;
-        Rigidbody ridigBody;
+        Rigidbody rigidBody;
         float turnAmount;
         float forwardAmount;
-        float originalSpeed;
+        private static FloatingText popupText;
 
-        bool isAlive = true;
-        bool isEnemy;
-        public bool isPatrolling;
 
         void Awake()
         {
@@ -60,42 +60,34 @@ namespace RPG.Characters
 
         private void AddRequiredComponents()
         {
+            InitializeFloatingText();
+
             var capsuleCollider = gameObject.AddComponent<CapsuleCollider>();
             capsuleCollider.center = colliderCenter;
             capsuleCollider.radius = colliderRadius;
             capsuleCollider.height = colliderHeight;
 
-            ridigBody = gameObject.AddComponent<Rigidbody>();
-            ridigBody.constraints = RigidbodyConstraints.FreezeRotation;
+            rigidBody = gameObject.AddComponent<Rigidbody>();
+            rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
 
-            var audioSource = gameObject.AddComponent<AudioSource>();
-            audioSource.spatialBlend = audioSourceSpatialBlend;
-            audioSource.dopplerLevel = 0;
-
-             animator = gameObject.AddComponent<Animator>();
-             animator.runtimeAnimatorController = animatorOverrideController;
-             animator.avatar = characterAvatar;
+            animator = gameObject.AddComponent<Animator>();
+            animator.runtimeAnimatorController = animatorOverrideController;
+            animator.avatar = characterAvatar;
 
             navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
             navMeshAgent.speed = navMeshAgentSteeringSpeed;
-            originalSpeed = navMeshAgent.speed;
             navMeshAgent.stoppingDistance = navMeshAgentStoppingDistance;
             navMeshAgent.autoBraking = false;
             navMeshAgent.updateRotation = false;
             navMeshAgent.updatePosition = true;
             navMeshAgent.radius = navMeshAgentRadius;
             navMeshAgent.height = navMeshAgentHeight;
-
-            if (GetComponent<EnemyAI>() != null)
-            {
-                isEnemy = true;
-                
-            }
+            navMeshAgent.baseOffset = navMeshAgentBaseOffset;
         }
 
         void Update()
         {
-            if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance && isAlive)
+            if (navMeshAgent != null && navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
             {
                 Move(navMeshAgent.desiredVelocity);
             }
@@ -104,21 +96,37 @@ namespace RPG.Characters
                 Move(Vector3.zero);
             }
 
-            if (isPatrolling)
+            if (!characterAlive)
             {
-                float patrollingSpeed = GetComponent<EnemyAI>().GetEnemyPatrolSpeed();
-                navMeshAgent.speed = patrollingSpeed;
-            }
-            else
-            {
-                navMeshAgent.speed = originalSpeed;
+                navMeshAgent.velocity = Vector3.zero;
+                navMeshAgent.updateRotation = false;
+                Move(Vector3.zero);
             }
         }
 
-        public void Kill()
+        public IEnumerator KillCharacter()
         {
-            isAlive = false;
-            navMeshAgent.isStopped = true;
+            characterAlive = false;
+
+            if (GetComponent<EnemyStatus>() != null)
+            {
+                FindObjectOfType<LevelUpSystem>().AddXP(GetComponent<EnemyStatus>().GetEnemyXP());
+            }
+
+            var agent = GetComponent<NavMeshAgent>();
+            agent.velocity = Vector3.zero;
+
+            GetComponent<Animator>().SetTrigger(DEATH_TRIGGER);
+
+            yield return new WaitForSecondsRealtime(2f);
+
+            if (GetComponent<PlayerMovement>() != null)
+            {
+                SceneManager.LoadScene("02_Start_Game_Scene");
+            }
+
+            StopAllCoroutines();
+            Destroy(gameObject);
         }
 
         public void SetDestination(Vector3 worldPos)
@@ -174,9 +182,22 @@ namespace RPG.Characters
                 Vector3 velocity = (animator.deltaPosition * moveSpeedMultiplier) / Time.deltaTime;
 
                 // we preserve the existing y part of the current velocity.
-                velocity.y = ridigBody.velocity.y;
-                ridigBody.velocity = velocity;
+                velocity.y = rigidBody.velocity.y;
+                rigidBody.velocity = velocity;
             }
+        }
+
+        public static void InitializeFloatingText()
+        {
+            if (!popupText)
+                popupText = Resources.Load<FloatingText>("Prefabs/Damage Number");
+        }
+
+        public void CreateFloatingText(string text, Transform location)
+        {
+            FloatingText instance = Instantiate(popupText);
+            instance.transform.SetParent(transform, false);
+            instance.SetText(text);
         }
     }
 }
