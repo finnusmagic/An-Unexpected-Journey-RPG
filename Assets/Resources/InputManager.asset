@@ -18,6 +18,6 @@ MonoBehaviour:
   CharacterSystemKeyCode: 105
   CraftSystemKeyCode: 99
   Ability_01_KeyCode: 113
-  Ability_02_KeyCode: 119
-  Ability_03_KeyCode: 101
-  Ability_04_KeyCode: 114
+  Ability_02_KeyCode: 101
+  Ability_03_KeyCode: 114
+  Ability_04_KeyCode: 116
