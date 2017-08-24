@@ -145,14 +145,14 @@ namespace RPG.Database
 
                 currentWeapon = GetComponent<WeaponSystem>().currentWeaponConfig = Resources.Load<WeaponConfig>("Weapons/" + item.itemName);
 
-                if (currentWeapon.rightHanded)
+                if (!currentWeapon.isRanged)
                 {
                     GameObject weaponObject = Instantiate(item.itemModel, HandR.transform, true);
                     weaponObject.transform.localPosition = currentWeapon.gripTransform.localPosition;
                     weaponObject.transform.localRotation = currentWeapon.gripTransform.localRotation;
 
                 }
-                if (currentWeapon.leftHanded)
+                if (currentWeapon.isRanged)
                 {
                     GameObject weaponObject = Instantiate(item.itemModel, HandL.transform, true);
                     weaponObject.transform.localPosition = currentWeapon.gripTransform.localPosition;

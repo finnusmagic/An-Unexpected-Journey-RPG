@@ -10,10 +10,14 @@ namespace RPG.Characters
         public GameObject targetPanel;
         public EnemyAI target = null;
 
+        private PlayerMovement playerMovement;
+        private SpecialAbilities abilities;
         private WeaponSystem weaponSystem;
 
         private void Start()
         {
+            playerMovement = GetComponent<PlayerMovement>();
+            abilities = GetComponent<SpecialAbilities>();
             weaponSystem = GetComponent<WeaponSystem>();
         }
 
@@ -24,12 +28,7 @@ namespace RPG.Characters
                 GetTarget();
                 weaponSystem.target = target.gameObject;
             }
-            else
-            {
-                targetPanel.SetActive(false);
-            }
-
-            if (target != null && target.GetComponent<Character>().characterAlive == false)
+            if (target != null && target.GetComponent<EnemyStatus>().isAlive == false)
             {
                 targetPanel.SetActive(false);
                 weaponSystem.target = null;
