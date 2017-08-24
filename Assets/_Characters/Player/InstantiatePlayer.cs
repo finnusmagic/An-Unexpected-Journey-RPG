@@ -23,8 +23,8 @@ public class InstantiatePlayer : MonoBehaviour {
         Inventory.GetComponent<Inventory>();
 
         AudioManager audioManager = AudioManager.instance;
-        audioManager.StopMusic();
         Scene scene = SceneManager.GetActiveScene();
+        audioManager.StopMusic("01_CharacterCreation_Scene");
         audioManager.PlayMusic(scene.name);
     }
 

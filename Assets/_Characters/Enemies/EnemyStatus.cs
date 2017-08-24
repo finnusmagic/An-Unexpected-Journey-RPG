@@ -11,6 +11,8 @@ namespace RPG.Characters
     public class EnemyStatus : MonoBehaviour
     {
         [Header("Enemy Information")]
+        [SerializeField] Class currentClass;
+        [Space(10)]
         [SerializeField] Sprite enemyImage;
         [SerializeField] string enemyName;
         [SerializeField] int enemyLevel;
@@ -23,6 +25,8 @@ namespace RPG.Characters
         Character character;
 
         GameObject enemyHealth;
+
+        public enum Class { Archer, Swordfighter, AxeFighter }
 
         public float healthAsPercentage;
 
@@ -63,8 +67,7 @@ namespace RPG.Characters
 
         public void TakeDamage(float damage)
         {
-            AudioManager audioManager = FindObjectOfType<AudioManager>();
-            audioManager.PlaySound("Enemy Getting Damage");
+            CheckForDamageSounds();
 
             character = GetComponent<Character>();
             character.CreateFloatingText(damage.ToString(), transform);
@@ -75,6 +78,7 @@ namespace RPG.Characters
 
             if (characterDies)
             {
+                CheckForDeathSounds();
                 character = GetComponent<Character>();
                 StartCoroutine(character.KillCharacter());
             }
@@ -93,6 +97,60 @@ namespace RPG.Characters
             GetComponent<EnemyAI>().gettingAttacked = true;
             yield return new WaitForSeconds(4f);
             GetComponent<EnemyAI>().gettingAttacked = false;
+        }
+
+        void CheckForDamageSounds()
+        {
+            AudioManager audioManager = AudioManager.instance;
+
+            if (currentClass == Class.Archer)
+            {
+                audioManager.PlaySound("Archer Damage");
+            }
+            if (currentClass == Class.Swordfighter)
+            {
+                audioManager.PlaySound("Swordfighter Damage");
+            }
+            if (currentClass == Class.AxeFighter)
+            {
+                audioManager.PlaySound("Axefighter Damage");
+            }
+        }
+
+        void CheckForDeathSounds()
+        {
+            AudioManager audioManager = AudioManager.instance;
+
+            if (currentClass == Class.Archer)
+            {
+                audioManager.PlaySound("Archer Death");
+            }
+            if (currentClass == Class.Swordfighter)
+            {
+                audioManager.PlaySound("Swordfighter Death");
+            }
+            if (currentClass == Class.AxeFighter)
+            {
+                audioManager.PlaySound("Axefighter Death");
+            }
+        }
+
+        public void  CheckForTriggerSounds()
+        {
+            AudioManager audioManager = AudioManager.instance;
+
+            if (currentClass == Class.Archer)
+            {
+                audioManager.PlaySound("Archer Trigger");
+            }
+            if (currentClass == Class.Swordfighter)
+            {
+                audioManager.PlaySound("Swordfighter Trigger");
+            }
+            if (currentClass == Class.AxeFighter)
+            {
+                audioManager.PlaySound("Axefighter Trigger");
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Characters
 {
@@ -35,12 +36,10 @@ namespace RPG.Characters
         [SerializeField] float waypointTolerance = 2f;
         int nextWaypointIndex;
 
-
         public enum State { idle, patrolling, attacking, chasing, gettingAttacked }
         State state = State.idle;
 
         public bool gettingAttacked = false;
-
 
         void Start()
         {
@@ -68,6 +67,11 @@ namespace RPG.Characters
             }
         }
 
+        public float GetChaseRadius()
+        {
+            return chaseRadius;
+        }
+
         private void CheckForPatrolling()
         {
             if (patrolPath != null)
@@ -85,6 +89,9 @@ namespace RPG.Characters
         {
             if (gettingAttacked && state != State.gettingAttacked) // Getting Attacked
             {
+                EnemyStatus enemyStatus = GetComponent<EnemyStatus>();
+                enemyStatus.CheckForTriggerSounds();
+
                 GetComponent<NavMeshAgent>().speed = chaseSpeed;
                 StopAllCoroutines();
                 StartCoroutine(ReactToAttack());
@@ -95,6 +102,9 @@ namespace RPG.Characters
         {
             if (distanceToPlayer <= chaseRadius && state != State.chasing) //Chasing
             {
+                EnemyStatus enemyStatus = GetComponent<EnemyStatus>();
+                enemyStatus.CheckForTriggerSounds();
+
                 GetComponent<NavMeshAgent>().speed = chaseSpeed;
                 StopAllCoroutines();
                 StartCoroutine(ChasePlayer());

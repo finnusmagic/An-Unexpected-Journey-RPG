@@ -64,7 +64,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     randomVolume: 0.25
     randomPitch: 0.5
@@ -72,7 +72,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 61d1be89708856a498924539f920db7e, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     randomVolume: 0.25
     randomPitch: 0.5
@@ -80,7 +80,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 16c688e4d84faa3488ebc1c4697a01f3, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     randomVolume: 0.25
     randomPitch: 0.5
@@ -88,7 +88,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 5318c0c653ad54db7be081c1a391547e, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.5
+    volume: 0.2
     pitch: 1
     randomVolume: 0.25
     randomPitch: 0.5
@@ -96,37 +96,109 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.5
+    volume: 0.3
     pitch: 1
-    randomVolume: 0.25
-    randomPitch: 0.5
+    randomVolume: 0
+    randomPitch: 0
   - name: Player Death
     clip: {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.5
+    volume: 0.4
     pitch: 1
-    randomVolume: 0.25
-    randomPitch: 0.5
-  - name: Enemy Getting Damage
-    clip: {fileID: 8300000, guid: 35a9e30fa232a844098ae0254b98dc9d, type: 3}
+    randomVolume: 0
+    randomPitch: 0
+  - name: Archer Trigger
+    clip: {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
     loop: 0
-    deactivate: 0
-    volume: 0.5
-    pitch: 1
-    randomVolume: 0.25
-    randomPitch: 0.5
-  musicTracks:
-  - name: 01_CharacterCreation_Scene
-    clip: {fileID: 8300000, guid: 924578d7a6128ff4bab754faf9b66bf8, type: 3}
-    loop: 1
     deactivate: 0
     volume: 0.3
     pitch: 1
     randomVolume: 0
     randomPitch: 0
+  - name: Archer Damage
+    clip: {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Archer Death
+    clip: {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Swordfighter Trigger
+    clip: {fileID: 8300000, guid: 35a9e30fa232a844098ae0254b98dc9d, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Swordfighter Damage
+    clip: {fileID: 8300000, guid: 35a9e30fa232a844098ae0254b98dc9d, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Swordfighter Death
+    clip: {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Axefighter Trigger
+    clip: {fileID: 8300000, guid: 5d50e61fcedf44e42b796d2e017af755, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Axefighter Damage
+    clip: {fileID: 8300000, guid: 5d50e61fcedf44e42b796d2e017af755, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Axefighter Death
+    clip: {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  musicTracks:
+  - name: 01_CharacterCreation_Scene
+    clip: {fileID: 8300000, guid: 924578d7a6128ff4bab754faf9b66bf8, type: 3}
+    loop: 1
+    deactivate: 0
+    volume: 0.2
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
   - name: 02_Start_Game_Scene
     clip: {fileID: 8300000, guid: 1f5ff12f4e119694f936189c7647d398, type: 3}
+    loop: 1
+    deactivate: 0
+    volume: 0.2
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Dialogue
+    clip: {fileID: 8300000, guid: 7c7d205f5cc1d0b4881b5bf08c927b71, type: 3}
     loop: 1
     deactivate: 0
     volume: 0.3
