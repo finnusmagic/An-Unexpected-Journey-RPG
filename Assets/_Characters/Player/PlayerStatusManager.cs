@@ -10,7 +10,6 @@ namespace RPG.Characters
 {
     public class PlayerStatusManager : MonoBehaviour
     {
-
         [Header("Panel Setup")]
         public GameObject playerStatusPanel;
         public GameObject playerStatsPanel;
@@ -80,7 +79,6 @@ namespace RPG.Characters
 
         private void Start()
         {
-
             playerLevel = FindObjectOfType<LevelUpSystem>();
             playerInventory = FindObjectOfType<PlayerInventoryManager>();
 
@@ -98,7 +96,6 @@ namespace RPG.Characters
 
         private void Update()
         {
-
             if (currentHealth < maxHealth)
             {
                 AddHealthPoints();

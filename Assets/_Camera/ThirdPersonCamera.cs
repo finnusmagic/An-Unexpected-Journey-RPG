@@ -6,7 +6,7 @@ using RPG.Characters;
 public class ThirdPersonCamera : MonoBehaviour {
 
     public float mouseSensitivity = 5;
-    public Transform player;
+    public Transform target;
     public float distanceFromTarget = 10f;
     public float rotationToPlayer = 40f;
 
@@ -41,7 +41,7 @@ public class ThirdPersonCamera : MonoBehaviour {
             Vector3 targetRotation = new Vector3(pitch, yaw);
             transform.eulerAngles = targetRotation;
 
-            transform.position = player.position - transform.forward * distanceFromTarget;
+            transform.position = target.position - transform.forward * distanceFromTarget;
         }
     }
 }

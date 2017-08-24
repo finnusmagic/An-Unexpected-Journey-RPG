@@ -53,7 +53,6 @@ GameObject:
   - component: {fileID: 114434339593025296}
   - component: {fileID: 114172310401218110}
   - component: {fileID: 114957393433197162}
-  - component: {fileID: 114336782590086812}
   m_Layer: 0
   m_Name: Enemy_AxeFighter_Default
   m_TagString: Enemy
@@ -697,6 +696,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1860900900620218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4057685104208320}
+  - component: {fileID: 114436766314669408}
+  m_Layer: 0
+  m_Name: Audio Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1866918922365486
 GameObject:
   m_ObjectHideFlags: 1
@@ -874,6 +889,19 @@ Transform:
   - {fileID: 4616848578982316}
   m_Father: {fileID: 4237172913607328}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4057685104208320
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860900900620218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4425525696645596}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4058243615392666
 Transform:
@@ -1055,7 +1083,7 @@ Transform:
   m_Children:
   - {fileID: 4604380015916654}
   m_Father: {fileID: 4425525696645596}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4276138601568904
 Transform:
@@ -1177,6 +1205,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4909588905133864}
+  - {fileID: 4057685104208320}
   - {fileID: 4251905631957772}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1665,18 +1694,6 @@ MonoBehaviour:
     type: 2}
   target: {fileID: 0}
   isAttacking: 0
---- !u!114 &114336782590086812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1064046166583576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc9a0586bad600e4cbf8dd55298204b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTriggerSound: Axefighter Trigger
 --- !u!114 &114392750511646796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1692,6 +1709,11 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 22100000, guid: 96c93efca801fdd4ebda45714884a13e,
     type: 2}
   characterAvatar: {fileID: 9000000, guid: d3d5692891e10cf43a756c443850b3f1, type: 3}
+  audioSourceSpatialBlend: 0.5
+  deathSounds:
+  - {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
+  - {fileID: 8300000, guid: 641077d1f0126fb478e0b4421e76d718, type: 3}
+  - {fileID: 8300000, guid: a3d9e99289c2a02489727813d3438c1f, type: 3}
   colliderCenter: {x: 0, y: 1, z: 0}
   colliderRadius: 0.3
   colliderHeight: 2
@@ -1725,6 +1747,23 @@ MonoBehaviour:
   patrolSpeed: 0.5
   waypointTolerance: 2
   gettingAttacked: 0
+--- !u!114 &114436766314669408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860900900620218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9a0586bad600e4cbf8dd55298204b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clip: {fileID: 8300000, guid: 3aac7baf965ba8142bfd2ccbe2ebd297, type: 3}
+  volume: 0.3
+  layerFilter: 11
+  triggerRadius: 6
+  isOneTimeOnly: 1
+  hasPlayed: 0
 --- !u!114 &114957393433197162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1736,13 +1775,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e361943d259d7ca458c4aaea1b1e472f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentClass: 2
   enemyImage: {fileID: 21300000, guid: b31f0c47a0d06f24598fbcbf6ae9609d, type: 3}
   enemyName: Cruel Bandit
   enemyLevel: 1
   xpToGive: 15
   maxHealthPoints: 150
   currentHealthPoints: 0
+  damageSounds:
+  - {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
   healthAsPercentage: 0
 --- !u!137 &137313248168357786
 SkinnedMeshRenderer:
