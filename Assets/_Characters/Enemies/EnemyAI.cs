@@ -120,7 +120,7 @@ namespace RPG.Characters
             last_position = transform.position;
         }
 
-        void PatrolPath()
+        void PatrollPath()
         {
             float distance = Vector3.Distance(PathToFollow.path_objs[CurrentWaypointID].position, transform.position);
 
@@ -164,7 +164,7 @@ namespace RPG.Characters
 
             while (distanceToPlayer >= chaseRadius)
             {
-                PatrolPath();
+                PatrollPath();
 
                 if (currentWalkTime <= walkTime)
                 {
