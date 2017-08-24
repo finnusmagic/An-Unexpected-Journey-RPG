@@ -6538,6 +6538,11 @@ Prefab:
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 1983766140}
+    - target: {fileID: 114798610422819398, guid: 90c7be1990c7f3441b2a1f3a9171f524,
+        type: 2}
+      propertyPath: projectileSocket
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114235914639838598, guid: 90c7be1990c7f3441b2a1f3a9171f524, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 90c7be1990c7f3441b2a1f3a9171f524, type: 2}

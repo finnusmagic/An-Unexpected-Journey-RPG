@@ -84,19 +84,11 @@ namespace RPG.Characters
             }
 
             UpdateHealthBar();
-            StartCoroutine(GettingAttacked());
         }
 
         public void Heal(float points)
         {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints + points, 0f, maxHealthPoints);
-        }
-
-        IEnumerator GettingAttacked()
-        {
-            GetComponent<EnemyAI>().gettingAttacked = true;
-            yield return new WaitForSeconds(4f);
-            GetComponent<EnemyAI>().gettingAttacked = false;
         }
 
         void CheckForDamageSounds()
