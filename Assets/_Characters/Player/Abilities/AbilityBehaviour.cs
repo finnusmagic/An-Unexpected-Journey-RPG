@@ -41,9 +41,9 @@ namespace RPG.Characters
 
         protected void PlayAbilitySound()
         {
-            var abilitySound = config.GetRandomAbilitySound();
-            var audioSource = GetComponent<AudioSource>();
-            audioSource.PlayOneShot(abilitySound);
+            //var abilitySound = config.GetRandomAbilitySound();
+            //var audioSource = GetComponent<AudioSource>();
+            //audioSource.PlayOneShot(abilitySound);
         }
     }
 }

@@ -1650,11 +1650,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114177990265714462, guid: 0e8468bc471d1dc44b8568684b02a4fa,
-        type: 2}
-      propertyPath: soundList.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1686,11 +1681,6 @@ Prefab:
     - target: {fileID: 4677380018962480, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114177990265714462, guid: 0e8468bc471d1dc44b8568684b02a4fa,
-        type: 2}
-      propertyPath: musicTracks.Array.data[2].volume
-      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
@@ -6352,7 +6342,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4832714811141322, guid: a36116e3c501eda41bca2346c67ed1af, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.24
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 4832714811141322, guid: a36116e3c501eda41bca2346c67ed1af, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6360,7 +6350,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4832714811141322, guid: a36116e3c501eda41bca2346c67ed1af, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -28.75
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 4832714811141322, guid: a36116e3c501eda41bca2346c67ed1af, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8299,6 +8289,11 @@ Prefab:
         type: 2}
       propertyPath: mouseSensitivity
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114185620874455954, guid: b4d85e4a13048e94eb722d1b711993f0,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
@@ -13883,6 +13878,11 @@ Prefab:
     - target: {fileID: 4058299215451178, guid: 800132168a421df4683658d89fc125c1, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114572198601381870, guid: 800132168a421df4683658d89fc125c1,
+        type: 2}
+      propertyPath: chaseRadius
+      value: 6.69
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 800132168a421df4683658d89fc125c1, type: 2}

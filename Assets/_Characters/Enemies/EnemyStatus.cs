@@ -70,6 +70,7 @@ namespace RPG.Characters
         public void TakeDamage(float damage)
         {
             CheckForDamageSounds();
+            // CheckForTriggerSounds();
 
             character = GetComponent<Character>();
             character.CreateFloatingText(damage.ToString(), transform);

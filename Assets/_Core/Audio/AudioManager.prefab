@@ -85,17 +85,17 @@ MonoBehaviour:
     randomVolume: 0.25
     randomPitch: 0.5
   - name: Bow Sound
-    clip: {fileID: 8300000, guid: 5318c0c653ad54db7be081c1a391547e, type: 3}
+    clip: {fileID: 8300000, guid: 939d4e7a023c0ac428eb54431addc849, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.2
+    volume: 0.5
     pitch: 1
-    randomVolume: 0.25
-    randomPitch: 0.5
+    randomVolume: 0.5
+    randomPitch: 0.1
   - name: Player Getting Damage
     clip: {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
     loop: 0
-    deactivate: 0
+    deactivate: 1
     volume: 0.3
     pitch: 1
     randomVolume: 0
@@ -109,26 +109,26 @@ MonoBehaviour:
     randomVolume: 0
     randomPitch: 0
   - name: Archer Trigger
-    clip: {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
+    clip: {fileID: 8300000, guid: e2bd686cac5dea84ca01f667cb43a60d, type: 3}
     loop: 0
-    deactivate: 0
-    volume: 0.3
+    deactivate: 1
+    volume: 1
     pitch: 1
     randomVolume: 0
     randomPitch: 0
   - name: Archer Damage
-    clip: {fileID: 8300000, guid: b3f3c129a774ed940890e0728ff445d1, type: 3}
+    clip: {fileID: 8300000, guid: e2bd686cac5dea84ca01f667cb43a60d, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.3
+    volume: 0.488
     pitch: 1
-    randomVolume: 0
-    randomPitch: 0
+    randomVolume: 0.25
+    randomPitch: 0.1
   - name: Archer Death
-    clip: {fileID: 8300000, guid: c52e83b653475d64b92c413f5c48fecd, type: 3}
+    clip: {fileID: 8300000, guid: 9dd2fa970fa3cbb46957a15bd7cb1e47, type: 3}
     loop: 0
     deactivate: 0
-    volume: 0.3
+    volume: 1
     pitch: 1
     randomVolume: 0
     randomPitch: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 1f5ff12f4e119694f936189c7647d398, type: 3}
     loop: 1
     deactivate: 0
-    volume: 0.2
+    volume: 0.1
     pitch: 1
     randomVolume: 0
     randomPitch: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 7c7d205f5cc1d0b4881b5bf08c927b71, type: 3}
     loop: 1
     deactivate: 0
-    volume: 0.3
+    volume: 0.2
     pitch: 1
     randomVolume: 0
     randomPitch: 0

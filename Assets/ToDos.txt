@@ -1,0 +1,4 @@
+inventar beenden mit escape
+mit rechtsklick gedrückthalten auch kamerawinkel
+ggnstände ausrüsten mit doppelklick
+kiting mechanik

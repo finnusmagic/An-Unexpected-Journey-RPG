@@ -91,8 +91,6 @@ namespace RPG.Characters
         {
             if (gettingAttacked && state != State.gettingAttacked) // Getting Attacked
             {
-                EnemyStatus enemyStatus = GetComponent<EnemyStatus>();
-                enemyStatus.CheckForTriggerSounds();
                 GetComponent<NavMeshAgent>().speed = chaseSpeed;
                 StopAllCoroutines();
                 StartCoroutine(ReactToAttack());
@@ -103,9 +101,6 @@ namespace RPG.Characters
         {
             if (distanceToPlayer <= chaseRadius && state != State.chasing) //Chasing
             {
-                EnemyStatus enemyStatus = GetComponent<EnemyStatus>();
-                enemyStatus.CheckForTriggerSounds();
-
                 GetComponent<NavMeshAgent>().speed = chaseSpeed;
                 StopAllCoroutines();
                 StartCoroutine(ChasePlayer());

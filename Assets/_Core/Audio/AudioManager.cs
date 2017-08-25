@@ -105,8 +105,9 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     [SerializeField] Sound[] sounds;
-    Dictionary<string, Sound> soundDic;
     [SerializeField] Music[] musicTracks;
+    Dictionary<string, Sound> soundDic;
+    Dictionary<string, Music> musicDic;
 
     private void Awake()
     {
@@ -135,50 +136,28 @@ public class AudioManager : MonoBehaviour
 
             soundDic.Add(sounds[i].name, sounds[i]);
         }
+
+        musicDic = new Dictionary<string, Music>();
         for (int i = 0; i < musicTracks.Length; i++)
         {
             GameObject _go = new GameObject("Music:" + i + "_" + musicTracks[i].name);
             _go.transform.SetParent(this.transform);
             musicTracks[i].SetSource(_go.AddComponent<AudioSource>());
+
+            musicDic.Add(musicTracks[i].name, musicTracks[i]);
         }
     }
 
     public void PlaySound(string _name)
     {
-        //Sound sound = soundList.Find(x => x.name == _name);
-        //if(sound != null)
-        //    sound.Play();
-        //else
-        //    Debug.LogWarning("Audio Manager: No Sound found.");
-
         if(soundDic.ContainsKey(_name))
             soundDic[_name].Play();
         else
             Debug.LogWarning("Audio Manager: No Sound found.");
-        //for (int i = 0; i < sounds.Length; i++)
-        //{
-        //    if (sounds[i].name == _name)
-        //    {
-        //        sounds[i].Play();
-        //        return;
-        //    }
-        //}
-
-
     }
 
     public void StopSound(string _name)
     {
-        //for (int i = 0; i < sounds.Length; i++)
-        //{
-        //    if (sounds[i].name == _name)
-        //    {
-        //        sounds[i].Stop();
-        //        return;
-        //    }
-        //}
-
-        //Debug.LogWarning("Audio Manager: No Sound found.");
         if (soundDic.ContainsKey(_name))
             soundDic[_name].Stop();
         else
@@ -187,29 +166,17 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(string _name)
     {
-        for (int i = 0; i < musicTracks.Length; i++)
-        {
-            if (musicTracks[i].name == _name)
-            {
-                musicTracks[i].Play();
-                return;
-            }
-        }
-
-        Debug.LogWarning("Audio Manager: No Music found.");
+        if (musicDic.ContainsKey(_name))
+            musicDic[_name].Play();
+        else
+            Debug.LogWarning("Audio Manager: No Music found.");
     }
 
     public void StopMusic(string _name)
     {
-        for (int i = 0; i < musicTracks.Length; i++)
-        {
-            if (musicTracks[i].name == _name)
-            {
-                musicTracks[i].Stop();
-                return;
-            }
-        }
-
-        Debug.LogWarning("Audio Manager: No Music found.");
+        if (musicDic.ContainsKey(_name))
+            musicDic[_name].Stop();
+        else
+            Debug.LogWarning("Audio Manager: No Music found.");
     }
 }
