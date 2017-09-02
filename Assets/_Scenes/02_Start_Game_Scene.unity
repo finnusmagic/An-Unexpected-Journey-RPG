@@ -109,6 +109,48 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 23800000, guid: 6f57abef87e3a7f46a3e358b258a6402, type: 2}
+--- !u!1001 &11509311
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4754217958725114, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.07182312
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754217958725114, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754217958725114, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 4.9477463
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754217958725114, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754217958725114, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754217958725114, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754217958725114, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754217958725114, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 71dd502105dd4e54d92f599bc8c82dff, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &25766049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1694,6 +1736,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114177990265714462, guid: 0e8468bc471d1dc44b8568684b02a4fa,
+        type: 2}
+      propertyPath: sounds.Array.data[15].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9457c331d7da634448ffc0210f6adfdd, type: 3}
+    - target: {fileID: 114177990265714462, guid: 0e8468bc471d1dc44b8568684b02a4fa,
+        type: 2}
+      propertyPath: sounds.Array.data[17].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8e4c20c22245e8541b51e126ce0229e0, type: 3}
+    - target: {fileID: 114177990265714462, guid: 0e8468bc471d1dc44b8568684b02a4fa,
+        type: 2}
+      propertyPath: sounds.Array.data[16].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c9d4f00b5404bc4bb61e56ba2649280, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0e8468bc471d1dc44b8568684b02a4fa, type: 2}
   m_IsPrefabParent: 0
@@ -1846,7 +1903,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4615813011687414, guid: 5a885964b534f61469a0689c24b79ab1, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5a885964b534f61469a0689c24b79ab1, type: 2}
@@ -2701,7 +2758,7 @@ Transform:
   m_Children:
   - {fileID: 612199676}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &382441077
 GameObject:
@@ -3474,6 +3531,11 @@ Prefab:
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 435918032}
+    - target: {fileID: 114957393433197162, guid: bd0eab39356b1264fb75192caed094fe,
+        type: 2}
+      propertyPath: enemyName
+      value: Bandit Axe Fighter
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd0eab39356b1264fb75192caed094fe, type: 2}
   m_IsPrefabParent: 0
@@ -5010,7 +5072,7 @@ Transform:
   - {fileID: 1952061543}
   - {fileID: 571772163}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &773716378
 GameObject:
@@ -6568,6 +6630,11 @@ Prefab:
       propertyPath: patrolPath
       value: 
       objectReference: {fileID: 1983766140}
+    - target: {fileID: 114716194465268890, guid: 90c7be1990c7f3441b2a1f3a9171f524,
+        type: 2}
+      propertyPath: enemyName
+      value: Bandit Swordfighter
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 90c7be1990c7f3441b2a1f3a9171f524, type: 2}
   m_IsPrefabParent: 0
@@ -7379,7 +7446,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4832714811141322, guid: a36116e3c501eda41bca2346c67ed1af, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114353672813778200, guid: a36116e3c501eda41bca2346c67ed1af,
         type: 2}
@@ -7658,7 +7725,7 @@ RectTransform:
   - {fileID: 839548343}
   - {fileID: 1630446964}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8318,7 +8385,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4582433635942160, guid: b4d85e4a13048e94eb722d1b711993f0, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114342250068780204, guid: b4d85e4a13048e94eb722d1b711993f0,
         type: 2}
@@ -9005,7 +9072,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4182222356635784, guid: 6ab4115b7792b9944bb78cb3baa296c9, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6ab4115b7792b9944bb78cb3baa296c9, type: 2}
@@ -11693,6 +11760,22 @@ MonoBehaviour:
   m_Script: {fileID: -146154839, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1772864993 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1100539723898832, guid: 90c7be1990c7f3441b2a1f3a9171f524,
+    type: 2}
+  m_PrefabInternal: {fileID: 986661513}
+--- !u!114 &1772864998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1772864993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f71022c73a9cd9b43914f91c8771f5a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1791021941
 GameObject:
   m_ObjectHideFlags: 0
@@ -11815,7 +11898,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4776948037054436, guid: 11c47ed9fb124b944adc689a22c19ac0, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1003762932470872, guid: 11c47ed9fb124b944adc689a22c19ac0, type: 2}
       propertyPath: m_IsActive
@@ -13029,6 +13112,35 @@ Transform:
   m_PrefabParentObject: {fileID: 4425525696645596, guid: bd0eab39356b1264fb75192caed094fe,
     type: 2}
   m_PrefabInternal: {fileID: 500703880}
+--- !u!1 &1956636068 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1358036631176394, guid: 71dd502105dd4e54d92f599bc8c82dff,
+    type: 2}
+  m_PrefabInternal: {fileID: 11509311}
+--- !u!114 &1956636069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1956636068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be18f548d7342b34499ed441dba60bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item:
+    itemName: 
+    itemID: 0
+    itemDesc: 
+    itemIcon: {fileID: 0}
+    itemModel: {fileID: 0}
+    itemValue: 1
+    itemType: 0
+    itemWeight: 0
+    maxStack: 1
+    indexItemInList: 999
+    rarity: 0
+    itemAttributes: []
 --- !u!1 &1967907690
 GameObject:
   m_ObjectHideFlags: 0
@@ -13928,6 +14040,11 @@ Prefab:
         type: 2}
       propertyPath: chaseRadius
       value: 6.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 114791874839043748, guid: 800132168a421df4683658d89fc125c1,
+        type: 2}
+      propertyPath: enemyName
+      value: Bandit Archer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 800132168a421df4683658d89fc125c1, type: 2}

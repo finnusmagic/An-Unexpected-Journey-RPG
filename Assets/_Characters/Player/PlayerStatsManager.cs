@@ -55,6 +55,8 @@ namespace RPG.Characters
         [SerializeField] GameObject playerStatusPanel;
         [SerializeField] GameObject playerStatsPanel;
 
+        public float healthAsPercentage;
+
         private void Start()
         {
             InstantiatePlayerModel();
@@ -112,6 +114,8 @@ namespace RPG.Characters
 
         public void UpdatePlayerStats()
         {
+            healthAsPercentage = currentHealth / maxHealth;
+
             MaxDamage = GameInfo.Damage + itemStats.GetItemDamage() + levelStats.GetLevelDamage();
             MaxArmor = GameInfo.Armor + itemStats.GetItemArmor() + levelStats.GetLevelArmor();
             maxHealth = GameInfo.Health + itemStats.GetItemHealth() + levelStats.GetLevelHealth();
@@ -157,7 +161,7 @@ namespace RPG.Characters
             CritDamage = playerStatsPanel.transform.GetChild(4).GetChild(1).GetComponent<Text>();
         }
 
-        public void DamagePlayer(float damage)
+        public void TakeDamage(float damage)
         {
             AudioManager audioManager = FindObjectOfType<AudioManager>();
             audioManager.PlaySound("Player Getting Damage");

@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3d64d8cfb1f594a9ce38035055a87a, type: 3}
   m_Name: Power Attack Level 1
   m_EditorClassIdentifier: 
+  abilityName: Power Attack
+  abilityAnimation: {fileID: 7400000, guid: 9e5d42c64f4181e4e92729d62fa2d0fd, type: 3}
   manaCost: 15
   coolDown: 2
-  currentCooldown: 1.6379722
+  currentCooldown: 2.010725
   abilityIcon: {fileID: 0}
   particlePrefab: {fileID: 1807866783877080, guid: c02686b7c12742040b1609d2866d06f4,
     type: 2}

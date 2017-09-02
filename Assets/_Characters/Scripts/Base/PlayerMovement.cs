@@ -97,7 +97,7 @@ namespace RPG.Characters
 
         void OnMouseOverPotentiallyWalkable(Vector3 destination)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetKeyDown(inputManagerDatabase.SelectTargetKeyCode))
             {
                 LockTarget lockTarget = GetComponent<LockTarget>();
                 lockTarget.target = null;
@@ -107,12 +107,17 @@ namespace RPG.Characters
         {
             enemy = enemyToSet;
 
-            if (Input.GetMouseButton(0))
+            if (Input.GetKeyDown(inputManagerDatabase.SelectTargetKeyCode))
             {
-                LockTarget lockTarget = GetComponent<LockTarget>();
-                lockTarget.targetPanel.SetActive(true);
-                lockTarget.target = enemy;
+                GetLockTarget();
             }
+        }
+
+        public void GetLockTarget()
+        {
+            LockTarget lockTarget = GetComponent<LockTarget>();
+            lockTarget.targetPanel.SetActive(true);
+            lockTarget.target = enemy;
         }
     }
 }

@@ -125,6 +125,7 @@ namespace RPG.Database
 
             EditorUtility.SetDirty(inputManagerDatabase);
 
+            inputManagerDatabase.SelectTargetKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Select Target", (KeyCode)inputManagerDatabase.SelectTargetKeyCode);
             inputManagerDatabase.AttackKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Attack", (KeyCode)inputManagerDatabase.AttackKeyCode);
             inputManagerDatabase.InventoryKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Inventory", (KeyCode)inputManagerDatabase.InventoryKeyCode);
             inputManagerDatabase.StorageKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Storage", (KeyCode)inputManagerDatabase.StorageKeyCode);

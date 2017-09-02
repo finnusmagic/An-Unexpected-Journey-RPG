@@ -180,6 +180,30 @@ MonoBehaviour:
     pitch: 1
     randomVolume: 0
     randomPitch: 0
+  - name: Area of Effect
+    clip: {fileID: 8300000, guid: 0b917aa70525c644483a660e38eee8a2, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Power Attack
+    clip: {fileID: 8300000, guid: 829364fc7916f524f9dc3dada56ecb4c, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
+  - name: Self Heal
+    clip: {fileID: 8300000, guid: beff85612c82191488f3b8966fc2c0b0, type: 3}
+    loop: 0
+    deactivate: 0
+    volume: 0.3
+    pitch: 1
+    randomVolume: 0
+    randomPitch: 0
   musicTracks:
   - name: 01_CharacterCreation_Scene
     clip: {fileID: 8300000, guid: 924578d7a6128ff4bab754faf9b66bf8, type: 3}

@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697ec6227e1450340a01fb7d876901bf, type: 3}
   m_Name: Self Heal Level 1
   m_EditorClassIdentifier: 
+  abilityName: Self Heal
+  abilityAnimation: {fileID: 7400000, guid: f0ae791c1ab57cf468fa2e34af5f254a, type: 3}
   manaCost: 25
   coolDown: 3
-  currentCooldown: 3.0155532
+  currentCooldown: 3.0157363
   abilityIcon: {fileID: 0}
   particlePrefab: {fileID: 1814514907074992, guid: d27c5388d0a1dbb42b3139489896685e,
     type: 2}

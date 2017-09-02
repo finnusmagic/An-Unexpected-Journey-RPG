@@ -5,6 +5,7 @@ public class AreaEffectBehaviour : AbilityBehaviour
 
     public override void Use(GameObject target)
     {
+        PlayAbilityAnimation();
         PlayAbilitySound();
         DealRadialDamage();
         PlayParticleEffect();
@@ -23,7 +24,7 @@ public class AreaEffectBehaviour : AbilityBehaviour
         foreach (RaycastHit hit in hits)
         {
             var damageable = hit.collider.gameObject.GetComponent<EnemyStatsManager>();
-            bool hitPlayer = hit.collider.gameObject.GetComponent<Character>();
+            bool hitPlayer = hit.collider.gameObject.GetComponent<PlayerStatsManager>();
             if (damageable != null && !hitPlayer)
             {
                 float damageToDeal = (config as AreaEffectConfig).GetDamageToEachTarget();

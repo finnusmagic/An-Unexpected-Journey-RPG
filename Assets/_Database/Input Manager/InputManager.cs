@@ -6,6 +6,7 @@ namespace RPG.Database
     public class InputManager : ScriptableObject
     {
         public KeyCode AttackKeyCode;
+        public KeyCode SelectTargetKeyCode;
         public KeyCode SplitItemKeyCode;
         public KeyCode InventoryKeyCode;
         public KeyCode StorageKeyCode;

@@ -19,6 +19,8 @@ namespace RPG.Characters
         public GameObject target = null;
         public bool isAttacking = false;
 
+        float attackTimer;
+
         GameObject weaponObject;
         Animator animator;
         Character character;
@@ -46,18 +48,6 @@ namespace RPG.Characters
         public WeaponConfig GetCurrentWeapon()
         {
             return currentWeaponConfig;
-        }
-
-        private void SetAttackAnimation()
-        {
-            if (currentWeaponConfig != null)
-            {
-                animator = GetComponent<Animator>();
-                var animatorOverrideController = character.GetOverrideController();
-
-                animator.runtimeAnimatorController = animatorOverrideController;
-                animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
-            }
         }
 
         public void AttackPlayer(GameObject targetToAttack)
@@ -98,36 +88,40 @@ namespace RPG.Characters
 
         public void AttackEnemy(GameObject targetToAttack)
         {
-            float attackTimer = currentWeaponConfig.GetMinTimeBetweenHits();
-
-            if (currentWeaponConfig.GetMinTimeBetweenHits() == attackTimer)
+            if (targetToAttack != null)
             {
+                if (IsTargetInRange(targetToAttack))
+                    attackTimer = currentWeaponConfig.GetMinTimeBetweenHits();
 
-                if (character.characterAlive && currentWeaponConfig != null)
+                if (currentWeaponConfig.GetMinTimeBetweenHits() == attackTimer)
                 {
-                    SetAttackAnimation();
 
-                    if (currentWeaponConfig.isRanged && target != null)
+                    if (character.characterAlive && currentWeaponConfig != null)
                     {
-                        if (!isAttacking && IsTargetInRange(targetToAttack) && target != null)
+                        SetAttackAnimation();
+
+                        if (currentWeaponConfig.isRanged && target != null)
                         {
-                            target = targetToAttack;
-                            StartCoroutine(DamageTargetRanged());
+                            if (!isAttacking && IsTargetInRange(targetToAttack) && target != null)
+                            {
+                                target = targetToAttack;
+                                StartCoroutine(DamageTargetRanged());
+                            }
+                        }
+
+                        else if (!currentWeaponConfig.isRanged && target != null)
+                        {
+                            if (!isAttacking && IsTargetInRange(targetToAttack) && target != null)
+                            {
+                                target = targetToAttack;
+                                StartCoroutine(DamageTargetMeele());
+                            }
                         }
                     }
-
-                    else if (!currentWeaponConfig.isRanged && target != null)
+                    else
                     {
-                        if (!isAttacking && IsTargetInRange(targetToAttack) && target != null)
-                        {
-                            target = targetToAttack;
-                            StartCoroutine(DamageTargetMeele());
-                        }
+                        StopAllCoroutines();
                     }
-                }
-                else
-                {
-                    StopAllCoroutines();
                 }
             }
         }
@@ -144,7 +138,7 @@ namespace RPG.Characters
             }
             else if (target.GetComponent<PlayerStatsManager>() != null)
             {
-                target.GetComponent<PlayerStatsManager>().DamagePlayer(currentWeaponConfig.GetAdditionalDamage());
+                target.GetComponent<PlayerStatsManager>().TakeDamage(currentWeaponConfig.GetAdditionalDamage());
             }
             yield return new WaitForSeconds(currentWeaponConfig.GetMinTimeBetweenHits());
             isAttacking = false;
@@ -219,6 +213,18 @@ namespace RPG.Characters
             Assert.IsFalse(numberOfDominantHands <= 0, "No DominantHand found on Player, please add one");
             Assert.IsFalse(numberOfDominantHands > 1, "Multiple DominantHand scripts on Player, please remove one");
             return dominantHands[0].gameObject;
+        }
+
+        private void SetAttackAnimation()
+        {
+            if (currentWeaponConfig != null)
+            {
+                animator = GetComponent<Animator>();
+                var animatorOverrideController = character.GetOverrideController();
+
+                animator.runtimeAnimatorController = animatorOverrideController;
+                animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip();
+            }
         }
     }
 }

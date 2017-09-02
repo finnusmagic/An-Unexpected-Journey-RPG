@@ -58,6 +58,12 @@ namespace RPG.Characters
             return moveSpeedMultiplier;
         }
 
+        public float GetAnimSpeedMultiplier()
+        {
+            return animator.speed;
+        }
+
+
         private void AddRequiredComponents()
         {
             InitializeFloatingText();
@@ -111,6 +117,11 @@ namespace RPG.Characters
             if (GetComponent<EnemyStatsManager>() != null)
             {
                 FindObjectOfType<LevelUpSystem>().AddXP(GetComponent<EnemyStatsManager>().GetEnemyXP());
+            }
+
+            if (GetComponent<PlayerMovement>() != null)
+            {
+                GetComponent<PlayerMovement>().canMove = false;
             }
 
             var agent = GetComponent<NavMeshAgent>();

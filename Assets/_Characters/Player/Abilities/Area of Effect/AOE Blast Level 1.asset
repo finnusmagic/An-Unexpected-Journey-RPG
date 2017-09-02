@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a07130e89789ba468d258c434a0d9da, type: 3}
   m_Name: AOE Blast Level 1
   m_EditorClassIdentifier: 
+  abilityName: Area of Effect
+  abilityAnimation: {fileID: 7400000, guid: 908f4942021d79642be0f824334f43ad, type: 3}
   manaCost: 25
   coolDown: 10
-  currentCooldown: 2.893474
+  currentCooldown: 10.05145
   abilityIcon: {fileID: 0}
   particlePrefab: {fileID: 1005475209298914, guid: 5c7566465b26a9840b7948f249d750df,
     type: 2}

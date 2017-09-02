@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: InputManager
   m_EditorClassIdentifier: 
   AttackKeyCode: 324
+  SelectTargetKeyCode: 323
   SplitItemKeyCode: 306
   InventoryKeyCode: 105
   StorageKeyCode: 98

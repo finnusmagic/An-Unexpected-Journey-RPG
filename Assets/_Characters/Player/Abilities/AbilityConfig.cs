@@ -5,7 +5,9 @@ namespace RPG.Characters
 {
     public abstract class AbilityConfig : ScriptableObject
     {
-        [Header("Spcial Ability General")]
+        [Header("Special Ability General")]
+        [SerializeField] string abilityName;
+        [SerializeField] AnimationClip abilityAnimation;
         [SerializeField] float manaCost;
         public float coolDown;
         public float currentCooldown;
@@ -42,6 +44,16 @@ namespace RPG.Characters
         public AudioClip GetRandomAbilitySound()
         {
             return audioClips[Random.Range(0, audioClips.Length)];
+        }
+
+        public AnimationClip GetAbilityAnimation()
+        {
+            return abilityAnimation;
+        }
+
+        public string GetAbilityName()
+        {
+            return abilityName;
         }
     }
 }
