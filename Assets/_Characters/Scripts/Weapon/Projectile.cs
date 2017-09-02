@@ -26,14 +26,14 @@ namespace RPG.Characters
             {
                 if (collider.gameObject.tag == "Enemy" && targetIsEnemy)
                 {
-                    collider.gameObject.GetComponent<EnemyStatus>().TakeDamage(damageCaused);
+                    collider.gameObject.GetComponent<EnemyStatsManager>().TakeDamage(damageCaused);
                     Destroy(gameObject, DESTROY_DELAY_AFTER_HIT);
                     hit = true;
                 }
 
                 else if (collider.gameObject.tag == "Player" && targetIsPlayer)
                 {
-                    collider.gameObject.GetComponent<PlayerStatusManager>().DamagePlayer(damageCaused);
+                    collider.gameObject.GetComponent<PlayerStatsManager>().DamagePlayer(damageCaused);
                     Destroy(gameObject, DESTROY_DELAY_AFTER_HIT);
                     hit = true;
                 }

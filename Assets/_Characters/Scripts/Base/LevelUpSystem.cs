@@ -6,40 +6,41 @@ using RPG.Characters;
 
 public class LevelUpSystem : MonoBehaviour {
 
-    [SerializeField] GameObject levelBar;
+    GameObject levelBar;
+
     Text levelText;
     Text currentXPText;
     Image levelProgressBar;
 
-    private float fillAmount;
-    private float reverseFillAmount;
-    [Space(10)]
-    public int currentLevel;
-    public int baseXP = 20;
-    public int currentXP;
+    float fillAmount;
+    float reverseFillAmount;
 
-    public int xpForNextLevel;
-    public int xpDifferenceToNextLevel;
-    public int totalXPDifference;
+    int currentLevel;
+    int baseXP = 20;
+    int currentXP;
 
-    public float statPoints;
-    public float skillPoints;
+    int xpForNextLevel;
+    int xpDifferenceToNextLevel;
+    int totalXPDifference;
 
-    public float specialStatPoints;
+    float statPoints;
+    float specialStatPoints;
 
-    public float levelDamage;
-    public float levelArmor;
-    public float levelHealth;
-    public float levelMana;
+    float levelDamage;
+    float levelArmor;
+    float levelHealth;
+    float levelMana;
 
-    public float levelHealthReg;
-    public float levelManaReg;
+    float levelHealthReg;
+    float levelManaReg;
 
-    public float levelCritChance;
-    public float levelCritDamage;
+    float levelCritChance;
+    float levelCritDamage;
 
 	void Start ()
     {
+        levelBar = GameObject.Find("Panel - Player Level");
+
         VisualiseLevel();
         AddXP(0);
     }
@@ -69,7 +70,6 @@ public class LevelUpSystem : MonoBehaviour {
         reverseFillAmount = 1 - fillAmount;
 
         statPoints = 5 * (currentLevel -1);
-        skillPoints = 5 * (currentLevel -1);
         specialStatPoints = 0.1f * (currentLevel - 1);
 
         PlayerLevelUp();
@@ -99,4 +99,44 @@ public class LevelUpSystem : MonoBehaviour {
         currentXPText.text = currentXP.ToString() + " / " + xpForNextLevel.ToString();
         levelProgressBar.fillAmount = reverseFillAmount;
     }	
+
+    public float GetLevelDamage()
+    {
+        return levelDamage;
+    }
+
+    public float GetLevelArmor()
+    {
+        return levelArmor;
+    }
+
+    public float GetLevelHealth()
+    {
+        return levelHealth;
+    }
+
+    public float GetLevelMana()
+    {
+        return levelMana;
+    }
+
+    public float GetLevelHealthReg()
+    {
+        return levelHealthReg;
+    }
+
+    public float GetLevelManaReg()
+    {
+        return levelManaReg;
+    }
+
+    public float GetLevelCritChance()
+    {
+        return levelCritChance;
+    }
+
+    public float GetLevelCritDamage()
+    {
+        return levelCritDamage;
+    }
 }

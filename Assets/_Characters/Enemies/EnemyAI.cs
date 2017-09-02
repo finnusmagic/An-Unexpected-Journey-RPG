@@ -7,6 +7,7 @@ namespace RPG.Characters
 {
     [RequireComponent(typeof(Character))]
     [RequireComponent(typeof(WeaponSystem))]
+    [RequireComponent(typeof(EnemyStatsManager))]
     public class EnemyAI : MonoBehaviour
     {
         [Header("Combat Setup")]

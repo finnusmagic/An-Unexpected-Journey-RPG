@@ -187,6 +187,6 @@ MonoBehaviour:
     - attributeName: Health Reg
       attributeValue: 2.5
     - attributeName: Crit Damage
-      attributeValue: 100
+      attributeValue: 50
     - attributeName: Crit Chance
-      attributeValue: 100
+      attributeValue: 50

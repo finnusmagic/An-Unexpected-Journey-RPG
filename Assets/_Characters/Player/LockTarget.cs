@@ -39,7 +39,7 @@ namespace RPG.Characters
 
         void GetTarget()
         {
-            var enemy = target.GetComponent<EnemyStatus>();
+            var enemy = target.GetComponent<EnemyStatsManager>();
             targetPanel.transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = enemy.healthAsPercentage;
             targetPanel.transform.GetChild(0).GetChild(2).GetComponent<Text>().text = (int)enemy.currentHealthPoints + " / " + enemy.maxHealthPoints;
 

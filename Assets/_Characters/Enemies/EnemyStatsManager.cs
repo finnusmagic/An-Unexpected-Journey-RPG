@@ -8,14 +8,12 @@ using UnityEngine.AI;
 
 namespace RPG.Characters
 {
-    public class EnemyStatus : MonoBehaviour
+    public class EnemyStatsManager : MonoBehaviour
     {
         [Header("Enemy Information")]
-        [SerializeField]
-        Class currentClass;
+        [SerializeField] Class currentClass;
         [Space(10)]
-        [SerializeField]
-        Sprite enemyImage;
+        [SerializeField] Sprite enemyImage;
         [SerializeField] string enemyName;
         [SerializeField] int enemyLevel;
         [SerializeField] int xpToGive;
@@ -70,7 +68,7 @@ namespace RPG.Characters
         public void TakeDamage(float damage)
         {
             CheckForDamageSounds();
-            // CheckForTriggerSounds();
+            CheckForTriggerSounds();
 
             character = GetComponent<Character>();
             character.CreateFloatingText(damage.ToString(), transform);

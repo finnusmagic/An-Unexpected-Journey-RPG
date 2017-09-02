@@ -8,21 +8,23 @@ namespace RPG.Characters
 {
     public class WeaponSystem : MonoBehaviour
     {
-        [SerializeField] float weaponDamage;
+        [Header("Basic Weapon Setup")]
+        public WeaponConfig currentWeaponConfig = null;
+
+        [Header("Ranged Weapon Setup")]
         [SerializeField] GameObject projectileSocket = null;
         [SerializeField] Vector3 aimOffset = new Vector3(0, 1f, 0);
 
-        public WeaponConfig currentWeaponConfig = null;
-
+        [Header("Weapon Status")]
         public GameObject target = null;
+        public bool isAttacking = false;
+
         GameObject weaponObject;
         Animator animator;
         Character character;
 
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
-
-        public bool isAttacking = false;
 
         private AudioManager audioManager;
 
@@ -136,13 +138,13 @@ namespace RPG.Characters
 
             isAttacking = true;
             animator.SetTrigger(ATTACK_TRIGGER);
-            if (target.GetComponent<EnemyStatus>() != null)
+            if (target.GetComponent<EnemyStatsManager>() != null)
             {
-                target.GetComponent<EnemyStatus>().TakeDamage(FindObjectOfType<PlayerStatusManager>().CalculateDamage());
+                target.GetComponent<EnemyStatsManager>().TakeDamage(FindObjectOfType<PlayerStatsManager>().CalculateDamage());
             }
-            else if (target.GetComponent<PlayerStatusManager>() != null)
+            else if (target.GetComponent<PlayerStatsManager>() != null)
             {
-                target.GetComponent<PlayerStatusManager>().DamagePlayer(currentWeaponConfig.GetAdditionalDamage());
+                target.GetComponent<PlayerStatsManager>().DamagePlayer(currentWeaponConfig.GetAdditionalDamage());
             }
             yield return new WaitForSeconds(currentWeaponConfig.GetMinTimeBetweenHits());
             isAttacking = false;
@@ -179,7 +181,7 @@ namespace RPG.Characters
             if (GetComponent<PlayerMovement>() != null) // check if shooter is player
             {
                 projectile.targetIsEnemy = true;
-                projectile.damageCaused = FindObjectOfType<PlayerStatusManager>().CalculateDamage();
+                projectile.damageCaused = FindObjectOfType<PlayerStatsManager>().CalculateDamage();
             }
 
             if (target != null)

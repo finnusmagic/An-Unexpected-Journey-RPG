@@ -7,9 +7,18 @@ using UnityEngine.UI;
 
 namespace RPG.Characters
 {
+    [RequireComponent(typeof(Character))]
+    [RequireComponent(typeof(WeaponSystem))]
+    [RequireComponent(typeof(SpecialAbilities))]
+    [RequireComponent(typeof(PlayerInventoryManager))]
+    [RequireComponent(typeof(PlayerStatsManager))]
+    [RequireComponent(typeof(LevelUpSystem))]
+    [RequireComponent(typeof(LockTarget))]
+
     public class PlayerMovement : MonoBehaviour
     {
         WeaponSystem weaponSystem;
+        InputManager inputManagerDatabase;
 
         Character character;
         EnemyAI enemy;
@@ -31,6 +40,9 @@ namespace RPG.Characters
 
         void Start()
         {
+            if (inputManagerDatabase == null)
+                inputManagerDatabase = (InputManager)Resources.Load("InputManager");
+
             cameraT = Camera.main.transform;
             character = GetComponent<Character>();
             weaponSystem = GetComponent<WeaponSystem>();
@@ -67,7 +79,7 @@ namespace RPG.Characters
                 float animationSpeedPercent = ((walking) ? 1f : 2f) * inputDir.magnitude;
                 animator.SetFloat("Forward", animationSpeedPercent, speedSmoothTime, Time.deltaTime);
 
-                if (Input.GetKeyDown(KeyCode.Alpha1) && character.characterAlive)
+                if (Input.GetKeyDown(inputManagerDatabase.AttackKeyCode) && character.characterAlive)
                 {
                     if (enemy != null)
                         weaponSystem.AttackEnemy(enemy.gameObject);

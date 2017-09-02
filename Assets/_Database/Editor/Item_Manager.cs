@@ -125,11 +125,12 @@ namespace RPG.Database
 
             EditorUtility.SetDirty(inputManagerDatabase);
 
+            inputManagerDatabase.AttackKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Attack", (KeyCode)inputManagerDatabase.AttackKeyCode);
             inputManagerDatabase.InventoryKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Inventory", (KeyCode)inputManagerDatabase.InventoryKeyCode);
             inputManagerDatabase.StorageKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Storage", (KeyCode)inputManagerDatabase.StorageKeyCode);
             inputManagerDatabase.CharacterSystemKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Charactersystem", (KeyCode)inputManagerDatabase.CharacterSystemKeyCode);
             inputManagerDatabase.CraftSystemKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Craftsystem", (KeyCode)inputManagerDatabase.CraftSystemKeyCode);
-            inputManagerDatabase.SplitItem = (KeyCode)EditorGUILayout.EnumPopup("Split", (KeyCode)inputManagerDatabase.SplitItem);
+            inputManagerDatabase.SplitItemKeyCode = (KeyCode)EditorGUILayout.EnumPopup("Split", (KeyCode)inputManagerDatabase.SplitItemKeyCode);
 
             inputManagerDatabase.Ability_01_KeyCode = (KeyCode)EditorGUILayout.EnumPopup("Ability 1", (KeyCode)inputManagerDatabase.Ability_01_KeyCode);
             inputManagerDatabase.Ability_02_KeyCode = (KeyCode)EditorGUILayout.EnumPopup("Ability 2", (KeyCode)inputManagerDatabase.Ability_02_KeyCode);

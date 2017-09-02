@@ -11,8 +11,9 @@ namespace RPG.Characters
     {
         [SerializeField] List<AbilityConfig> abilities;
 
-        private PlayerStatusManager player;
-        public GameObject abilityPanel;
+        private PlayerStatsManager player;
+
+        GameObject abilityPanel;
 
         InputManager inputManager;
         Character character;
@@ -20,10 +21,12 @@ namespace RPG.Characters
 
         void Start()
         {
+            abilityPanel = GameObject.Find("Panel - Abilities");
+
             if (inputManager == null)
                 inputManager = (InputManager)Resources.Load("InputManager");
 
-            player = GetComponent<PlayerStatusManager>();
+            player = GetComponent<PlayerStatsManager>();
             character = GetComponent<Character>();
             weaponSystem = GetComponent<WeaponSystem>();
 
@@ -35,7 +38,7 @@ namespace RPG.Characters
         {
             if (Input.GetKeyDown(inputManager.Ability_01_KeyCode))
             {
-                if (abilities[0].currentCooldown >= abilities[0].coolDown && abilities[0].GetManaCost() <= player.currentMana)
+                if (abilities[0].currentCooldown >= abilities[0].coolDown && abilities[0].GetManaCost() <= player.CurrentMana)
                 {
                     player.ConsumeMana(abilities[0].GetManaCost());
                     abilities[0].Use(gameObject);
@@ -44,7 +47,7 @@ namespace RPG.Characters
             }
             else if (Input.GetKeyDown(inputManager.Ability_02_KeyCode))
             {
-                if (abilities[1].currentCooldown >= abilities[1].coolDown && abilities[1].GetManaCost() <= player.currentMana)
+                if (abilities[1].currentCooldown >= abilities[1].coolDown && abilities[1].GetManaCost() <= player.CurrentMana)
                 {
                     player.ConsumeMana(abilities[1].GetManaCost());
                     abilities[1].Use(gameObject);
@@ -62,7 +65,7 @@ namespace RPG.Characters
 
                 else if (weaponSystem.IsTargetInRange(enemyTarget.gameObject) && enemyTarget != null)
                 {
-                    if (abilities[2].currentCooldown >= abilities[2].coolDown && abilities[2].GetManaCost() <= player.currentMana)
+                    if (abilities[2].currentCooldown >= abilities[2].coolDown && abilities[2].GetManaCost() <= player.CurrentMana)
                     {
                         transform.LookAt(enemyTarget.GetComponent<EnemyAI>().transform);
 
@@ -91,7 +94,7 @@ namespace RPG.Characters
 
             for (int i = 0; i < abilities.Count; i++)
             {
-                if (abilities[i].GetManaCost() >= player.currentMana)
+                if (abilities[i].GetManaCost() >= player.CurrentMana)
                 {
                     abilityPanel.transform.GetChild(i).GetChild(1).gameObject.SetActive(true);
                 }

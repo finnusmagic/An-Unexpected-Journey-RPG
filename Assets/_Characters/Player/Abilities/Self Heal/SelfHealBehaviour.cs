@@ -4,11 +4,11 @@ namespace RPG.Characters
 {
     public class SelfHealBehaviour : AbilityBehaviour
     {
-        PlayerStatusManager player = null;
+        PlayerStatsManager player = null;
 
         void Start()
         {
-            player = GetComponent<PlayerStatusManager>();
+            player = GetComponent<PlayerStatsManager>();
         }
 
         public override void Use(GameObject target)

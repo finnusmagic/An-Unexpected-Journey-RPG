@@ -108,9 +108,9 @@ namespace RPG.Characters
         {
             characterAlive = false;
 
-            if (GetComponent<EnemyStatus>() != null)
+            if (GetComponent<EnemyStatsManager>() != null)
             {
-                FindObjectOfType<LevelUpSystem>().AddXP(GetComponent<EnemyStatus>().GetEnemyXP());
+                FindObjectOfType<LevelUpSystem>().AddXP(GetComponent<EnemyStatsManager>().GetEnemyXP());
             }
 
             var agent = GetComponent<NavMeshAgent>();

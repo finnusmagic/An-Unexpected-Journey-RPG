@@ -21,7 +21,7 @@ namespace RPG.Database
             if (GameObject.FindGameObjectWithTag("Tooltip") != null)
                 tooltip = GameObject.FindGameObjectWithTag("Tooltip").GetComponent<Tooltip>();
             if (GameObject.FindGameObjectWithTag("EquipmentSystem") != null)
-                eS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().characterSystem.GetComponent<EquipmentSystem>();
+                eS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().GetCharacterPanel().GetComponent<EquipmentSystem>();
 
             if (GameObject.FindGameObjectWithTag("MainInventory") != null)
                 mainInventory = GameObject.FindGameObjectWithTag("MainInventory");
@@ -42,16 +42,16 @@ namespace RPG.Database
                     //item from craft system to inventory
                     if (transform.parent.GetComponent<CraftResultSlot>() != null)
                     {
-                        bool check = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().inventory.GetComponent<Inventory>().checkIfItemAllreadyExist(item.itemID, item.itemValue);
+                        bool check = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().GetInventoryPanel().GetComponent<Inventory>().checkIfItemAllreadyExist(item.itemID, item.itemValue);
 
                         if (!check)
                         {
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().inventory.GetComponent<Inventory>().addItemToInventory(item.itemID, item.itemValue);
-                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().inventory.GetComponent<Inventory>().stackableSettings();
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().GetInventoryPanel().GetComponent<Inventory>().addItemToInventory(item.itemID, item.itemValue);
+                            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().GetInventoryPanel().GetComponent<Inventory>().stackableSettings();
                         }
-                        CraftSystem cS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().craftSystem.GetComponent<CraftSystem>();
+                        CraftSystem cS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().GetCraftSystemPanel().GetComponent<CraftSystem>();
                         cS.deleteItems(item);
-                        CraftResultSlot result = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().craftSystem.transform.GetChild(3).GetComponent<CraftResultSlot>();
+                        CraftResultSlot result = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().GetCraftSystemPanel().transform.GetChild(3).GetComponent<CraftResultSlot>();
                         result.temp = 0;
                         tooltip.deactivateTooltip();
                         gearable = true;
@@ -184,7 +184,7 @@ namespace RPG.Database
             bool gearable = false;
 
             if (GameObject.FindGameObjectWithTag("EquipmentSystem") != null)
-                eS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().characterSystem.GetComponent<EquipmentSystem>();
+                eS = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventoryManager>().GetCharacterPanel().GetComponent<EquipmentSystem>();
 
             if (eS != null)
                 itemTypeOfSlot = eS.itemTypeOfSlots;

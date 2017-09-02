@@ -452,15 +452,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4832714811141322}
-  - component: {fileID: 114519105505950122}
   - component: {fileID: 114459752577362874}
+  - component: {fileID: 114519105505950122}
   - component: {fileID: 114598100056089872}
   - component: {fileID: 114477762546080258}
   - component: {fileID: 114353672813778200}
   - component: {fileID: 114991543371149220}
   - component: {fileID: 114290178735193028}
-  - component: {fileID: 114805597329526328}
-  - component: {fileID: 114368486361594620}
+  - component: {fileID: 114666019406676742}
   m_Layer: 11
   m_Name: Player_Warrior
   m_TagString: Player
@@ -1068,7 +1067,7 @@ GameObject:
   - component: {fileID: 137360792070529704}
   - component: {fileID: 33121227500334802}
   m_Layer: 11
-  m_Name: PlayerMesh
+  m_Name: Player Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1884,7 +1883,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371042566339608}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3.89}
+  m_LocalPosition: {x: 0.35, y: 0, z: 3.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4961834873237044}
@@ -2531,24 +2530,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52638f3686ebbc4449cee1491716a179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelBar: {fileID: 0}
-  currentLevel: 0
-  baseXP: 20
-  currentXP: 0
-  xpForNextLevel: 0
-  xpDifferenceToNextLevel: 0
-  totalXPDifference: 0
-  statPoints: 0
-  skillPoints: 0
-  specialStatPoints: 0
-  levelDamage: 0
-  levelArmor: 0
-  levelHealth: 0
-  levelMana: 0
-  levelHealthReg: 0
-  levelManaReg: 0
-  levelCritChance: 0
-  levelCritDamage: 0
 --- !u!114 &114353672813778200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2560,35 +2541,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d1816eabec94a48a9db8d04e49be50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 0}
-  characterSystem: {fileID: 0}
-  craftSystem: {fileID: 0}
+  inventoryPanel: {fileID: 0}
+  characterSystemPanel: {fileID: 0}
+  craftSystemPanel: {fileID: 0}
   HandL: {fileID: 1961247537822576}
   HandR: {fileID: 1476698698577802}
-  itemDamage: 0
-  itemArmor: 0
-  itemHealth: 0
-  itemMana: 0
-  itemHealthReg: 0
-  itemManaReg: 0
-  itemCritChance: 0
-  itemCritDamage: 0
---- !u!114 &114368486361594620
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1371042566339608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d4164510514a04459c4861ffb062ca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMesh: {fileID: 1947662928860196}
-  warriorMesh: {fileID: 4300026, guid: d288a0e4a2d923b46898986e979da643, type: 3}
-  archerMesh: {fileID: 4300044, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
-  mageMesh: {fileID: 4300046, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
-  Inventory: {fileID: 0}
 --- !u!114 &114378762873257970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2631,7 +2588,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 58a711623a785014899b67e7b3bb3215, type: 2}
   - {fileID: 11400000, guid: dd53b6c78a1c6b040806ac43be6d9501, type: 2}
   - {fileID: 11400000, guid: 3b6b4ad46ab809447b0ec2d1f1b95301, type: 2}
-  abilityPanel: {fileID: 0}
 --- !u!114 &114519105505950122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2672,13 +2628,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f280a43b95148498ecb6ffa9d03e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDamage: 0
+  currentWeaponConfig: {fileID: 0}
   projectileSocket: {fileID: 1063599861428208}
   aimOffset: {x: 0, y: 1, z: 0}
-  currentWeaponConfig: {fileID: 0}
   target: {fileID: 0}
   isAttacking: 0
---- !u!114 &114805597329526328
+--- !u!114 &114666019406676742
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2702,25 +2657,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f512ac689bbb241b9124026c08b69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  warriorMesh: {fileID: 4300026, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+  archerMesh: {fileID: 4300044, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
+  mageMesh: {fileID: 4300046, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
+  Inventory: {fileID: 0}
   playerStatusPanel: {fileID: 0}
   playerStatsPanel: {fileID: 0}
-  playerAbilityPanel: {fileID: 0}
-  currentHealth: 0
-  maxHealth: 0
-  currentMana: 0
-  maxMana: 0
-  currentDamage: 0
-  maxDamage: 0
-  currentArmor: 0
-  maxArmor: 0
-  currentHealthReg: 0
-  maxHealthReg: 0
-  currentManaReg: 0
-  maxManaReg: 0
-  currentCritChance: 0
-  maxCritChance: 0
-  currentCritDamage: 0
-  maxCritDamage: 0
 --- !u!137 &137360792070529704
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2757,7 +2699,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300026, guid: d288a0e4a2d923b46898986e979da643, type: 3}
+  m_Mesh: {fileID: 4300026, guid: d189059b3f5f1dd4bbd228dc35df3a2a, type: 3}
   m_Bones:
   - {fileID: 4869355412779832}
   - {fileID: 4588957241764402}

@@ -7,9 +7,10 @@ namespace RPG.Database
 {
     public class PlayerInventoryManager : MonoBehaviour
     {
-        public GameObject inventory;
-        public GameObject characterSystem;
-        public GameObject craftSystem;
+        [SerializeField] GameObject inventoryPanel;
+        [SerializeField] GameObject characterSystemPanel;
+        [SerializeField] GameObject craftSystemPanel;
+
         [Space(10)]
         [SerializeField] GameObject HandL;
         [SerializeField] GameObject HandR;
@@ -22,60 +23,48 @@ namespace RPG.Database
         private Tooltip toolTip;
 
         private InputManager inputManagerDatabase;
-        private PlayerStatusManager playerStatus;
+        private PlayerStatsManager playerStatus;
         int normalSize = 3;
 
-        public float itemDamage;
-        public float itemArmor;
-        public float itemHealth;
-        public float itemMana;
+        float itemDamage;
+        float itemArmor;
+        float itemHealth;
+        float itemMana;
 
-        public float itemHealthReg;
-        public float itemManaReg;
+        float itemHealthReg;
+        float itemManaReg;
 
-        public float itemCritChance;
-        public float itemCritDamage;
+        float itemCritChance;
+        float itemCritDamage;
 
         void Start()
         {
-            playerStatus = FindObjectOfType<PlayerStatusManager>();
+            playerStatus = FindObjectOfType<PlayerStatsManager>();
 
             if (inputManagerDatabase == null)
                 inputManagerDatabase = (InputManager)Resources.Load("InputManager");
 
-            if (craftSystem != null)
-                cS = craftSystem.GetComponent<CraftSystem>();
+            if (craftSystemPanel != null)
+                cS = craftSystemPanel.GetComponent<CraftSystem>();
 
             if (GameObject.FindGameObjectWithTag("Tooltip") != null)
                 toolTip = GameObject.FindGameObjectWithTag("Tooltip").GetComponent<Tooltip>();
-            if (inventory != null)
-                mainInventory = inventory.GetComponent<Inventory>();
-            if (characterSystem != null)
-                characterSystemInventory = characterSystem.GetComponent<Inventory>();
-            if (craftSystem != null)
-                craftSystemInventory = craftSystem.GetComponent<Inventory>();
+            if (inventoryPanel != null)
+                mainInventory = inventoryPanel.GetComponent<Inventory>();
+            if (characterSystemPanel != null)
+                characterSystemInventory = characterSystemPanel.GetComponent<Inventory>();
+            if (craftSystemPanel != null)
+                craftSystemInventory = craftSystemPanel.GetComponent<Inventory>();
         }
 
         void Update()
         {
-            if (Input.GetKeyDown(inputManagerDatabase.CharacterSystemKeyCode))
-            {
-                if (!characterSystem.activeSelf)
-                {
-                    characterSystemInventory.openInventory();
-                }
-                else
-                {
-                    if (toolTip != null)
-                        toolTip.deactivateTooltip();
-                    characterSystemInventory.closeInventory();
-                }
-            }
 
             if (Input.GetKeyDown(inputManagerDatabase.InventoryKeyCode))
             {
-                if (!inventory.activeSelf)
+                if (!inventoryPanel.activeSelf)
                 {
+                    characterSystemInventory.openInventory();
                     mainInventory.openInventory();
                     this.GetComponent<PlayerMovement>().canMove = false;
                 }
@@ -83,14 +72,24 @@ namespace RPG.Database
                 {
                     if (toolTip != null)
                         toolTip.deactivateTooltip();
+                    characterSystemInventory.closeInventory();
                     mainInventory.closeInventory();
                     this.GetComponent<PlayerMovement>().canMove = true;
                 }
             }
 
+            if (inventoryPanel.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (toolTip != null)
+                    toolTip.deactivateTooltip();
+                characterSystemInventory.closeInventory();
+                mainInventory.closeInventory();
+                this.GetComponent<PlayerMovement>().canMove = true;
+            }
+
             if (Input.GetKeyDown(inputManagerDatabase.CraftSystemKeyCode))
             {
-                if (!craftSystem.activeSelf)
+                if (!craftSystemPanel.activeSelf)
                     craftSystemInventory.openInventory();
                 else
                 {
@@ -101,7 +100,6 @@ namespace RPG.Database
                     craftSystemInventory.closeInventory();
                 }
             }
-
         }
 
         public void OnEnable()
@@ -176,7 +174,7 @@ namespace RPG.Database
                 for (int i = 0; i < item.itemAttributes.Count; i++)
                 {
                     if (mainInventory == null)
-                        mainInventory = inventory.GetComponent<Inventory>();
+                        mainInventory = inventoryPanel.GetComponent<Inventory>();
                     mainInventory.sortItems();
                     if (item.itemAttributes[i].attributeName == "Slots")
                         ChangeInventorySize((int)item.itemAttributes[i].attributeValue);
@@ -195,7 +193,7 @@ namespace RPG.Database
             DropTheRestItems(size);
 
             if (mainInventory == null)
-                mainInventory = inventory.GetComponent<Inventory>();
+                mainInventory = inventoryPanel.GetComponent<Inventory>();
             if (size == 3)
             {
                 mainInventory.width = 3;
@@ -253,31 +251,31 @@ namespace RPG.Database
             {
                 if (item.itemAttributes[i].attributeName == "Health")
                 {
-                    if ((playerStatus.currentHealth + item.itemAttributes[i].attributeValue) > playerStatus.maxHealth)
-                        playerStatus.currentHealth = playerStatus.maxHealth;
+                    if ((playerStatus.CurrentHealth + item.itemAttributes[i].attributeValue) > playerStatus.MaxHealth)
+                        playerStatus.CurrentHealth = playerStatus.MaxHealth;
                     else
-                        playerStatus.currentHealth += item.itemAttributes[i].attributeValue;
+                        playerStatus.CurrentHealth += item.itemAttributes[i].attributeValue;
                 }
                 if (item.itemAttributes[i].attributeName == "Mana")
                 {
-                    if ((playerStatus.currentMana + item.itemAttributes[i].attributeValue) > playerStatus.maxMana)
-                        playerStatus.currentMana = playerStatus.maxMana;
+                    if ((playerStatus.CurrentMana + item.itemAttributes[i].attributeValue) > playerStatus.MaxMana)
+                        playerStatus.CurrentMana = playerStatus.MaxMana;
                     else
-                        playerStatus.currentMana += item.itemAttributes[i].attributeValue;
+                        playerStatus.CurrentMana += item.itemAttributes[i].attributeValue;
                 }
                 if (item.itemAttributes[i].attributeName == "Armor")
                 {
-                    if ((playerStatus.currentArmor + item.itemAttributes[i].attributeValue) > playerStatus.maxArmor)
-                        playerStatus.currentArmor = playerStatus.maxArmor;
+                    if ((playerStatus.MaxArmor + item.itemAttributes[i].attributeValue) > playerStatus.MaxArmor)
+                        playerStatus.MaxArmor = playerStatus.MaxArmor;
                     else
-                        playerStatus.currentArmor += item.itemAttributes[i].attributeValue;
+                        playerStatus.MaxArmor += item.itemAttributes[i].attributeValue;
                 }
                 if (item.itemAttributes[i].attributeName == "Damage")
                 {
-                    if ((playerStatus.currentDamage + item.itemAttributes[i].attributeValue) > playerStatus.maxDamage)
-                        playerStatus.currentDamage = playerStatus.maxDamage;
+                    if ((playerStatus.MaxDamage + item.itemAttributes[i].attributeValue) > playerStatus.MaxDamage)
+                        playerStatus.MaxDamage = playerStatus.MaxDamage;
                     else
-                        playerStatus.currentDamage += item.itemAttributes[i].attributeValue;
+                        playerStatus.MaxDamage += item.itemAttributes[i].attributeValue;
                 }
                 playerStatus.UpdatePlayerHealth();
                 playerStatus.UpdatePlayerMana();
@@ -289,21 +287,37 @@ namespace RPG.Database
             for (int i = 0; i < item.itemAttributes.Count; i++)
             {
                 if (item.itemAttributes[i].attributeName == "Health")
+                {
                     itemHealth += item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Mana")
+                {
                     itemMana += item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Armor")
+                {
                     itemArmor += item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Damage")
+                {
                     itemDamage += item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Health Reg")
+                {
                     itemHealthReg += item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Mana Reg")
+                {
                     itemManaReg += item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Crit Chance")
+                {
                     itemCritChance += item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Crit Damage")
+                {
                     itemCritDamage += item.itemAttributes[i].attributeValue;
+                }
             }
         }
 
@@ -312,24 +326,94 @@ namespace RPG.Database
             for (int i = 0; i < item.itemAttributes.Count; i++)
             {
                 if (item.itemAttributes[i].attributeName == "Health")
+                {
                     itemHealth -= item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Mana")
+                {
                     itemMana -= item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Armor")
+                {
                     itemArmor -= item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Damage")
+                {
                     itemDamage -= item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Health Reg")
+                {
                     itemHealthReg -= item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Mana Reg")
+                {
                     itemManaReg -= item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Crit Chance")
+                {
                     itemCritChance -= item.itemAttributes[i].attributeValue;
+                }
                 if (item.itemAttributes[i].attributeName == "Crit Damage")
+                {
                     itemCritDamage -= item.itemAttributes[i].attributeValue;
+                }
             }
         }
 
+        public GameObject GetInventoryPanel()
+        {
+            return inventoryPanel;
+        }
+
+        public GameObject GetCharacterPanel()
+        {
+            return characterSystemPanel;
+        }
+
+        public GameObject GetCraftSystemPanel()
+        {
+            return craftSystemPanel;
+        }
+
+        public float GetItemDamage()
+        {
+            return itemDamage;
+        }
+
+        public float GetItemArmor()
+        {
+            return itemArmor;
+        }
+
+        public float GetItemHealth()
+        {
+            return itemHealth;
+        }
+
+        public float GetItemMana()
+        {
+            return itemMana;
+        }
+
+        public float GetItemHealthReg()
+        {
+            return itemHealthReg;
+        }
+
+        public float GetItemManaReg()
+        {
+            return itemManaReg;
+        }
+
+        public float GetItemCritChance()
+        {
+            return itemCritChance;
+        }
+
+        public float GetItemCritDamage()
+        {
+            return itemCritDamage;
+        }
     }
 }
 
