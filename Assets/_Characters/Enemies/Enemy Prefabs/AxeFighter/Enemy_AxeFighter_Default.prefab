@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 114434339593025296}
   - component: {fileID: 114172310401218110}
   - component: {fileID: 114957393433197162}
+  - component: {fileID: 114295970790077078}
   m_Layer: 0
   m_Name: Enemy_AxeFighter_Default
   m_TagString: Enemy
@@ -1171,15 +1172,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1064046166583576}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.93, y: 0, z: -0.28}
+  m_LocalRotation: {x: -0, y: -0.8101805, z: -0, w: 0.5861806}
+  m_LocalPosition: {x: 1.67, y: 0, z: 1.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4909588905133864}
   - {fileID: 4251905631957772}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -108.227005, z: 0}
 --- !u!4 &4455444590324922
 Transform:
   m_ObjectHideFlags: 1
@@ -1657,13 +1658,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f280a43b95148498ecb6ffa9d03e41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponDamage: 0
-  projectileSocket: {fileID: 0}
-  aimOffset: {x: 0, y: 1, z: 0}
   currentWeaponConfig: {fileID: 11400000, guid: e6ac1a451dedd644a8e219bbd22d4ee6,
     type: 2}
+  projectileSocket: {fileID: 0}
+  aimOffset: {x: 0, y: 1, z: 0}
   target: {fileID: 0}
   isAttacking: 0
+--- !u!114 &114295970790077078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1064046166583576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1478b6b6a5fa0434281bd802ce1c4bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LootTable:
+  - itemToDrop: {fileID: 1106296778813486, guid: 9b2a146c59c70bd4f8b3c85cc3ced46f,
+      type: 2}
+    dropRarity: 45
+  - itemToDrop: {fileID: 1486665497478714, guid: 771efc7e5b8ae5348ba148c67ea921ca,
+      type: 2}
+    dropRarity: 45
+  - itemToDrop: {fileID: 1113079020106014, guid: ec63474b248be7444aed3dc7c84dc976,
+      type: 2}
+    dropRarity: 10
+  dropChance: 25
 --- !u!114 &114392750511646796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1704,7 +1726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c4e2c0105368244a79510536347b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseRadius: 6
+  chaseRadius: 3
   chaseSpeed: 1
   projectileSocket: {fileID: 0}
   patrolPath: {fileID: 0}
@@ -1725,7 +1747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentClass: 2
   enemyImage: {fileID: 21300000, guid: b31f0c47a0d06f24598fbcbf6ae9609d, type: 3}
-  enemyName: Cruel Bandit
+  enemyName: Bandit Axe Fighter
   enemyLevel: 1
   xpToGive: 15
   maxHealthPoints: 150

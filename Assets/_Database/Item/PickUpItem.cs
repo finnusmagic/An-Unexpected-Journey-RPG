@@ -9,11 +9,18 @@ namespace RPG.Database
         private Inventory _inventory;
         private GameObject _player;
 
+        float Rarity;
+
         void Start()
         {
             _player = GameObject.FindGameObjectWithTag("Player");
             if (_player != null)
                 _inventory = _player.GetComponent<PlayerInventoryManager>().GetInventoryPanel().GetComponent<Inventory>();
+        }
+
+        public float GetItemRarity()
+        {
+            return item.rarity;
         }
 
         void Update()

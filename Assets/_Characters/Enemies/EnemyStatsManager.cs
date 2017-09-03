@@ -79,6 +79,11 @@ namespace RPG.Characters
 
             if (characterDies)
             {
+                if (GetComponent<LootScript>() != null)
+                {
+                    GetComponent<LootScript>().CalculateLoot();
+                }
+
                 CheckForDeathSounds();
                 character = GetComponent<Character>();
                 StartCoroutine(character.KillCharacter());
